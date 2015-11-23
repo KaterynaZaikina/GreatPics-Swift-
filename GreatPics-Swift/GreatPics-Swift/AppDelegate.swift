@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //Review: можно было не создавать константу а сразу написать window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        //Review: можно было не создавать константу, а сразу написать window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window = window

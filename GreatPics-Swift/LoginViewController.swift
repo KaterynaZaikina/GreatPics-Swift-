@@ -13,6 +13,7 @@ import AFNetworking
 
 private let INSTAGRAM_AUTH_URL = "https://api.instagram.com/oauth/authorize/?"
 
+//Review: методы делегата выносятся в отдельный экстеншен к классу, прочитай еще раз наши гайдлайны
 class LoginViewController: UIViewController, UIWebViewDelegate {
     
 //Review: Ты создала константу как константу инстанса класса т.е. теперь все могут до нее доступаться LoginViewController().YOUR_CONSTANT.
@@ -54,6 +55,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         let urlString = request.URL?.absoluteString
+//Review: В данном случае в отличии от loginControllerWithCompletionBlock опшиналу нужно делать не force unwrap а через if let
         let accessToken = TokenFinder.accessTokenDidFind(urlString!)
         if accessToken.characters.count != 0 {
             if (completionBlock != nil) {
