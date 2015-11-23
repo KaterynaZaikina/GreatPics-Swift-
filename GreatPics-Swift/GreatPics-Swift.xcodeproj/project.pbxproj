@@ -59,13 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
-				8032F7BD1C032FC300451C46 /* .gitignore */,
 				8032F7AA1C0326A300451C46 /* ViewController.swift */,
 				8032F7AC1C0326A300451C46 /* Main.storyboard */,
 				8032F7B21C0326A300451C46 /* Assets.xcassets */,
 				8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */,
 				8032F7B71C0326A300451C46 /* Info.plist */,
 				8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */,
+				8032F7BD1C032FC300451C46 /* .gitignore */,
 			);
 			path = "GreatPics-Swift";
 			sourceTree = "<group>";
