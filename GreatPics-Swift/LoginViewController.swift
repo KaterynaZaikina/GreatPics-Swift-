@@ -57,6 +57,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         let urlString = request.URL?.absoluteString
 //Review: В данном случае в отличии от loginControllerWithCompletionBlock опшиналу нужно делать не force unwrap а через if let
         let accessToken = TokenFinder.accessTokenDidFind(urlString!)
+//Review: Тут лучше использовать метод isEmpty -   !accessToken.isEmpty
         if accessToken.characters.count != 0 {
             if (completionBlock != nil) {
             completionBlock!(accessToken)
