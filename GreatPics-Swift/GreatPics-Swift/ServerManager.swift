@@ -9,14 +9,17 @@
 import Foundation
 import AFNetworking
 
+private let errorDomain = "com.yalantis.GreatPics.instagram"
+private let errorCode = 333
+
 class ServerManager {
     
     var accessToken: String?
     private let sessionManager: AFHTTPSessionManager
-    private var pagination: Dictionary<String, String>?
+    private var pagination: [String: String]?
     static let sharedManager = ServerManager()
     
-    init() {
+    private init() {
         let url = NSURL(string: "https://api.instagram.com/v1/")
         sessionManager = AFHTTPSessionManager(baseURL: url)
     }
@@ -29,23 +32,19 @@ class ServerManager {
         loadPostsWithMaxTagID(pagination?["next_max_tag_id"])
     }
     
-    private func recentPostsForTagName(tagName:String, count:Int, maxTagID:String?, success:(AnyObject? -> Void)?, failure:(NSError -> Void)?) {
+    private func recentPostsForTagName(tagName:String, count:Int = 20, maxTagID:String?, success:(AnyObject? -> Void)?, failure:(NSError -> Void)?) {
         let urlString = "tags/\(tagName)/media/recent"
         var parameters = [String: AnyObject]()
-        if let accessToken = accessToken {
-            parameters["access_token"] = accessToken
-        }
+        parameters["access_token"] = accessToken
         parameters["count"] = count
-        if let maxTagID = maxTagID {
-            parameters["max_tag_id"] = maxTagID
-        }
+        parameters["max_tag_id"] = maxTagID
         
         sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
             if let responseObject = responseObject {
                 success?(responseObject)
             } else {
-                let userInfo = ["localizedDescription":"Response Object is not recieved"]
-                let error = NSError(domain:"com.yalantis.GreatPics.instagram", code:333, userInfo: userInfo)
+                let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
+                let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
                 print("error - \(error.localizedDescription), status code - \(error.code)")
             }
             }, failure: { (operation:NSURLSessionDataTask?, error:NSError) -> Void in
@@ -55,14 +54,13 @@ class ServerManager {
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
-        let numberOfPostLoaded = 20
-        recentPostsForTagName("workhardanywhere", count: numberOfPostLoaded, maxTagID: maxTagID, success: { (responseObject) -> Void in
+        recentPostsForTagName("workhardanywhere", maxTagID: maxTagID, success: { responseObject in
             print("\(responseObject)")
             // after adding InstaPostManager
             //    KVZInstaPostManager *manager = [[KVZInstaPostManager alloc] init];
             //    weakSelf.pagination = [responseObject valueForKey:@"pagination"];
             //    [manager importPosts:[responseObject valueForKey:@"data"]];
-            }) { (error) -> Void in
+            }) { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         }
     }
