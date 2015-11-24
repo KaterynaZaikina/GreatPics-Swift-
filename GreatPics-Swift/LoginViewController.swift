@@ -56,7 +56,12 @@ extension LoginViewController: UIWebViewDelegate {
             return false
         }
         let accessToken = TokenFinder.accessTokenDidFind(urlStringExist)
-        if !accessToken.isEmpty {
+        if !accessToken.isEmpty {            
+            // server checking - temporary!!!
+            let manager = ServerManager.sharedManager
+            manager.accessToken = accessToken
+            manager.loadFirstPageOfPosts()
+            
             if (completionBlock != nil) {
                 completionBlock!(accessToken)
             }
