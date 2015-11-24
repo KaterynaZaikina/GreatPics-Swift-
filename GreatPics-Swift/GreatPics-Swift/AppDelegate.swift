@@ -9,32 +9,20 @@
 import UIKit
 import CoreData
 
-//Review: Закоменченый код
-//KVZLoginViewController *loginViewController = [KVZLoginViewController loginControllerWithCompletionBlock:loginCompletionBlock];
-//UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:loginViewController];
-//window.rootViewController = navigationController;
-
-//UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//self.window = window;
-
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //Review: можно было не создавать константу, а сразу написать window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window = window
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let loginViewController = LoginViewController.loginControllerWithCompletionBlock { _ in
         }
         
         let navigationController = UINavigationController(rootViewController: loginViewController)
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        window!.rootViewController = navigationController
+        window!.makeKeyAndVisible()
         return true
     }
 

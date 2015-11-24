@@ -9,26 +9,25 @@
 import Foundation
 
 class TokenFinder {
-//Review: Текст не отформатирован выдели весь текст и нажми ctrl + i
     
-   class func accessTokenDidFind(var urlString: String) -> (String) {
-    var accessToken = String()
-    if urlString.rangeOfString("access_token=") != nil {
-//Review: прочитай про команду split в свифте let splitedArray = urlString.characters.split("#").map{String($0)}
-        let array = urlString.componentsSeparatedByString("#")
-        
-        if array.count > 1 {
-            urlString = array[array.count - 1]
-        }
-        let values = urlString.componentsSeparatedByString("=")
-        if values.count == 2 {
-            let key = values[0]
-            if key == "access_token" {
-                accessToken = values[values.count - 1]
+    class func accessTokenDidFind(var urlString: String) -> (String) {
+        var accessToken = String()
+        if urlString.rangeOfString("access_token=") != nil {
+            let splitedArray = urlString.characters.split("#").map{String($0)}
+            
+            if splitedArray.count > 1 {
+                urlString = splitedArray[splitedArray.count - 1]
+            }
+            let values = urlString.characters.split("=").map{String($0)}
+            if values.count == 2 {
+                let key = values[0]
+                if key == "access_token" {
+                    accessToken = values[values.count - 1]
+                }
             }
         }
-    }
-    return accessToken
+        print(accessToken)
+        return accessToken
     }
     
 }
