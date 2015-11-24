@@ -33,8 +33,10 @@ class LoginViewController: UIViewController {
     func login() {
         let urlString = INSTAGRAM_AUTH_URL + "client_id=" + INSTAGRAM_CLIENT_ID + "&redirect_uri=" + INSTAGRAM_REDIRECT_URI + "&response_type=token"
         let url = NSURL(string: urlString)
-        let request = NSURLRequest(URL:url!)
-        webView.loadRequest(request)
+        if let url = url {
+            let request = NSURLRequest(URL:url)
+            webView.loadRequest(request)
+        }
     }
     
         //MARK: - Controller lifecycle
