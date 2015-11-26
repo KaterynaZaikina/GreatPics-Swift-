@@ -18,11 +18,14 @@ class InstaPostManager {
         let entity = NSEntityDescription.entityForName("InstaPost", inManagedObjectContext: managedObjectContext)
         fetchRequest.entity = entity
         
-        if let posts = posts as? [[String: AnyObject]] {
+        guard let posts = posts as? [[String: AnyObject]] else {
+            return
+        }
+        
             let identifiers = posts.map { String($0["id"]) }
             let predicate = NSPredicate(format: "identifier IN %@", argumentArray: [identifiers])
             fetchRequest.predicate = predicate
-        }
+        
         
         var fetchedObjectArray: [InstaPost]?
         
@@ -42,22 +45,32 @@ class InstaPostManager {
             var fetchedObjectsDictionary = NSDictionary(objects: fetchedObjectArray, forKeys: fetchedObjectsIdentifiers) as? [String : InstaPost]
             print("fetchedObjectsDictionary is \(fetchedObjectsDictionary)")
             
-            if let posts = posts as? NSArray {
-                posts.enumerateObjectsUsingBlock { (postDictionary, index, stop) -> Void in
-                    
-                    let postDictionary = postDictionary as? [String: AnyObject]
-                    
-                    if let key = postDictionary?["id"] as? String {
-                        if fetchedObjectsDictionary?[key] == nil {
-                            let post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost", inManagedObjectContext: self.managedObjectContext) as? InstaPost
-                            post?.createdAtDate = NSDate()
-                            post?.updateWithDictionary(postDictionary)
-                            print("post # \(index) = \(post?.identifier)")
-                        }
+            var post:InstaPost?
+            for var postDictionary: [String: AnyObject] in posts {
+                if let key = postDictionary["id"] as? String {
+                    if fetchedObjectsDictionary?[key] == nil {
+                        post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost", inManagedObjectContext: self.managedObjectContext) as? InstaPost
+                        post?.createdAtDate = NSDate()
+                        print("post #  = \(post?.createdAtDate)")
+                        
+                    } else {
+                        post = fetchedObjectsDictionary?[key]
+                        
+                        
                     }
+                    post?.updateWithDictionary(postDictionary)
+                    //to check adding in core data
+                    let fetch = NSFetchRequest(entityName: "InstaPost")
+                    do {
+                        let array = try managedObjectContext.executeFetchRequest(fetch)
+                        print("array count - \(array.count)")
+                    } catch {
+                        print("error")
+                    }
+
                 }
             }
-            
+          
         }
         do {
             try self.managedObjectContext.save()

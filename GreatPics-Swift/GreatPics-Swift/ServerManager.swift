@@ -40,10 +40,11 @@ class ServerManager {
         parameters["max_tag_id"] = maxTagID
         
         sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
-            if let responseObject = responseObject {
-                let jsonResult = responseObject as! Dictionary<String, AnyObject>
-                let posts = jsonResult["data"]! as! [AnyObject]
-                   success?(posts) } else {
+            if let responseObject = responseObject as? [String : AnyObject] {
+                if let posts = responseObject["data"] as? [AnyObject]  {
+                    success?(posts)
+                }
+            } else {
                 let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
                 let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
                 print("error - \(error.localizedDescription), status code - \(error.code)") }

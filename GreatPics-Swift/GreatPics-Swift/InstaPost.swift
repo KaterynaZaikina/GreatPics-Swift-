@@ -15,10 +15,8 @@ class InstaPost: NSManagedObject {
         if let id = responseObject?["id"] as? String {
             identifier = id
         }
-        if let caption = responseObject?["caption"] as? [String : AnyObject] {
-            if let text = caption["text"] as? String {
-                self.text = text
-            }
+        if let caption = responseObject?["caption"] as? [String : AnyObject],  let text = caption["text"] as? String {
+            self.text = text
         }
         if let images = responseObject?["images"] as? [String: AnyObject] {
             if let standard_resolution = images["standard_resolution"] as? [String: AnyObject] {

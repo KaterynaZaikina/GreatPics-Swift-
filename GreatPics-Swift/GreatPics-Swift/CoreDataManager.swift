@@ -9,6 +9,9 @@
 import Foundation
 import CoreData
 
+private let errorDomain = "com.yalantis.GreatPics.instagram"
+private let errorCode = 9999
+
 class CoreDataManager {
     
     static let sharedManager = CoreDataManager()
@@ -31,12 +34,13 @@ class CoreDataManager {
         do {
             try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
         } catch {
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            var errorUserInfo = [String: AnyObject]()
+            errorUserInfo[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            errorUserInfo[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            dict[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            errorUserInfo[NSUnderlyingErrorKey] = error as NSError
+            
+            let wrappedError = NSError(domain: errorDomain, code: errorCode, userInfo: errorUserInfo)
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
             abort()
         }
@@ -57,8 +61,8 @@ class CoreDataManager {
             do {
                 try managedObjectContext.save()
             } catch {
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                let coreDataError  = error as NSError
+                NSLog("Unresolved error \(coreDataError ), \(coreDataError .userInfo)")
                 abort()
             }
         }
