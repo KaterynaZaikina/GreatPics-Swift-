@@ -41,8 +41,8 @@ class CoreDataManager {
             errorUserInfo[NSUnderlyingErrorKey] = error as NSError
             
             let wrappedError = NSError(domain: errorDomain, code: errorCode, userInfo: errorUserInfo)
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
+            print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+            assertionFailure(wrappedError.localizedDescription)
         }
         
         return coordinator
@@ -62,8 +62,8 @@ class CoreDataManager {
                 try managedObjectContext.save()
             } catch {
                 let coreDataError  = error as NSError
-                NSLog("Unresolved error \(coreDataError ), \(coreDataError .userInfo)")
-                abort()
+                print("Unresolved error \(coreDataError), \(coreDataError .userInfo)")
+                assertionFailure(coreDataError.localizedDescription)
             }
         }
     }
