@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-private let errorDomain = "com.yalantis.GreatPics.instagram"
+private let errorDomain = "com.yalantis.GreatPics.database"
 private let errorCode = 9999
 
 class CoreDataManager {
