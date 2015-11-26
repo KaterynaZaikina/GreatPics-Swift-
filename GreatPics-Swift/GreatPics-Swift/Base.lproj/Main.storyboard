@@ -40,5 +40,54 @@
             </objects>
             <point key="canvasLocation" x="963" y="-337"/>
         </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="hiP-aZ-xsF">
+            <objects>
+                <collectionViewController storyboardIdentifier="CollectionViewController" id="oow-JS-QFV" customClass="CollectionViewController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="FWR-aP-0Vx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="6r1-W5-Mml">
+                            <size key="itemSize" width="130" height="130"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="5" minY="5" maxX="0.0" maxY="5"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="6LB-tM-o4v" customClass="CollectionViewCell" customModule="GreatPics_Swift" customModuleProvider="target">
+                                <rect key="frame" x="5" y="5" width="130" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xOc-zS-epy">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xOc-zS-epy" secondAttribute="trailing" id="3cR-qP-JyZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="xOc-zS-epy" secondAttribute="bottom" id="N09-3A-wdb"/>
+                                    <constraint firstItem="xOc-zS-epy" firstAttribute="leading" secondItem="6LB-tM-o4v" secondAttribute="leading" id="W2b-7T-XmO"/>
+                                    <constraint firstItem="xOc-zS-epy" firstAttribute="top" secondItem="6LB-tM-o4v" secondAttribute="top" id="yLp-nO-4RP"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="xOc-zS-epy" id="NWh-vK-QAj"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="oow-JS-QFV" id="z1U-Qw-alG"/>
+                            <outlet property="delegate" destination="oow-JS-QFV" id="9k4-wp-HIc"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="964" y="326"/>
+        </scene>
     </scenes>
 </document>

@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let navigationController = UINavigationController(rootViewController: loginViewController)
+        
+//        let sb = UIStoryboard(name:"Main", bundle:nil)
+//        let collectionController = sb.instantiateViewControllerWithIdentifier("CollectionViewController") as! CollectionViewController
+//        let navigationController = UINavigationController(rootViewController: collectionController)
         window!.rootViewController = navigationController
         window!.makeKeyAndVisible()
         return true
