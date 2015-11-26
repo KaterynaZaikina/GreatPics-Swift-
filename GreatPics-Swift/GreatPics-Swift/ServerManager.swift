@@ -32,7 +32,7 @@ class ServerManager {
         loadPostsWithMaxTagID(pagination?["next_max_tag_id"])
     }
     
-    private func recentPostsForTagName(tagName:String, count:Int = 20, maxTagID:String?, success:(AnyObject? -> Void)?, failure:(NSError -> Void)?) {
+    private func recentPostsForTagName(tagName:String, count:Int = 20, maxTagID:String?, success:([AnyObject] -> Void)?, failure:(NSError -> Void)?) {
         let urlString = "tags/\(tagName)/media/recent"
         var parameters = [String: AnyObject]()
         parameters["access_token"] = accessToken
@@ -40,17 +40,17 @@ class ServerManager {
         parameters["max_tag_id"] = maxTagID
         
         sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
-            if let responseObject = responseObject {
-                success?(responseObject)
+            if let responseObject = responseObject as? [String : AnyObject] {
+                if let posts = responseObject["data"] as? [AnyObject]  {
+                    success?(posts)
+                }
             } else {
                 let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
                 let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
-                print("error - \(error.localizedDescription), status code - \(error.code)")
-            }
+                print("error - \(error.localizedDescription), status code - \(error.code)") }
             }, failure: { (operation:NSURLSessionDataTask?, error:NSError) -> Void in
                 failure?(error)
         })
-        
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
@@ -60,6 +60,8 @@ class ServerManager {
             //    KVZInstaPostManager *manager = [[KVZInstaPostManager alloc] init];
             //    weakSelf.pagination = [responseObject valueForKey:@"pagination"];
             //    [manager importPosts:[responseObject valueForKey:@"data"]];
+            let manager = InstaPostManager()
+            manager.importPost(responseObject)
             }) { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         }

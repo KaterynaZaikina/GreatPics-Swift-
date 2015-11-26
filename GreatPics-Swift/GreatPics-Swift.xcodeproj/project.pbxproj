@@ -18,6 +18,10 @@
 		8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C31C036DFE00451C46 /* TokenFinder.swift */; settings = {ASSET_TAGS = (); }; };
 		8032F7C61C037F2700451C46 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C51C037F2600451C46 /* NavigationManager.swift */; settings = {ASSET_TAGS = (); }; };
 		8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C71C0481ED00451C46 /* ServerManager.swift */; settings = {ASSET_TAGS = (); }; };
+		8032F7CA1C04B90000451C46 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */; settings = {ASSET_TAGS = (); }; };
+		8032F7CD1C04C40400451C46 /* InstaPost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7CB1C04C40400451C46 /* InstaPost+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		8032F7CE1C04C40400451C46 /* InstaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7CC1C04C40400451C46 /* InstaPost.swift */; settings = {ASSET_TAGS = (); }; };
+		8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */; settings = {ASSET_TAGS = (); }; };
 		DFC01BB1BD68362761AB0358 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A081B496D74C3EABAD33A /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +40,10 @@
 		8032F7C31C036DFE00451C46 /* TokenFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenFinder.swift; sourceTree = "<group>"; };
 		8032F7C51C037F2600451C46 /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		8032F7C71C0481ED00451C46 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		8032F7CB1C04C40400451C46 /* InstaPost+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InstaPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8032F7CC1C04C40400451C46 /* InstaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPost.swift; sourceTree = "<group>"; };
+		8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostManager.swift; sourceTree = "<group>"; };
 		947A081B496D74C3EABAD33A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +93,7 @@
 				8032F7C11C033B7400451C46 /* LoginViewController.swift */,
 				8032F7C51C037F2600451C46 /* NavigationManager.swift */,
 				8032F7C31C036DFE00451C46 /* TokenFinder.swift */,
+				8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */,
 				8032F7C71C0481ED00451C46 /* ServerManager.swift */,
 				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
 				8032F7AA1C0326A300451C46 /* ViewController.swift */,
@@ -93,6 +102,9 @@
 				8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */,
 				8032F7B71C0326A300451C46 /* Info.plist */,
 				8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */,
+				8032F7CB1C04C40400451C46 /* InstaPost+CoreDataProperties.swift */,
+				8032F7CC1C04C40400451C46 /* InstaPost.swift */,
+				8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */,
 				8032F7BD1C032FC300451C46 /* .gitignore */,
 			);
 			path = "GreatPics-Swift";
@@ -229,11 +241,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8032F7C21C033B7400451C46 /* LoginViewController.swift in Sources */,
+				8032F7CD1C04C40400451C46 /* InstaPost+CoreDataProperties.swift in Sources */,
 				8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */,
 				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
 				8032F7AB1C0326A300451C46 /* ViewController.swift in Sources */,
 				8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */,
+				8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */,
 				8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */,
+				8032F7CE1C04C40400451C46 /* InstaPost.swift in Sources */,
+				8032F7CA1C04B90000451C46 /* CoreDataManager.swift in Sources */,
 				8032F7C61C037F2700451C46 /* NavigationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
