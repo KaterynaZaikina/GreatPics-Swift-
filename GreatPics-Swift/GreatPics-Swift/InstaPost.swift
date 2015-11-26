@@ -10,22 +10,20 @@ import Foundation
 import CoreData
 
 class InstaPost: NSManagedObject {
+    typealias R = [String : AnyObject]
     
     func updateWithDictionary(responseObject: [String : AnyObject]?) {
         if let id = responseObject?["id"] as? String {
             identifier = id
         }
-        if let caption = responseObject?["caption"] as? [String : AnyObject],  let text = caption["text"] as? String {
+        if let caption = responseObject?["caption"] as? R,  let text = caption["text"] as? String {
             self.text = text
         }
-        if let images = responseObject?["images"] as? [String: AnyObject] {
-            if let standard_resolution = images["standard_resolution"] as? [String: AnyObject] {
-                if let url = standard_resolution["url"] as? String {
-                    imageURL = url
-                }
+        if let images = responseObject?["images"] as? R, let standard_resolution = images["standard_resolution"] as? R {
+            if let url = standard_resolution["url"] as? String {
+                imageURL = url
             }
         }
     }
-    
     
 }
