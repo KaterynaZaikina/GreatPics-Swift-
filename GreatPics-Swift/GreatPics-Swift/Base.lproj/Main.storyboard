@@ -79,13 +79,10 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="oow-JS-QFV" id="z1U-Qw-alG"/>
-                            <outlet property="delegate" destination="oow-JS-QFV" id="9k4-wp-HIc"/>
-                        </connections>
                     </collectionView>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ihe-Uf-cMz" customClass="DataSource" customModule="GreatPics_Swift" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="964" y="326"/>
         </scene>

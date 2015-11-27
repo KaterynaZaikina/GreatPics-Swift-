@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 import AFNetworking
+import SDWebImage
 
 protocol DataSourceDelegate {
     
@@ -29,7 +30,6 @@ class DataSource: NSObject, NSFetchedResultsControllerDelegate {
         fetchRequest.fetchBatchSize = kFetchBatchSize
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAtDate", ascending: true)]
-        
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.managedObjectContext,
             sectionNameKeyPath: nil,
@@ -54,14 +54,13 @@ class DataSource: NSObject, NSFetchedResultsControllerDelegate {
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
         
         if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL {
-            cell.imageView.setImageWithURL(NSURL(string: imageURL)!)
+            cell.imageView.sd_setImageWithURL(NSURL(string: imageURL)!)
         }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         delegate?.dataSourceDidChangeContent(self)
     }
-    
     
 }
 
@@ -95,5 +94,5 @@ extension DataSource: UICollectionViewDelegate {
             delegate?.dataSourceWillDisplayLastCell(self)
         }
     }
-
+    
 }

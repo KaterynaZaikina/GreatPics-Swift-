@@ -55,7 +55,7 @@ extension LoginViewController: UIWebViewDelegate {
         guard let urlStringExist = urlString else {
             return false
         }
-        let accessToken = TokenFinder.accessTokenDidFind(urlStringExist)
+        let accessToken = TokenFinder.findAccessToken(urlStringExist)
         if !accessToken.isEmpty {
             if (completionBlock != nil) {
                 completionBlock!(accessToken)
