@@ -38,7 +38,7 @@ class CoreDataManager {
             errorUserInfo[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             errorUserInfo[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            errorUserInfo[NSUnderlyingErrorKey] = error as NSError
+            errorUserInfo[NSUnderlyingErrorKey] = error as? NSError
             
             let wrappedError = NSError(domain: errorDomain, code: errorCode, userInfo: errorUserInfo)
             print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
@@ -60,6 +60,7 @@ class CoreDataManager {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
+                
             } catch {
                 let coreDataError  = error as NSError
                 print("Unresolved error \(coreDataError), \(coreDataError .userInfo)")

@@ -14,17 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let loginViewController = LoginViewController.loginControllerWithCompletionBlock { _ in
-        }
-        
-        let navigationController = UINavigationController(rootViewController: loginViewController)
-        
-//        let sb = UIStoryboard(name:"Main", bundle:nil)
-//        let collectionController = sb.instantiateViewControllerWithIdentifier("CollectionViewController") as! CollectionViewController
-//        let navigationController = UINavigationController(rootViewController: collectionController)
-        window!.rootViewController = navigationController
+        let navigationManager = NavigationManager()
+        navigationManager.createdLoginController(window)
         window!.makeKeyAndVisible()
         return true
     }

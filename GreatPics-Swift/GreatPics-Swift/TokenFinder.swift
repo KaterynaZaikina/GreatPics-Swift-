@@ -26,7 +26,6 @@ class TokenFinder {
                 }
             }
         }
-        print(accessToken)
         return accessToken
     }
     

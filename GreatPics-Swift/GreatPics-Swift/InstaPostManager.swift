@@ -22,16 +22,15 @@ class InstaPostManager {
             return
         }
         
-        let identifiers = posts.map { String($0["id"]) }
+        let identifiers = posts.flatMap { $0["id"] as? String }
+  
         let predicate = NSPredicate(format: "identifier IN %@", argumentArray: [identifiers])
         fetchRequest.predicate = predicate
-        
         
         var fetchedObjectArray: [InstaPost]?
         
         do {
             fetchedObjectArray = try managedObjectContext.executeFetchRequest(fetchRequest) as? [InstaPost]
-            print("fetchedObjectArray is \(fetchedObjectArray)")
             
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
@@ -44,8 +43,6 @@ class InstaPostManager {
             
             var fetchedObjectsDictionary = NSDictionary(objects: fetchedObjectArray,
                 forKeys: fetchedObjectsIdentifiers) as? [String : InstaPost]
-            print("fetchedObjectsDictionary is \(fetchedObjectsDictionary)")
-            
             
             for var postDictionary: [String: AnyObject] in posts {
                 if let key = postDictionary["id"] as? String {
@@ -54,18 +51,17 @@ class InstaPostManager {
                         post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost",
                             inManagedObjectContext: self.managedObjectContext) as? InstaPost
                         post.createdAtDate = NSDate()
-                    } else {
-                        post = fetchedObjectsDictionary?[key]
+                    }
+                    else {
+                        if let key = post?.identifier {
+                            post = fetchedObjectsDictionary?[key]
+                        }
                     }
                     post?.updateWithDictionary(postDictionary)
                 }
             }
         }
-        do {
-            try self.managedObjectContext.save()
-        } catch {
-            print("Failure to save context: \(error)")
-        }
+        
     }
     
 }

@@ -7,3 +7,29 @@
 //
 
 import Foundation
+import UIKit
+
+class NavigationManager {
+
+    func createdLoginController(window: UIWindow?) {
+        let loginBlock = {(accessToken: String?) -> () in
+            if let accessToken = accessToken {
+            let serverManager = ServerManager.sharedManager
+                serverManager.accessToken = accessToken
+                self.createCollectionController(window)
+            }
+        }
+        
+        let loginViewController = LoginViewController.loginControllerWithCompletionBlock(loginBlock)
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        window?.rootViewController = navigationController
+    }
+    
+    func createCollectionController(window: UIWindow?) {
+        let sb = UIStoryboard(name:"Main", bundle:nil)
+        let collectionController = sb.instantiateViewControllerWithIdentifier("CollectionViewController") as! CollectionViewController
+        let navigationController = UINavigationController(rootViewController: collectionController)
+        window?.rootViewController = navigationController
+    }
+
+}
