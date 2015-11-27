@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="963" y="-337"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Insta Post Controller-->
         <scene sceneID="hiP-aZ-xsF">
             <objects>
-                <collectionViewController storyboardIdentifier="CollectionViewController" id="oow-JS-QFV" customClass="CollectionViewController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="InstaPostController" id="oow-JS-QFV" customClass="InstaPostController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="FWR-aP-0Vx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,6 @@
                     </collectionView>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="ihe-Uf-cMz" customClass="DataSource" customModule="GreatPics_Swift" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="964" y="326"/>
         </scene>

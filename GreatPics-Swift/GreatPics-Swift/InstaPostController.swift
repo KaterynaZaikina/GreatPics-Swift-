@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewController: UICollectionViewController {
+class InstaPostController: UICollectionViewController {
         
     private let dataSource = InstaPostDataSource()
     private let serverManager = ServerManager.sharedManager
@@ -25,7 +25,7 @@ class CollectionViewController: UICollectionViewController {
 }
 
     //MARK: - DataSourceDelegate
-extension CollectionViewController: InstaPostDataSourceDelegate {
+extension InstaPostController: InstaPostDataSourceDelegate {
     
     func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource) {
         serverManager.loadNextPageOfPosts()

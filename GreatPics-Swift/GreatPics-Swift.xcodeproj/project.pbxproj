@@ -10,7 +10,7 @@
 		8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7A81C0326A300451C46 /* AppDelegate.swift */; };
-		8032F7AB1C0326A300451C46 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7AA1C0326A300451C46 /* CollectionViewController.swift */; };
+		8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7AA1C0326A300451C46 /* InstaPostController.swift */; };
 		8032F7AE1C0326A300451C46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7AC1C0326A300451C46 /* Main.storyboard */; };
 		8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */; };
 		8032F7B31C0326A300451C46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7B21C0326A300451C46 /* Assets.xcassets */; };
@@ -33,7 +33,7 @@
 		8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		8032F7A51C0326A300451C46 /* GreatPics-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GreatPics-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8032F7A81C0326A300451C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8032F7AA1C0326A300451C46 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		8032F7AA1C0326A300451C46 /* InstaPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPostController.swift; sourceTree = "<group>"; };
 		8032F7AD1C0326A300451C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8032F7B01C0326A300451C46 /* GreatPics_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreatPics_Swift.xcdatamodel; sourceTree = "<group>"; };
 		8032F7B21C0326A300451C46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +73,59 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8021DDED1C08B53300F3FD0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8032F7CB1C04C40400451C46 /* InstaPost+CoreDataProperties.swift */,
+				8032F7CC1C04C40400451C46 /* InstaPost.swift */,
+				8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8021DDEE1C08B54100F3FD0E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8032F7C11C033B7400451C46 /* LoginViewController.swift */,
+				8032F7AA1C0326A300451C46 /* InstaPostController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		8021DDEF1C08B54900F3FD0E /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				8032F7C71C0481ED00451C46 /* ServerManager.swift */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		8021DDF01C08B55500F3FD0E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8032F7C31C036DFE00451C46 /* TokenFinder.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		8021DDF11C08B5B300F3FD0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8021DDF21C08B5BA00F3FD0E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				8032F7C51C037F2600451C46 /* NavigationManager.swift */,
+				8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */,
+				8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		8032F79C1C0326A300451C46 = {
 			isa = PBXGroup;
 			children = (
@@ -94,23 +147,18 @@
 		8032F7A71C0326A300451C46 /* GreatPics-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				8032F7C11C033B7400451C46 /* LoginViewController.swift */,
-				8032F7C51C037F2600451C46 /* NavigationManager.swift */,
-				8032F7C31C036DFE00451C46 /* TokenFinder.swift */,
-				8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */,
-				8032F7C71C0481ED00451C46 /* ServerManager.swift */,
-				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
-				8032F7AA1C0326A300451C46 /* CollectionViewController.swift */,
-				8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */,
-				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
+				8021DDED1C08B53300F3FD0E /* Model */,
+				8021DDF11C08B5B300F3FD0E /* View */,
+				8021DDEE1C08B54100F3FD0E /* Controllers */,
+				8021DDF21C08B5BA00F3FD0E /* Managers */,
+				8021DDEF1C08B54900F3FD0E /* Server */,
+				8021DDF01C08B55500F3FD0E /* Helpers */,
 				8032F7AC1C0326A300451C46 /* Main.storyboard */,
+				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
 				8032F7B21C0326A300451C46 /* Assets.xcassets */,
 				8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */,
 				8032F7B71C0326A300451C46 /* Info.plist */,
 				8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */,
-				8032F7CB1C04C40400451C46 /* InstaPost+CoreDataProperties.swift */,
-				8032F7CC1C04C40400451C46 /* InstaPost.swift */,
-				8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */,
 				8032F7BD1C032FC300451C46 /* .gitignore */,
 			);
 			path = "GreatPics-Swift";
@@ -250,7 +298,7 @@
 				8032F7CD1C04C40400451C46 /* InstaPost+CoreDataProperties.swift in Sources */,
 				8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */,
 				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
-				8032F7AB1C0326A300451C46 /* CollectionViewController.swift in Sources */,
+				8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */,
 				8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */,
 				8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */,
 				8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */,

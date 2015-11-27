@@ -27,7 +27,7 @@ class NavigationManager {
     
     func createCollectionController(window: UIWindow?) {
         let sb = UIStoryboard(name:"Main", bundle:nil)
-        let collectionController = sb.instantiateViewControllerWithIdentifier("CollectionViewController") as! CollectionViewController
+        let collectionController = sb.instantiateViewControllerWithIdentifier("InstaPostController") as! InstaPostController
         let navigationController = UINavigationController(rootViewController: collectionController)
         window?.rootViewController = navigationController
     }
