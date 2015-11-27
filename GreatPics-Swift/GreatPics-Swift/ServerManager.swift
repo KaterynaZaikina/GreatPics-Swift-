@@ -11,6 +11,8 @@ import AFNetworking
 
 private let errorDomain = "com.yalantis.GreatPics.instagram"
 private let errorCode = 333
+private let tag = "selfie"
+private let postNumber = "20"
 
 class ServerManager {
     
@@ -58,7 +60,7 @@ class ServerManager {
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
-        recentPostsForTagName("selfie", count: "20", maxTagID: maxTagID, success: { responseObject in
+        recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { responseObject in
             if let paginationDictionary = responseObject?["pagination"] as? [String : String]  {
                 self.pagination = paginationDictionary
             }

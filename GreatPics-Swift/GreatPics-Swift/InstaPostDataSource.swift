@@ -12,22 +12,26 @@ import CoreData
 import AFNetworking
 import SDWebImage
 
-protocol DataSourceDelegate {
+private let numberOfPosts = 3
+private let fetchBatchSize = 20
+private let errorDomain = "com.yalantis.GreatPics.request"
+private let errorCode = 5555
+
+protocol InstaPostDataSourceDelegate {
     
-    func dataSourceWillDisplayLastCell(dataSource: DataSource)
-    func dataSourceDidChangeContent(dataSource: DataSource)
+    func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource)
+    func dataSourceDidChangeContent(dataSource: InstaPostDataSource)
     
 }
 
-class DataSource: NSObject, NSFetchedResultsControllerDelegate {
+class InstaPostDataSource: NSObject, NSFetchedResultsControllerDelegate {
     
-    var delegate: DataSourceDelegate?
+    var delegate: InstaPostDataSourceDelegate?
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
-        
-        let kFetchBatchSize = 20;
-        fetchRequest.fetchBatchSize = kFetchBatchSize
+    
+        fetchRequest.fetchBatchSize = fetchBatchSize
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAtDate", ascending: true)]
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -42,7 +46,7 @@ class DataSource: NSObject, NSFetchedResultsControllerDelegate {
         catch {
             var userInfo = [String: AnyObject]()
             userInfo[NSLocalizedDescriptionKey] = "Failed to fetch request"
-            let error = NSError(domain: "com.yalantis.GreatPics.request", code: 5555, userInfo: userInfo)
+            let error = NSError(domain: errorDomain, code: errorCode, userInfo: userInfo)
             print("Unresolved error: \(error.userInfo)")
         }
         
@@ -64,7 +68,7 @@ class DataSource: NSObject, NSFetchedResultsControllerDelegate {
     
 }
 
-extension DataSource: UICollectionViewDataSource {
+extension InstaPostDataSource: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[section]
@@ -84,12 +88,11 @@ extension DataSource: UICollectionViewDataSource {
     
 }
 
-extension DataSource: UICollectionViewDelegate {
+extension InstaPostDataSource: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[indexPath.section]
         let numberOfItems = sectionInfo?.numberOfObjects
-        let numberOfPosts = 3
         if numberOfItems != nil && indexPath.item == numberOfItems! - numberOfPosts {
             delegate?.dataSourceWillDisplayLastCell(self)
         }

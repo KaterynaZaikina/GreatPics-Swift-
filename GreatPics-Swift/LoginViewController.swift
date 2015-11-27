@@ -19,10 +19,10 @@ private let INSTAGRAM_CLIENT_ID  = "ffce67cce0814cb996eef468646cf08f"
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
-    typealias loginComplitionBlock = (String?) -> ()
-    var completionBlock: loginComplitionBlock?
+    typealias loginCompletionBlock = (String?) -> ()
+    var completionBlock: loginCompletionBlock?
     
-    class func loginControllerWithCompletionBlock(completionBlock: loginComplitionBlock) -> LoginViewController {
+    class func loginControllerWithCompletionBlock(completionBlock: loginCompletionBlock) -> LoginViewController {
         let sb = UIStoryboard(name:"Main", bundle:nil)
         let loginController = sb.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         loginController.completionBlock = completionBlock

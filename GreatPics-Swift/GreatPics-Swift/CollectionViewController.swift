@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionViewController: UICollectionViewController {
         
-    private let dataSource = DataSource()
+    private let dataSource = InstaPostDataSource()
     private let serverManager = ServerManager.sharedManager
 
     //MARK: - Controller lifecycle
@@ -22,21 +22,16 @@ class CollectionViewController: UICollectionViewController {
         serverManager.loadFirstPageOfPosts()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-       
-    }
-
 }
 
     //MARK: - DataSourceDelegate
-extension CollectionViewController: DataSourceDelegate {
+extension CollectionViewController: InstaPostDataSourceDelegate {
     
-    func dataSourceWillDisplayLastCell(dataSource: DataSource) {
+    func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource) {
         serverManager.loadNextPageOfPosts()
     }
     
-    func dataSourceDidChangeContent(dataSource: DataSource) {
+    func dataSourceDidChangeContent(dataSource: InstaPostDataSource) {
         self.collectionView?.reloadData()
     }
     

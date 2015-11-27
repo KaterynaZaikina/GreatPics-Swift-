@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8021DDEA1C07179F00F3FD0E /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDE91C07179F00F3FD0E /* DataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */; settings = {ASSET_TAGS = (); }; };
 		8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7A81C0326A300451C46 /* AppDelegate.swift */; };
 		8032F7AB1C0326A300451C46 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7AA1C0326A300451C46 /* CollectionViewController.swift */; };
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		4420183F556435587225877B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		8021DDE91C07179F00F3FD0E /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostDataSource.swift; sourceTree = "<group>"; };
 		8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		8032F7A51C0326A300451C46 /* GreatPics-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GreatPics-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8032F7A81C0326A300451C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 				8032F7C71C0481ED00451C46 /* ServerManager.swift */,
 				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
 				8032F7AA1C0326A300451C46 /* CollectionViewController.swift */,
-				8021DDE91C07179F00F3FD0E /* DataSource.swift */,
+				8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */,
 				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
 				8032F7AC1C0326A300451C46 /* Main.storyboard */,
 				8032F7B21C0326A300451C46 /* Assets.xcassets */,
@@ -252,7 +252,7 @@
 				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
 				8032F7AB1C0326A300451C46 /* CollectionViewController.swift in Sources */,
 				8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */,
-				8021DDEA1C07179F00F3FD0E /* DataSource.swift in Sources */,
+				8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */,
 				8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */,
 				8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */,
 				8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */,
