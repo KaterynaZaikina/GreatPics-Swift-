@@ -11,6 +11,8 @@ import AFNetworking
 
 private let errorDomain = "com.yalantis.GreatPics.instagram"
 private let errorCode = 333
+private let tag = "selfie"
+private let postNumber = "20"
 
 class ServerManager {
     
@@ -19,7 +21,7 @@ class ServerManager {
     private var pagination: [String: String]?
     static let sharedManager = ServerManager()
     
-    private init() {
+    init() {
         let url = NSURL(string: "https://api.instagram.com/v1/")
         sessionManager = AFHTTPSessionManager(baseURL: url)
     }
@@ -29,22 +31,26 @@ class ServerManager {
     }
     
     func loadNextPageOfPosts() {
-        loadPostsWithMaxTagID(pagination?["next_max_tag_id"])
+        loadPostsWithMaxTagID(pagination?["next_max_id"])
     }
     
-    private func recentPostsForTagName(tagName:String, count:Int = 20, maxTagID:String?, success:([AnyObject] -> Void)?, failure:(NSError -> Void)?) {
+    private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
         let urlString = "tags/\(tagName)/media/recent"
-        var parameters = [String: AnyObject]()
-        parameters["access_token"] = accessToken
+        var parameters = [String: String]()
+        if accessToken != nil {
+            parameters["access_token"] = accessToken
+        }
+        
+        if maxTagID != nil {
+            parameters["max_tag_id"] = maxTagID
+        }
+        
         parameters["count"] = count
-        parameters["max_tag_id"] = maxTagID
         
         sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
             if let responseObject = responseObject as? [String : AnyObject] {
-                if let posts = responseObject["data"] as? [AnyObject]  {
-                    success?(posts)
-                }
-            } else {
+                success?(responseObject)
+                } else {
                 let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
                 let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
                 print("error - \(error.localizedDescription), status code - \(error.code)") }
@@ -54,17 +60,20 @@ class ServerManager {
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
-        recentPostsForTagName("workhardanywhere", maxTagID: maxTagID, success: { responseObject in
-            print("\(responseObject)")
-            // after adding InstaPostManager
-            //    KVZInstaPostManager *manager = [[KVZInstaPostManager alloc] init];
-            //    weakSelf.pagination = [responseObject valueForKey:@"pagination"];
-            //    [manager importPosts:[responseObject valueForKey:@"data"]];
+        recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { responseObject in
+            if let paginationDictionary = responseObject?["pagination"] as? [String : String]  {
+                self.pagination = paginationDictionary
+            }
+            
             let manager = InstaPostManager()
-            manager.importPost(responseObject)
+            if let postsDictionary = responseObject?["data"] as? [AnyObject]  {
+                manager.importPost(postsDictionary)
+            }
             }) { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         }
     }
     
 }
+
+

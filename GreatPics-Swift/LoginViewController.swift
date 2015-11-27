@@ -19,10 +19,10 @@ private let INSTAGRAM_CLIENT_ID  = "ffce67cce0814cb996eef468646cf08f"
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
-    typealias loginComplitionBlock = (NSString) -> ()
-    var completionBlock: loginComplitionBlock?
+    typealias loginCompletionBlock = (String?) -> ()
+    var completionBlock: loginCompletionBlock?
     
-    class func loginControllerWithCompletionBlock(completionBlock: loginComplitionBlock) -> LoginViewController {
+    class func loginControllerWithCompletionBlock(completionBlock: loginCompletionBlock) -> LoginViewController {
         let sb = UIStoryboard(name:"Main", bundle:nil)
         let loginController = sb.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         loginController.completionBlock = completionBlock
@@ -55,13 +55,8 @@ extension LoginViewController: UIWebViewDelegate {
         guard let urlStringExist = urlString else {
             return false
         }
-        let accessToken = TokenFinder.accessTokenDidFind(urlStringExist)
-        if !accessToken.isEmpty {            
-            // server checking - temporary!!!
-            let manager = ServerManager.sharedManager
-            manager.accessToken = accessToken
-            manager.loadFirstPageOfPosts()
-            
+        let accessToken = TokenFinder.findAccessToken(urlStringExist)
+        if !accessToken.isEmpty {
             if (completionBlock != nil) {
                 completionBlock!(accessToken)
             }
