@@ -12,9 +12,25 @@ private let errorCode = 333
 import Foundation
 
 class NetworkingManager {
-
-    func sendGETRequest(request: NSURLRequest?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
     
+    func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
+        
+        var parameterString: String?
+        if parameters != nil {
+            parameterString = parameters!.stringFromHttpParameters()
+        }
+        
+        var completeURLString: String?
+        if urlString != nil && parameterString != nil {
+            completeURLString = "\(urlString!)?\(parameterString!)"
+        }
+        
+        var request: NSURLRequest?
+        if completeURLString != nil {
+            request = NSURLRequest(URL: NSURL(string: completeURLString!)!)
+        }
+        
+        
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config)
         
@@ -22,7 +38,7 @@ class NetworkingManager {
             return
         }
         let task = session.dataTaskWithRequest(request!, completionHandler: { data, response, error -> Void in
-        
+            
             var json: [String : AnyObject]?
             if let data = data {
                 do {
@@ -43,6 +59,6 @@ class NetworkingManager {
         })
         
         task.resume()
-
+        
     }
 }

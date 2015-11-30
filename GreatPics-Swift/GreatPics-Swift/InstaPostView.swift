@@ -7,4 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
+class InstaPostView: UIView {
+    var image: UIImage?
+    var imagePath: String?
+    
+}

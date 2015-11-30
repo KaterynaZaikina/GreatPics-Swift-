@@ -17,13 +17,14 @@ private let postNumber = "20"
 class ServerManager {
     
     var accessToken: String?
-    private let sessionManager: AFHTTPSessionManager
+    let baseURLString: String!
+    //    private let sessionManager: AFHTTPSessionManager
     private var pagination: [String: String]?
     static let sharedManager = ServerManager()
     
     init() {
-        let url = NSURL(string: "https://api.instagram.com/v1/")
-        sessionManager = AFHTTPSessionManager(baseURL: url)
+        baseURLString = "https://api.instagram.com/v1/"
+        // sessionManager = AFHTTPSessionManager(baseURL: url)
     }
     
     func loadFirstPageOfPosts() {
@@ -36,7 +37,7 @@ class ServerManager {
     
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
         
-        let urlString = "https://api.instagram.com/v1/tags/\(tagName)/media/recent"
+        let urlString = baseURLString + "tags/\(tagName)/media/recent"
         var parameters = [String: String]()
         if accessToken != nil {
             parameters["access_token"] = accessToken
@@ -48,25 +49,19 @@ class ServerManager {
         
         parameters["count"] = count
         
-        let parameterString = parameters.stringFromHttpParameters()
-        let completeURLString = NSURL(string:"\(urlString)?\(parameterString)")!
-        let requestURL = NSURLRequest(URL: completeURLString)
+        NetworkingManager().sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
         
-        NetworkingManager().sendGETRequest(requestURL, success: success, failure: failure)
         
-
-
-        
-//        sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
-//            if let responseObject = responseObject as? [String : AnyObject] {
-//                success?(responseObject)
-//                } else {
-//                let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
-//                let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
-//                print("error - \(error.localizedDescription), status code - \(error.code)") }
-//            }, failure: { (operation:NSURLSessionDataTask?, error:NSError) -> Void in
-//                failure?(error)
-//        })
+        //        sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
+        //            if let responseObject = responseObject as? [String : AnyObject] {
+        //                success?(responseObject)
+        //                } else {
+        //                let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
+        //                let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
+        //                print("error - \(error.localizedDescription), status code - \(error.code)") }
+        //            }, failure: { (operation:NSURLSessionDataTask?, error:NSError) -> Void in
+        //                failure?(error)
+        //        })
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
@@ -86,9 +81,8 @@ class ServerManager {
     
 }
 
-
 extension String {
-
+    
     func stringByAddingPercentEncodingForURLQueryValue() -> String? {
         let characterSet = NSMutableCharacterSet.alphanumericCharacterSet()
         characterSet.addCharactersInString("-._~")
@@ -109,7 +103,7 @@ extension Dictionary {
         
         return parameterArray.joinWithSeparator("&")
     }
-
+    
 }
 
 
