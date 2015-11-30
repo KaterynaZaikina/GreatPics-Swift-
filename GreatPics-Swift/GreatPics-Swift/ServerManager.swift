@@ -16,7 +16,6 @@ class ServerManager {
     
     var accessToken: String?
     
-    //    private let sessionManager: AFHTTPSessionManager
     private var pagination: [String: String]?
     static let sharedManager = ServerManager()
     
@@ -49,17 +48,6 @@ class ServerManager {
             print("error response object")
         }
         
-        
-        //        sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
-        //            if let responseObject = responseObject as? [String : AnyObject] {
-        //                success?(responseObject)
-        //                } else {
-        //                let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
-        //                let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
-        //                print("error - \(error.localizedDescription), status code - \(error.code)") }
-        //            }, failure: { (operation:NSURLSessionDataTask?, error:NSError) -> Void in
-        //                failure?(error)
-        //        })
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {

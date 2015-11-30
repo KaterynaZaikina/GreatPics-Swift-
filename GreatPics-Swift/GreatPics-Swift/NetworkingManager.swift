@@ -52,7 +52,6 @@ class NetworkingManager {
             if let data = data {
                 do {
                     json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject]
-                    print("\(json)")
                 } catch {
                     print("error with data")
                 }
