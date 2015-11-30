@@ -15,7 +15,7 @@ enum NetworkingError: ErrorType {
 
 class NetworkingManager {
     
-    var baseURL: String!
+    var baseURL: String
     
     init(baseURL: String) {
         self.baseURL = baseURL
@@ -23,16 +23,16 @@ class NetworkingManager {
     
     func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) throws {
         
-        var completeString = baseURL
-       
-            if let urlString = urlString, let parameters = parameters  {
-            completeString = baseURL + "\(urlString)?" + stringFromHttpParameters(parameters)
+        var completeURLString = baseURL
+        
+        if let urlString = urlString  {
+            completeURLString = baseURL + "\(urlString)"
+            if let parameters = parameters {
+                completeURLString = completeURLString + "?" + stringFromHttpParameters(parameters)
             }
+        }
         
         var request: NSURLRequest?
-        guard let completeURLString = completeString else {
-            throw NetworkingError.InvalidURLRequest
-        }
         
         let requestURL = NSURL(string: completeURLString)
         if let requestURL = requestURL {
