@@ -6,10 +6,12 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-private let errorDomain = "com.yalantis.GreatPics.instagram"
-private let errorCode = 333
 
 import Foundation
+
+enum NetworkingError: ErrorType {
+    case InvalidURLRequest
+}
 
 class NetworkingManager {
     
@@ -19,22 +21,25 @@ class NetworkingManager {
     self.baseURL = baseURL
     }
     
-    func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
+    func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) throws {
         
-        guard let parameters = parameters else {
-            return
+        var parameterString: String?
+        if let parameters = parameters  {
+            parameterString = stringFromHttpParameters(parameters)
         }
         
-        let parameterString = stringFromHttpParameters(parameters)
-        
         var completeString: String?
-        if let urlString = urlString, baseURL = baseURL {
+        if let baseURL = baseURL {
+            if let urlString = urlString {
             completeString = baseURL + "\(urlString)?\(parameterString)"
+            } else {
+            completeString = baseURL
+            }
         }
         
         var request: NSURLRequest?
         guard let completeURLString = completeString else {
-            return
+            throw NetworkingError.InvalidURLRequest
         }
         
         let requestURL = NSURL(string: completeURLString)
@@ -46,7 +51,7 @@ class NetworkingManager {
         let session = NSURLSession(configuration: config)
         
         guard request != nil else {
-            return
+            throw NetworkingError.InvalidURLRequest
         }
         
         let task = session.dataTaskWithRequest(request!, completionHandler: { data, response, error -> Void in
@@ -61,18 +66,16 @@ class NetworkingManager {
                 }
             }
             
-            if let json = json  {
-                success?(json)
-            } else {
-                success?(nil)
-                let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
-                let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
-                print("error - \(error.localizedDescription), status code - \(error.code)") }
+            success?(json)
+            if json == nil {
+                print("JSON is not recieved!")
+            }
             
-            if let errorAccepted = error {
-                failure?(errorAccepted)
+            if let acceptedError = error {
+                failure?(acceptedError)
             }
         })
+        
         task.resume()
     }
     

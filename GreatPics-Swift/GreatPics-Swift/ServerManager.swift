@@ -9,8 +9,6 @@
 import Foundation
 import AFNetworking
 
-private let errorDomain = "com.yalantis.GreatPics.instagram"
-private let errorCode = 333
 private let tag = "selfie"
 private let postNumber = "20"
 
@@ -45,7 +43,11 @@ class ServerManager {
         parameters["count"] = count
         let baseURL = "https://api.instagram.com/v1/"
         
-        NetworkingManager(baseURL: baseURL).sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
+        do {
+            try NetworkingManager(baseURL: baseURL).sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
+        } catch  {
+            print("error response object")
+        }
         
         
         //        sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
