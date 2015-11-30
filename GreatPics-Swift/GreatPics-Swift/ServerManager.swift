@@ -17,15 +17,10 @@ private let postNumber = "20"
 class ServerManager {
     
     var accessToken: String?
-    let baseURLString: String!
+    
     //    private let sessionManager: AFHTTPSessionManager
     private var pagination: [String: String]?
     static let sharedManager = ServerManager()
-    
-    init() {
-        baseURLString = "https://api.instagram.com/v1/"
-        // sessionManager = AFHTTPSessionManager(baseURL: url)
-    }
     
     func loadFirstPageOfPosts() {
         loadPostsWithMaxTagID(nil)
@@ -37,7 +32,7 @@ class ServerManager {
     
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
         
-        let urlString = baseURLString + "tags/\(tagName)/media/recent"
+        let urlString = "tags/\(tagName)/media/recent"
         var parameters = [String: String]()
         if accessToken != nil {
             parameters["access_token"] = accessToken
@@ -48,8 +43,9 @@ class ServerManager {
         }
         
         parameters["count"] = count
+        let baseURL = "https://api.instagram.com/v1/"
         
-        NetworkingManager().sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
+        NetworkingManager(baseURL: baseURL).sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
         
         
         //        sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
@@ -77,31 +73,6 @@ class ServerManager {
             }) { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         }
-    }
-    
-}
-
-extension String {
-    
-    func stringByAddingPercentEncodingForURLQueryValue() -> String? {
-        let characterSet = NSMutableCharacterSet.alphanumericCharacterSet()
-        characterSet.addCharactersInString("-._~")
-        
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(characterSet)
-    }
-    
-}
-
-extension Dictionary {
-    
-    func stringFromHttpParameters() -> String {
-        let parameterArray = self.map { (key, value) -> String in
-            let percentEscapedKey = (key as! String).stringByAddingPercentEncodingForURLQueryValue()!
-            let percentEscapedValue = (value as! String).stringByAddingPercentEncodingForURLQueryValue()!
-            return "\(percentEscapedKey)=\(percentEscapedValue)"
-        }
-        
-        return parameterArray.joinWithSeparator("&")
     }
     
 }
