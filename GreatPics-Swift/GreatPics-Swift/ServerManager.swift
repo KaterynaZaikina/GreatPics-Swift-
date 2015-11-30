@@ -9,22 +9,15 @@
 import Foundation
 import AFNetworking
 
-private let errorDomain = "com.yalantis.GreatPics.instagram"
-private let errorCode = 333
 private let tag = "selfie"
 private let postNumber = "20"
 
 class ServerManager {
     
     var accessToken: String?
-    private let sessionManager: AFHTTPSessionManager
+    
     private var pagination: [String: String]?
     static let sharedManager = ServerManager()
-    
-    init() {
-        let url = NSURL(string: "https://api.instagram.com/v1/")
-        sessionManager = AFHTTPSessionManager(baseURL: url)
-    }
     
     func loadFirstPageOfPosts() {
         loadPostsWithMaxTagID(nil)
@@ -35,6 +28,7 @@ class ServerManager {
     }
     
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
+        
         let urlString = "tags/\(tagName)/media/recent"
         var parameters = [String: String]()
         if accessToken != nil {
@@ -46,17 +40,14 @@ class ServerManager {
         }
         
         parameters["count"] = count
+        let baseURL = "https://api.instagram.com/v1/"
         
-        sessionManager.GET(urlString, parameters: parameters, success: { operation, responseObject in
-            if let responseObject = responseObject as? [String : AnyObject] {
-                success?(responseObject)
-                } else {
-                let userInfo = [NSLocalizedDescriptionKey : "Response Object is not recieved"]
-                let error = NSError(domain:errorDomain, code:errorCode, userInfo: userInfo)
-                print("error - \(error.localizedDescription), status code - \(error.code)") }
-            }, failure: { (operation:NSURLSessionDataTask?, error:NSError) -> Void in
-                failure?(error)
-        })
+        do {
+            try NetworkingManager(baseURL: baseURL).sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
+        } catch  {
+            print("error response object")
+        }
+        
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
