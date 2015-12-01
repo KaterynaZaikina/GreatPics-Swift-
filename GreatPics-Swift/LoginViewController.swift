@@ -45,7 +45,6 @@ class LoginViewController: UIViewController {
         webView.delegate = self
         login()
     }
-    
 }
 
        //MARK: - WebView Delegate

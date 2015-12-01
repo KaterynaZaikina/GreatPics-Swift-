@@ -11,10 +11,10 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: InstaPostView!
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.image = nil
+        imageView.clear()
     }
 
 }

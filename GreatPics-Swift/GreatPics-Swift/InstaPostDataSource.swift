@@ -58,8 +58,9 @@ class InstaPostDataSource: NSObject, NSFetchedResultsControllerDelegate {
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
         
         if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL {
-            cell.imageView.sd_setImageWithURL(NSURL(string: imageURL)!)
-        }
+           // cell.imageView.sd_setImageWithURL(NSURL(string: imageURL)!)
+            cell.imageView.loadImageWithURL(NSURL(string: imageURL)!, placeholderImage: UIImage(named: "placeholder.png")!)
+        } 
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {

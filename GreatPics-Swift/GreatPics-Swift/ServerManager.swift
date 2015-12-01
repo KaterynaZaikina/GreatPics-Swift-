@@ -9,7 +9,7 @@
 import Foundation
 import AFNetworking
 
-private let tag = "selfie"
+private let tag = "mycar"
 private let postNumber = "20"
 
 class ServerManager {
