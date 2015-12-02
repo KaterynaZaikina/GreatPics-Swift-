@@ -16,30 +16,28 @@ private let baseURL = "https://api.instagram.com/v1/"
 class ServerManager {
     
     var accessToken: String?
+    private let defaults = NSUserDefaults.standardUserDefaults()
+    private var pagination: [String: String]?
     
-    private var pagination: [String: String]? {
-        didSet {
-            print(pagination?["next_max_id"])
+    private var maxTagID: String? {
+        get {
+           return defaults.valueForKey("maxTagID") as? String
+        }
+        set(newValue) {
+            defaults.setObject(newValue, forKey: "maxTagID")
         }
     }
     
-//    private var maxTagId: String {
-//        get {
-//            
-//        }
-//        set {
-//            
-//        }
-//    }
     static let sharedManager = ServerManager()
     private let networkingManger = NetworkingManager(baseURL: baseURL)
     
     func loadFirstPageOfPosts() {
-        loadPostsWithMaxTagID(nil)
+        loadPostsWithMaxTagID(maxTagID)
     }
     
     func loadNextPageOfPosts() {
-        loadPostsWithMaxTagID(pagination?["next_max_id"])
+        maxTagID = pagination?["next_max_id"]
+        loadPostsWithMaxTagID(maxTagID)
     }
     
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
