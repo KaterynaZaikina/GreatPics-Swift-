@@ -18,7 +18,6 @@ class NetworkingManager {
     private var baseURL: String?
     private let operationManager = NetworkOperationManager()
     
-    
     init(baseURL: String?) {
         self.baseURL = baseURL
     }

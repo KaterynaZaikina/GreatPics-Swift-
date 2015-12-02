@@ -29,7 +29,8 @@ protocol InstaPostDataSourceDelegate: class {
 class InstaPostDataSource: NSObject {
     
     weak var delegate: InstaPostDataSourceDelegate?
-    var blockOperations: [NSBlockOperation] = []
+    private var blockOperations: [NSBlockOperation] = []
+    private var collectionView: UICollectionView?
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
@@ -59,7 +60,6 @@ class InstaPostDataSource: NSObject {
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
-        
         if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL)!, placeholderImage: UIImage(named: placeHolder)!)
         }
@@ -72,26 +72,23 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         blockOperations.removeAll(keepCapacity: false)
+        collectionView = delegate?.collectioViewTransfer(self)
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        let collectionViewTransfered = delegate?.collectioViewTransfer(self)
-        guard let collectionView = collectionViewTransfered else {
-            return
-        }
+        guard let collectionView = collectionView else { return }
         switch(type) {
-            
         case .Insert:
             if let newIndexPath = newIndexPath {
                 blockOperations.append(
-                    NSBlockOperation(block: { () -> Void in
+                    NSBlockOperation(block: { [unowned collectionView] in
                         collectionView.insertItemsAtIndexPaths([newIndexPath])
                         })
                 )
             }
         case .Update:
                 blockOperations.append(
-                    NSBlockOperation(block: { () -> Void in
+                    NSBlockOperation(block: { [unowned collectionView] in
                         collectionView.reloadItemsAtIndexPaths([indexPath!])
                         })
                 )
@@ -102,22 +99,17 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        let collectionViewTransfered = delegate?.collectioViewTransfer(self)
-        guard let collectionView = collectionViewTransfered else {
-            return
-        }
-        
-        collectionView.performBatchUpdates({ () -> Void in
+        guard let collectionView = collectionView else { return }
+        collectionView.performBatchUpdates({ [unowned self] in
             for operation: NSBlockOperation in self.blockOperations {
                 operation.start()
             }
-            }, completion: { finished in
+            }, completion: { [unowned self] finished in
                 self.blockOperations.removeAll(keepCapacity: false)
             })
     }
     
 }
-
 
 //MARK: - UICollectionViewDataSource
 extension InstaPostDataSource: UICollectionViewDataSource {

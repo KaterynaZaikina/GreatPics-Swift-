@@ -12,7 +12,7 @@ import UIKit
 class NavigationManager {
 
     func createdLoginController(window: UIWindow?) {
-        let loginBlock = { (accessToken: String?) in
+        let loginBlock = { [unowned self] (accessToken: String?) in
             if let accessToken = accessToken {
             let serverManager = ServerManager.sharedManager
                 serverManager.accessToken = accessToken

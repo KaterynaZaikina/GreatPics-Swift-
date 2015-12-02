@@ -23,14 +23,14 @@ class ServerManager {
         }
     }
     
-    private var maxTagId: String {
-        get {
-            
-        }
-        set {
-            
-        }
-    }
+//    private var maxTagId: String {
+//        get {
+//            
+//        }
+//        set {
+//            
+//        }
+//    }
     static let sharedManager = ServerManager()
     private let networkingManger = NetworkingManager(baseURL: baseURL)
     
@@ -70,7 +70,7 @@ class ServerManager {
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
-        recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { responseObject in
+        recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { [unowned self] responseObject in
             if let paginationDictionary = responseObject?["pagination"] as? [String : String]  {
                 self.pagination = paginationDictionary
             }
