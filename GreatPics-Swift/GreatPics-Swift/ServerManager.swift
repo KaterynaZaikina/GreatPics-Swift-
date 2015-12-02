@@ -11,13 +11,28 @@ import AFNetworking
 
 private let tag = "mycar"
 private let postNumber = "20"
+private let baseURL = "https://api.instagram.com/v1/"
 
 class ServerManager {
     
     var accessToken: String?
     
-    private var pagination: [String: String]?
+    private var pagination: [String: String]? {
+        didSet {
+            print(pagination?["next_max_id"])
+        }
+    }
+    
+    private var maxTagId: String {
+        get {
+            
+        }
+        set {
+            
+        }
+    }
     static let sharedManager = ServerManager()
+    private let networkingManger = NetworkingManager(baseURL: baseURL)
     
     func loadFirstPageOfPosts() {
         loadPostsWithMaxTagID(nil)
@@ -40,14 +55,18 @@ class ServerManager {
         }
         
         parameters["count"] = count
-        let baseURL = "https://api.instagram.com/v1/"
+        
         
         do {
-            try NetworkingManager(baseURL: baseURL).sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
+            try networkingManger.sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
         } catch  {
             print("error response object")
         }
         
+    }
+    
+    func loadImageWithURL(imageURL: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
+        return  networkingManger.loadWithRequest(imageURL, completionBlock: completionBlock)
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {

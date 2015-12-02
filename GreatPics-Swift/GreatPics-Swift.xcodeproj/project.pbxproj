@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		801ED9B21C0F0DBB004CA991 /* NetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801ED9B11C0F0DBB004CA991 /* NetworkOperationManager.swift */; };
 		8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */; };
 		8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */; };
 		8021DDF41C08BF8A00F3FD0E /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDF31C08BF8A00F3FD0E /* NetworkingManager.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		4420183F556435587225877B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		801ED9B11C0F0DBB004CA991 /* NetworkOperationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationManager.swift; sourceTree = "<group>"; };
 		8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostDataSource.swift; sourceTree = "<group>"; };
 		8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		8021DDF31C08BF8A00F3FD0E /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				8033935A1C0DAEE1004E8DA0 /* NetworkingOperation.swift */,
 				8032F7C71C0481ED00451C46 /* ServerManager.swift */,
 				8021DDF31C08BF8A00F3FD0E /* NetworkingManager.swift */,
+				801ED9B11C0F0DBB004CA991 /* NetworkOperationManager.swift */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
 				8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */,
 				8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */,
+				801ED9B21C0F0DBB004CA991 /* NetworkOperationManager.swift in Sources */,
 				803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */,
 				8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */,
 				8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */,

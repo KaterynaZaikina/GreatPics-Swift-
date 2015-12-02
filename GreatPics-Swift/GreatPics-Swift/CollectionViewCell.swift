@@ -13,8 +13,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: InstaPostView!
     override func prepareForReuse() {
-        super.prepareForReuse()
         imageView.clear()
+        super.prepareForReuse()
     }
 
 }

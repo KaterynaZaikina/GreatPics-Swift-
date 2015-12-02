@@ -11,22 +11,24 @@ import Foundation
 class NetworkingOperation: NSOperation {
 
     typealias OperationCompletion = (NSData?, NSURLResponse?, NSError?) -> Void
+    
     var completionHandler: OperationCompletion?
-    let requestURL: NSURL?
     var queue: dispatch_queue_t?
+    private let requestURL: NSURL?
     private var _isFinished = false
     override var finished: Bool {
         get {
             return _isFinished
         }
     }
-    
+    override func cancel() {
+        super.cancel()
+    }
     override var executing: Bool {
         get {
             return !_isFinished
         }
     }
-    
     override var asynchronous: Bool {
         get {
             return true
@@ -38,18 +40,18 @@ class NetworkingOperation: NSOperation {
     }
     
     override func main() {
+
         if let requestURL = requestURL {
-            NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { (data, response, error) -> Void in
-                if let queue = self.queue {
+            NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { [weak self] data, response, error in
+                guard let this = self else { return }
+                if let queue = this.queue {
                    dispatch_async(queue, { () -> Void in
-                    self.completionHandler?(data, response, error)
-                    
-                    self.willChangeValueForKey("isFinished")
-                    self._isFinished = true
-                    self.didChangeValueForKey("isFinished")
+                    this.completionHandler?(data, response, error)
+                    this.willChangeValueForKey("isFinished")
+                    this._isFinished = true
+                    this.didChangeValueForKey("isFinished")
                    })
                 }
-              
             }).resume()
             
         self.willChangeValueForKey("isFinished")
@@ -57,6 +59,5 @@ class NetworkingOperation: NSOperation {
         self.didChangeValueForKey("isFinished")
         }
     }
-    
     
 }

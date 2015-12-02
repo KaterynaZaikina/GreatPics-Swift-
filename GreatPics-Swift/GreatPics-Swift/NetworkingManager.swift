@@ -15,13 +15,12 @@ enum NetworkingError: ErrorType {
 
 class NetworkingManager {
     
-    var baseURL: String?
-    private let operationManager: NetworkOperationManager
+    private var baseURL: String?
+    private let operationManager = NetworkOperationManager()
     
     
     init(baseURL: String?) {
         self.baseURL = baseURL
-        self.operationManager = NetworkOperationManager()
     }
     
     // MARK: - Loading functions
@@ -49,21 +48,18 @@ class NetworkingManager {
         guard request != nil else {
             throw NetworkingError.InvalidURLRequest
         }
-        
         let networkOperation = NetworkingOperation(requestURL: requestURL)
         
         networkOperation.queue = dispatch_get_main_queue()
         networkOperation.queuePriority = .High
         
         networkOperation.completionHandler = { (data, response, error) -> Void in
-            
             guard let data = data where error == nil else {
                 print(error)
                 return
             }
             
             var json: [String : AnyObject]?
-            
             do {
                 json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject]
             } catch {
@@ -85,7 +81,6 @@ class NetworkingManager {
         }
         let key = requestURL!.absoluteString
         operationManager.addNewOperation(networkOperation, key: key)
-        
     }
     
     
@@ -100,7 +95,6 @@ class NetworkingManager {
         return networkOperation
         
     }
-    
    
     // MARK: - String and Dictionary extensions
     private func stringByAddingPercentEncodingForURLQueryValue(string: String) -> String {
@@ -117,33 +111,6 @@ class NetworkingManager {
             return "\(percentEscapedKey)=\(percentEscapedValue)"
         }
         return parameterArray.joinWithSeparator("&")
-    }
-    
-    // MARK: - NetworkOperationManager class
-    class NetworkOperationManager {
-        
-        private let networkOperationQueue: NSOperationQueue
-        private var operations = [String : NSOperation]()
-        
-        init() {
-            networkOperationQueue = NSOperationQueue()
-            networkOperationQueue.maxConcurrentOperationCount = 5
-        }
-        
-        func addNewOperation(operation: NSOperation, key: String) {
-            operations[key] = operation
-            networkOperationQueue.addOperation(operation)
-        }
-        
-        func cancelNetworkOperationWithKey(key: String) {
-            operations[key]?.cancel()
-            operations.removeValueForKey(key)
-        }
-        
-        func cancelAllOperations() {
-            networkOperationQueue.cancelAllOperations()
-        }
-        
     }
     
 }

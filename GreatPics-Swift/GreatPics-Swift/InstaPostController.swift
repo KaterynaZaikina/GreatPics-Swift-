@@ -9,10 +9,10 @@
 import UIKit
 
 class InstaPostController: UICollectionViewController {
-        
+    
     private let dataSource = InstaPostDataSource()
     private let serverManager = ServerManager.sharedManager
-
+    
     //MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,18 +21,18 @@ class InstaPostController: UICollectionViewController {
         self.collectionView?.dataSource = dataSource
         serverManager.loadFirstPageOfPosts()
     }
-
+    
 }
 
-    //MARK: - DataSourceDelegate
+//MARK: - DataSourceDelegate
 extension InstaPostController: InstaPostDataSourceDelegate {
     
     func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource) {
         serverManager.loadNextPageOfPosts()
     }
     
-    func dataSourceDidChangeContent(dataSource: InstaPostDataSource) {
-        self.collectionView?.reloadData()
+    func collectioViewTransfer(dataSource: InstaPostDataSource) -> UICollectionView {
+        return self.collectionView!
     }
     
 }

@@ -12,31 +12,24 @@ import UIKit
 class InstaPostView: UIImageView {
     
     var realImage: UIImage?
-    
     var url: NSURL?
     var operation: NSOperation?
     
     func loadImageWithURL(imageURL: NSURL?, placeholderImage: UIImage)  {
         url = imageURL
-       
-        
-       operation = NetworkingManager(baseURL: nil).loadWithRequest(url!) { (data, response, error) -> Void in
-            
+        operation = ServerManager().loadImageWithURL(url!) { data, response, error in
             guard let data = data where error == nil else {
                 print(error)
                 return
             }
-            
             let image = UIImage(data: data)
             self.realImage = image
             assert(self.realImage != nil)
             self.performSelectorOnMainThread("updateImage", withObject: nil, waitUntilDone: true)
         }
-        
         if realImage == nil {
             self.image = placeholderImage
         }
-
     }
     
     func updateImage() {
@@ -45,11 +38,11 @@ class InstaPostView: UIImageView {
     }
     
     func clear() {
-        image = nil
+        self.image = nil
         realImage = nil
         operation?.cancel()
         operation = nil
         url = nil
     }
-
+    
 }

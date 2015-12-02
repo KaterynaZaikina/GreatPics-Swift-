@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-        //MARK: - Controller lifecycle
+    //MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.delegate = self
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-       //MARK: - WebView Delegate
+//MARK: - WebView Delegate
 extension LoginViewController: UIWebViewDelegate {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         let urlString = request.URL?.absoluteString
