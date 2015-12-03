@@ -9,28 +9,36 @@
 import Foundation
 import UIKit
 import CoreData
-import AFNetworking
-import SDWebImage
 
 private let numberOfPosts = 3
 private let fetchBatchSize = 20
 private let errorDomain = "com.yalantis.GreatPics.request"
 private let errorCode = 5555
+private let placeholder = "placeholder.png"
 
-protocol InstaPostDataSourceDelegate {
+
+
+//MARK: - InstaPostDataSourceDelegate
+protocol InstaPostDataSourceDelegate: class {
     
     func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource)
-    func dataSourceDidChangeContent(dataSource: InstaPostDataSource)
     
 }
 
-class InstaPostDataSource: NSObject, NSFetchedResultsControllerDelegate {
+//MARK: - InstaPostDataSource class
+class InstaPostDataSource: NSObject {
     
-    var delegate: InstaPostDataSourceDelegate?
+    init(collectionView: UICollectionView) {
+        self.collectionView = collectionView
+    }
+    
+    let collectionView: UICollectionView
+    weak var delegate: InstaPostDataSourceDelegate?
+    private var blockOperations: [NSBlockOperation] = []
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
-    
+        
         fetchRequest.fetchBatchSize = fetchBatchSize
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAtDate", ascending: true)]
@@ -51,23 +59,60 @@ class InstaPostDataSource: NSObject, NSFetchedResultsControllerDelegate {
         }
         
         return fetchedResultController
-        }()
+    }()
     
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
-        
-        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL {
-            cell.imageView.sd_setImageWithURL(NSURL(string: imageURL)!)
+        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
+            cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: placeholder)!)
         }
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        delegate?.dataSourceDidChangeContent(self)
     }
     
 }
 
+//MARK: - FetchedresultsControllerDelegate
+extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        blockOperations.removeAll(keepCapacity: false)
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch(type) {
+        case .Insert:
+            if let newIndexPath = newIndexPath {
+                blockOperations.append(
+                    NSBlockOperation(block: { [unowned self] in
+                        self.collectionView.insertItemsAtIndexPaths([newIndexPath])
+                        })
+                )
+            }
+        case .Update:
+                blockOperations.append(
+                    NSBlockOperation(block: { [unowned self] in
+                        self.collectionView.reloadItemsAtIndexPaths([indexPath!])
+                        })
+                )
+        default:
+            break
+        }
+        
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        collectionView.performBatchUpdates({ [unowned self] in
+            for operation: NSBlockOperation in self.blockOperations {
+                operation.start()
+            }
+            }, completion: { [unowned self] finished in
+                self.blockOperations.removeAll(keepCapacity: false)
+            })
+    }
+    
+}
+
+//MARK: - UICollectionViewDataSource
 extension InstaPostDataSource: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,6 +133,7 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     
 }
 
+//MARK: - UICollectionViewDelegate
 extension InstaPostDataSource: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {

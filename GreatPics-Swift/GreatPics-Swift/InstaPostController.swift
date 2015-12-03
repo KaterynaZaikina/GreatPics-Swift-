@@ -9,30 +9,27 @@
 import UIKit
 
 class InstaPostController: UICollectionViewController {
-        
-    private let dataSource = InstaPostDataSource()
-    private let serverManager = ServerManager.sharedManager
 
+    private let serverManager = ServerManager.sharedManager
+    private var dataSource: InstaPostDataSource!
+    
     //MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource = InstaPostDataSource(collectionView: collectionView!)
         dataSource.delegate = self
         self.collectionView?.delegate = dataSource
         self.collectionView?.dataSource = dataSource
         serverManager.loadFirstPageOfPosts()
     }
-
+    
 }
 
-    //MARK: - DataSourceDelegate
+//MARK: - DataSourceDelegate
 extension InstaPostController: InstaPostDataSourceDelegate {
     
     func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource) {
         serverManager.loadNextPageOfPosts()
-    }
-    
-    func dataSourceDidChangeContent(dataSource: InstaPostDataSource) {
-        self.collectionView?.reloadData()
     }
     
 }

@@ -8,15 +8,19 @@
 
 import Foundation
 import UIKit
+import KeychainAccess
 
 class NavigationManager {
+    
+    private let keychainStorage: Keychain = Keychain(service: "com.kateryna.GreatPics-Swift.instagram-token")
+    private var accessTokenExist: Bool {
+        return keychainStorage["accessToken"] != nil
+    }
 
     func createdLoginController(window: UIWindow?) {
-        let loginBlock = {(accessToken: String?) -> () in
+        let loginBlock = { [unowned self] (accessToken: String?) in
             if let accessToken = accessToken {
-            let serverManager = ServerManager.sharedManager
-                serverManager.accessToken = accessToken
-                self.createCollectionController(window)
+                self.keychainStorage["accessToken"] = accessToken
             }
         }
         
@@ -26,10 +30,23 @@ class NavigationManager {
     }
     
     func createCollectionController(window: UIWindow?) {
+        if accessTokenExist == true {
+            let serverManager = ServerManager.sharedManager
+            serverManager.accessToken = keychainStorage["accessToken"]
+        }
+        
         let sb = UIStoryboard(name:"Main", bundle:nil)
         let collectionController = sb.instantiateViewControllerWithIdentifier("InstaPostController") as! InstaPostController
         let navigationController = UINavigationController(rootViewController: collectionController)
         window?.rootViewController = navigationController
     }
-
+    
+    func showMainScreen(window: UIWindow) {
+        if (accessTokenExist == false) {
+            createdLoginController(window)
+        } else {
+           createCollectionController(window)
+        }
+    }
+    
 }

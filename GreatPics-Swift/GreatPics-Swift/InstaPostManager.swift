@@ -21,14 +21,12 @@ class InstaPostManager {
         guard let posts = posts as? [[String: AnyObject]] else {
             return
         }
-        
         let identifiers = posts.flatMap { $0["id"] as? String }
         
         let predicate = NSPredicate(format: "identifier IN %@", argumentArray: [identifiers])
         fetchRequest.predicate = predicate
         
         var fetchedObjectArray: [InstaPost]?
-        
         do {
             fetchedObjectArray = try managedObjectContext.executeFetchRequest(fetchRequest) as? [InstaPost]
             
@@ -58,7 +56,6 @@ class InstaPostManager {
                 }
             }
         }
-        
        CoreDataManager.sharedManager.saveContext()
     }
     

@@ -15,14 +15,19 @@ enum NetworkingError: ErrorType {
 
 class NetworkingManager {
     
-    var baseURL: String
+    private var baseURL: String?
+    private let operationManager = NetworkOperationManager()
     
-    init(baseURL: String) {
+    init(baseURL: String?) {
         self.baseURL = baseURL
     }
     
+    // MARK: - Loading functions
     func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) throws {
         
+        guard let baseURL = self.baseURL else {
+            return
+        }
         var completeURLString = baseURL
         
         if let urlString = urlString  {
@@ -39,37 +44,45 @@ class NetworkingManager {
             request = NSURLRequest(URL: requestURL)
         }
         
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        
         guard request != nil else {
             throw NetworkingError.InvalidURLRequest
         }
+        let networkOperation = NetworkingOperation(requestURL: requestURL)
         
-        let task = session.dataTaskWithRequest(request!, completionHandler: { data, response, error -> Void in
-            
-            var json: [String : AnyObject]?
-            if let data = data {
-                do {
-                    json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject]
-                } catch {
-                    print("error with data")
-                }
+        networkOperation.queue = dispatch_get_main_queue()
+        networkOperation.queuePriority = .High
+        
+        networkOperation.completionHandler = { (data, response, error) in
+            guard let data = data where error == nil else {
+                print(error)
+                return
             }
             
-            success?(json)
+            var json: [String : AnyObject]?
+            do {
+                json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject]
+            } catch {
+                print("error with data")
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                success?(json)
+            })
             if json == nil {
                 print("JSON is not recieved!")
             }
             
             if let acceptedError = error {
-                failure?(acceptedError)
+                dispatch_async(dispatch_get_main_queue(), {
+                    failure?(acceptedError)
+                })
             }
-        })
-        
-        task.resume()
+        }
+        let key = requestURL!.absoluteString
+        operationManager.addNewOperation(networkOperation, key: key)
     }
     
+    // MARK: - String and Dictionary extensions
     private func stringByAddingPercentEncodingForURLQueryValue(string: String) -> String {
         let characterSet = NSMutableCharacterSet.alphanumericCharacterSet()
         characterSet.addCharactersInString("-._~")
@@ -87,7 +100,5 @@ class NetworkingManager {
     }
     
 }
-
-
 
 

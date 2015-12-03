@@ -8,8 +8,7 @@
 
 import Foundation
 import UIKit
-
-import AFNetworking
+import KeychainAccess
 
 private let INSTAGRAM_AUTH_URL = "https://api.instagram.com/oauth/authorize/?"
 private let INSTAGRAM_REDIRECT_URI = "https://yalantis.com"
@@ -39,16 +38,15 @@ class LoginViewController: UIViewController {
         }
     }
     
-        //MARK: - Controller lifecycle
+    //MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.delegate = self
         login()
     }
-    
 }
 
-       //MARK: - WebView Delegate
+//MARK: - WebView Delegate
 extension LoginViewController: UIWebViewDelegate {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         let urlString = request.URL?.absoluteString
