@@ -11,36 +11,41 @@ import UIKit
 
 class InstaPostView: UIImageView {
     
-    var realImage: UIImage?
     var url: NSURL?
     var operation: NSOperation?
+    private let imageLoader = ImageLoader()
     
     func loadImageWithURL(imageURL: NSURL?, placeholderImage: UIImage)  {
         url = imageURL
-        operation = ServerManager().loadImageWithURL(url!) { data, response, error in
+        guard let existedURL = imageURL else {
+            return
+        }
+        
+        operation = imageLoader.loadImageWithURL(existedURL) { data, response, error in
             guard let data = data where error == nil else {
                 print(error)
                 return
             }
             let image = UIImage(data: data)
-            self.realImage = image
-            assert(self.realImage != nil)
-            self.performSelectorOnMainThread("updateImage", withObject: nil, waitUntilDone: true)
+            self.performSelectorOnMainThread("updateImage:", withObject: image, waitUntilDone: true)
         }
-        if realImage == nil {
+        if image == nil {
             self.image = placeholderImage
         }
     }
     
-    func updateImage() {
-        self.image = self.realImage
+    func updateImage(image: UIImage?) {
+        if let existImage = image {
+            self.image = existImage
+        }
         self.setNeedsDisplay()
     }
     
     func clear() {
-        self.image = nil
-        realImage = nil
-        operation?.cancel()
+        image = nil
+        if let imageURL = url {
+            imageLoader.clearImage(imageURL)
+        }
         operation = nil
         url = nil
     }

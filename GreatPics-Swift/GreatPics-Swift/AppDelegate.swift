@@ -17,12 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if (navigationManager.accessTokenExist == false) {
-            navigationManager.createdLoginController(window)
-        } else {
-            navigationManager.createCollectionController(window)
-        }
-        
+        navigationManager.showMainScreen(window!)
         window!.makeKeyAndVisible()
         return true
     }

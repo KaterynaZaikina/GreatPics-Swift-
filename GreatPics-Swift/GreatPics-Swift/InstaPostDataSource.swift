@@ -14,23 +14,27 @@ private let numberOfPosts = 3
 private let fetchBatchSize = 20
 private let errorDomain = "com.yalantis.GreatPics.request"
 private let errorCode = 5555
-private let placeHolder = "placeholder.png"
+private let placeholder = "placeholder.png"
+
 
 
 //MARK: - InstaPostDataSourceDelegate
 protocol InstaPostDataSourceDelegate: class {
     
     func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource)
-    func collectioView(dataSource: InstaPostDataSource) -> UICollectionView
     
 }
 
 //MARK: - InstaPostDataSource class
 class InstaPostDataSource: NSObject {
     
+    init(collectionView: UICollectionView) {
+        self.collectionView = collectionView
+    }
+    
+    let collectionView: UICollectionView
     weak var delegate: InstaPostDataSourceDelegate?
     private var blockOperations: [NSBlockOperation] = []
-    private var collectionView: UICollectionView?
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
@@ -60,8 +64,8 @@ class InstaPostDataSource: NSObject {
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
-        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL {
-            cell.imageView.loadImageWithURL(NSURL(string: imageURL)!, placeholderImage: UIImage(named: placeHolder)!)
+        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
+            cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: placeholder)!)
         }
     }
     
@@ -72,24 +76,22 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         blockOperations.removeAll(keepCapacity: false)
-        collectionView = delegate?.collectioView(self)
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        guard let collectionView = collectionView else { return }
         switch(type) {
         case .Insert:
             if let newIndexPath = newIndexPath {
                 blockOperations.append(
-                    NSBlockOperation(block: { [unowned collectionView] in
-                        collectionView.insertItemsAtIndexPaths([newIndexPath])
+                    NSBlockOperation(block: { [unowned self] in
+                        self.collectionView.insertItemsAtIndexPaths([newIndexPath])
                         })
                 )
             }
         case .Update:
                 blockOperations.append(
-                    NSBlockOperation(block: { [unowned collectionView] in
-                        collectionView.reloadItemsAtIndexPaths([indexPath!])
+                    NSBlockOperation(block: { [unowned self] in
+                        self.collectionView.reloadItemsAtIndexPaths([indexPath!])
                         })
                 )
         default:
@@ -99,7 +101,6 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        guard let collectionView = collectionView else { return }
         collectionView.performBatchUpdates({ [unowned self] in
             for operation: NSBlockOperation in self.blockOperations {
                 operation.start()

@@ -60,9 +60,9 @@ class ServerManager {
         
     }
     
-    func loadImageWithURL(imageURL: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
-        return  networkingManger.loadWithRequest(imageURL, completionBlock: completionBlock)
-    }
+//    func loadImageWithURL(imageURL: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
+//        return  networkingManger.loadWithRequest(imageURL, completionBlock: completionBlock)
+//    }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {
         recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { [unowned self] responseObject in
