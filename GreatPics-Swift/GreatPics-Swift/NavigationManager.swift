@@ -14,11 +14,7 @@ class NavigationManager {
     
     private let keychainStorage: Keychain = Keychain(service: "com.kateryna.GreatPics-Swift.instagram-token")
     private var accessTokenExist: Bool {
-        if keychainStorage["accessToken"] != nil {
-            return true
-        } else {
-            return false
-        }
+        return keychainStorage["accessToken"] != nil
     }
 
     func createdLoginController(window: UIWindow?) {

@@ -27,6 +27,6 @@ class ImageLoader {
         let key = imageURL.absoluteString
         operationManager.cancelNetworkOperationWithKey(key)
     }
-
+    
     
 }
