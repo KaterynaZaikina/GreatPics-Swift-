@@ -14,49 +14,55 @@ class InstaPostManager {
     private let managedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
     func importPost(posts: AnyObject) {
-        let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName("InstaPost", inManagedObjectContext: managedObjectContext)
-        fetchRequest.entity = entity
         
-        guard let posts = posts as? [[String: AnyObject]] else {
-            return
-        }
-        let identifiers = posts.flatMap { $0["id"] as? String }
+        let privateContext = CoreDataManager.sharedManager.importContext
         
-        let predicate = NSPredicate(format: "identifier IN %@", argumentArray: [identifiers])
-        fetchRequest.predicate = predicate
-        
-        var fetchedObjectArray: [InstaPost]?
-        do {
-            fetchedObjectArray = try managedObjectContext.executeFetchRequest(fetchRequest) as? [InstaPost]
+        privateContext.performBlock {
+            let fetchRequest = NSFetchRequest()
+            let entity = NSEntityDescription.entityForName("InstaPost", inManagedObjectContext: privateContext)
+            fetchRequest.entity = entity
             
-        } catch let error as NSError {
-            print("Error: \(error.localizedDescription)")
-            fetchedObjectArray = nil
-        }
-        
-        var fetchedObjectsIdentifiers: [String]
-        if let fetchedObjectArray = fetchedObjectArray {
-            fetchedObjectsIdentifiers = fetchedObjectArray.flatMap{ $0.identifier }
+            guard let posts = posts as? [[String: AnyObject]] else {
+                return
+            }
+            let identifiers = posts.flatMap { $0["id"] as? String }
             
-            var fetchedObjectsDictionary = NSDictionary(objects: fetchedObjectArray,
-                forKeys: fetchedObjectsIdentifiers) as? [String : InstaPost]
+            let predicate = NSPredicate(format: "identifier IN %@", argumentArray: [identifiers])
+            fetchRequest.predicate = predicate
             
-            for var postDictionary: [String: AnyObject] in posts {
-                if let key = postDictionary["id"] as? String {
-                    var post: InstaPost!
-                    if let existPost = fetchedObjectsDictionary?[key] {
-                        post = existPost
-                    }  else {
-                        post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost",
-                            inManagedObjectContext: self.managedObjectContext) as? InstaPost
-                        post.createdAtDate = NSDate()
+            var fetchedObjectArray: [InstaPost]?
+            do {
+                fetchedObjectArray = try privateContext.executeFetchRequest(fetchRequest) as? [InstaPost]
+                
+            } catch let error as NSError {
+                print("Error: \(error.localizedDescription)")
+                fetchedObjectArray = nil
+            }
+            
+            var fetchedObjectsIdentifiers: [String]
+            if let fetchedObjectArray = fetchedObjectArray {
+                fetchedObjectsIdentifiers = fetchedObjectArray.flatMap{ $0.identifier }
+                
+                var fetchedObjectsDictionary = NSDictionary(objects: fetchedObjectArray,
+                    forKeys: fetchedObjectsIdentifiers) as? [String : InstaPost]
+                
+                for var postDictionary: [String: AnyObject] in posts {
+                    if let key = postDictionary["id"] as? String {
+                        var post: InstaPost!
+                        if let existPost = fetchedObjectsDictionary?[key] {
+                            post = existPost
+                        }  else {
+                            
+                            post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost",
+                                inManagedObjectContext: self.managedObjectContext) as? InstaPost
+                            post.createdAtDate = NSDate()
+                        }
+                        post?.updateWithDictionary(postDictionary)
                     }
-                    post?.updateWithDictionary(postDictionary)
                 }
             }
+            CoreDataManager.sharedManager.saveImportContext(privateContext)
         }
-       CoreDataManager.sharedManager.saveContext()
     }
     
 }

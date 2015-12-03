@@ -65,19 +65,16 @@ class NetworkingManager {
                 print("error with data")
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
-                success?(json)
-            })
+            success?(json)
             if json == nil {
                 print("JSON is not recieved!")
             }
             
             if let acceptedError = error {
-                dispatch_async(dispatch_get_main_queue(), {
-                    failure?(acceptedError)
-                })
+                failure?(acceptedError)
             }
         }
+        
         let key = requestURL!.absoluteString
         operationManager.addNewOperation(networkOperation, key: key)
     }

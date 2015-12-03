@@ -15,17 +15,22 @@ private let errorCode = 9999
 class CoreDataManager {
     
     static let sharedManager = CoreDataManager()
-
+    lazy var importContext: NSManagedObjectContext = {
+        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        context.parentContext = self.managedObjectContext
+        return context
+    }()
+    
     // MARK: - Core Data stack
     private lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
-        }()
+    }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = NSBundle.mainBundle().URLForResource("GreatPics_Swift", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
-        }()
+    }()
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -46,29 +51,40 @@ class CoreDataManager {
         }
         
         return coordinator
-        }()
+    }()
     
-     private(set) lazy var managedObjectContext: NSManagedObjectContext = {
+    private(set) lazy var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
         let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
-        }()
+    }()
     
     // MARK: - Core Data Saving support
     func saveContext () {
-        if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-                
-            } catch {
-                let coreDataError  = error as NSError
-                print("Unresolved error \(coreDataError), \(coreDataError .userInfo)")
-                assertionFailure(coreDataError.localizedDescription)
+        managedObjectContext.performBlock { [unowned self] in
+            if self.managedObjectContext.hasChanges {
+                do {
+                    try self.managedObjectContext.save()
+                    
+                } catch {
+                    let coreDataError  = error as NSError
+                    print("Unresolved error \(coreDataError), \(coreDataError .userInfo)")
+                    assertionFailure(coreDataError.localizedDescription)
+                }
             }
         }
     }
-
+    
+    func saveImportContext(context: NSManagedObjectContext) {
+        do {
+            try context.save()
+        } catch {
+            fatalError("Failure to save context: \(error)")
+        }
+        saveContext()
+    }
+    
 }
 
 
