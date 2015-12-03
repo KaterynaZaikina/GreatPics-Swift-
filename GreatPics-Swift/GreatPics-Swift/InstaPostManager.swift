@@ -19,7 +19,6 @@ class InstaPostManager {
         let privateContext = NSManagedObjectContext(
             concurrencyType: .PrivateQueueConcurrencyType)
         privateContext.parentContext = CoreDataManager.sharedManager.managedObjectContext
-        ///
         
         privateContext.performBlock {
         let fetchRequest = NSFetchRequest()
