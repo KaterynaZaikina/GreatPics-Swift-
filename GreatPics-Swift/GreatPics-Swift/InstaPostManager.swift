@@ -14,8 +14,16 @@ class InstaPostManager {
     private let managedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
     func importPost(posts: AnyObject) {
+        
+        //MARK: Multi-context
+        let privateContext = NSManagedObjectContext(
+            concurrencyType: .PrivateQueueConcurrencyType)
+        privateContext.parentContext = CoreDataManager.sharedManager.managedObjectContext
+        ///
+        
+        privateContext.performBlock {
         let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName("InstaPost", inManagedObjectContext: managedObjectContext)
+        let entity = NSEntityDescription.entityForName("InstaPost", inManagedObjectContext: privateContext)
         fetchRequest.entity = entity
         
         guard let posts = posts as? [[String: AnyObject]] else {
@@ -28,7 +36,7 @@ class InstaPostManager {
         
         var fetchedObjectArray: [InstaPost]?
         do {
-            fetchedObjectArray = try managedObjectContext.executeFetchRequest(fetchRequest) as? [InstaPost]
+            fetchedObjectArray = try privateContext.executeFetchRequest(fetchRequest) as? [InstaPost]
             
         } catch let error as NSError {
             print("Error: \(error.localizedDescription)")
@@ -48,6 +56,7 @@ class InstaPostManager {
                     if let existPost = fetchedObjectsDictionary?[key] {
                         post = existPost
                     }  else {
+                        
                         post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost",
                             inManagedObjectContext: self.managedObjectContext) as? InstaPost
                         post.createdAtDate = NSDate()
@@ -56,7 +65,14 @@ class InstaPostManager {
                 }
             }
         }
-       CoreDataManager.sharedManager.saveContext()
+            do {
+                try privateContext.save()
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
+            
+            CoreDataManager.sharedManager.saveContext()
+    }
     }
     
 }

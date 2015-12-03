@@ -57,9 +57,10 @@ class CoreDataManager {
     
     // MARK: - Core Data Saving support
     func saveContext () {
-        if managedObjectContext.hasChanges {
+        managedObjectContext.performBlock { [unowned self] in
+        if self.managedObjectContext.hasChanges {
             do {
-                try managedObjectContext.save()
+                try self.managedObjectContext.save()
                 
             } catch {
                 let coreDataError  = error as NSError
@@ -67,6 +68,7 @@ class CoreDataManager {
                 assertionFailure(coreDataError.localizedDescription)
             }
         }
+    }
     }
 
 }

@@ -65,9 +65,11 @@ class NetworkingManager {
                 print("error with data")
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
-                success?(json)
-            })
+//            dispatch_async(dispatch_get_main_queue(), {
+//                success?(json)
+//            })
+            
+            success?(json)
             if json == nil {
                 print("JSON is not recieved!")
             }

@@ -9,7 +9,7 @@
 import Foundation
 import AFNetworking
 
-private let tag = "mycar"
+private let tag = "makeup"
 private let postNumber = "20"
 private let baseURL = "https://api.instagram.com/v1/"
 
