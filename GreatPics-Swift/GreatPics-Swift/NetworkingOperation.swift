@@ -40,7 +40,6 @@ class NetworkingOperation: NSOperation {
     }
     
     override func main() {
-
         if let requestURL = requestURL {
             NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { [weak self] data, response, error in
                 guard let this = self else { return }

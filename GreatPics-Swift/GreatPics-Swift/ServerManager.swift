@@ -9,7 +9,11 @@
 import Foundation
 import AFNetworking
 
+<<<<<<< HEAD
 private let tag = "makeup"
+=======
+private let tag = "underaurorasky"
+>>>>>>> develop
 private let postNumber = "20"
 private let baseURL = "https://api.instagram.com/v1/"
 
@@ -58,10 +62,6 @@ class ServerManager {
             print("error response object")
         }
         
-    }
-    
-    func loadImageWithURL(imageURL: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
-        return  networkingManger.loadWithRequest(imageURL, completionBlock: completionBlock)
     }
     
     private func loadPostsWithMaxTagID(maxTagID:String?) {

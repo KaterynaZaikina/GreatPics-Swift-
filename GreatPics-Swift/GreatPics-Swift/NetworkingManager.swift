@@ -84,19 +84,6 @@ class NetworkingManager {
         operationManager.addNewOperation(networkOperation, key: key)
     }
     
-    
-    func loadWithRequest(url: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
-        let networkOperation = NetworkingOperation(requestURL: url)
-        networkOperation.queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        networkOperation.queuePriority = .Normal
-        
-        networkOperation.completionHandler = completionBlock
-        let key = url.absoluteString
-        operationManager.addNewOperation(networkOperation, key: key)
-        return networkOperation
-        
-    }
-   
     // MARK: - String and Dictionary extensions
     private func stringByAddingPercentEncodingForURLQueryValue(string: String) -> String {
         let characterSet = NSMutableCharacterSet.alphanumericCharacterSet()

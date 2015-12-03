@@ -13,14 +13,10 @@ import KeychainAccess
 class NavigationManager {
     
     private let keychainStorage: Keychain = Keychain(service: "com.kateryna.GreatPics-Swift.instagram-token")
-    var accessTokenExist: Bool {
-         if keychainStorage["accessToken"] != nil {
-            return true
-        } else {
-            return false
-        }
+    private var accessTokenExist: Bool {
+        return keychainStorage["accessToken"] != nil
     }
-    
+
     func createdLoginController(window: UIWindow?) {
         let loginBlock = { [unowned self] (accessToken: String?) in
             if let accessToken = accessToken {
@@ -43,6 +39,14 @@ class NavigationManager {
         let collectionController = sb.instantiateViewControllerWithIdentifier("InstaPostController") as! InstaPostController
         let navigationController = UINavigationController(rootViewController: collectionController)
         window?.rootViewController = navigationController
+    }
+    
+    func showMainScreen(window: UIWindow) {
+        if (accessTokenExist == false) {
+            createdLoginController(window)
+        } else {
+           createCollectionController(window)
+        }
     }
     
 }
