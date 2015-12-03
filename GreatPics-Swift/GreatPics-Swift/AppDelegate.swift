@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import KeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private let navigationManager: NavigationManager = NavigationManager()
-    
+        
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        navigationManager.createdLoginController(window)
+        if (navigationManager.accessTokenExist == false) {
+            navigationManager.createdLoginController(window)
+        } else {
+            navigationManager.createCollectionController(window)
+        }
+        
         window!.makeKeyAndVisible()
         return true
     }

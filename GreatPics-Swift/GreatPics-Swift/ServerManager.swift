@@ -41,7 +41,6 @@ class ServerManager {
     }
     
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
-        
         let urlString = "tags/\(tagName)/media/recent"
         var parameters = [String: String]()
         if accessToken != nil {
@@ -53,8 +52,6 @@ class ServerManager {
         }
         
         parameters["count"] = count
-        
-        
         do {
             try networkingManger.sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
         } catch  {

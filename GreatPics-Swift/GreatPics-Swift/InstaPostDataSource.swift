@@ -21,7 +21,7 @@ private let placeHolder = "placeholder.png"
 protocol InstaPostDataSourceDelegate: class {
     
     func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource)
-    func collectioViewTransfer(dataSource: InstaPostDataSource) -> UICollectionView
+    func collectioView(dataSource: InstaPostDataSource) -> UICollectionView
     
 }
 
@@ -72,7 +72,7 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         blockOperations.removeAll(keepCapacity: false)
-        collectionView = delegate?.collectioViewTransfer(self)
+        collectionView = delegate?.collectioView(self)
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {

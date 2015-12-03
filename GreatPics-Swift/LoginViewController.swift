@@ -8,8 +8,7 @@
 
 import Foundation
 import UIKit
-
-import AFNetworking
+import KeychainAccess
 
 private let INSTAGRAM_AUTH_URL = "https://api.instagram.com/oauth/authorize/?"
 private let INSTAGRAM_REDIRECT_URI = "https://yalantis.com"

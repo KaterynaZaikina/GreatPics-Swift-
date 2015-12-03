@@ -31,7 +31,7 @@ extension InstaPostController: InstaPostDataSourceDelegate {
         serverManager.loadNextPageOfPosts()
     }
     
-    func collectioViewTransfer(dataSource: InstaPostDataSource) -> UICollectionView {
+    func collectioView(dataSource: InstaPostDataSource) -> UICollectionView {
         return self.collectionView!
     }
     

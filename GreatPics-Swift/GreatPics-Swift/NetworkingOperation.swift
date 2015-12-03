@@ -10,7 +10,7 @@ import Foundation
 
 class NetworkingOperation: NSOperation {
 
-    typealias OperationCompletion = (NSData?, NSURLResponse?, NSError?) -> Void
+    typealias OperationCompletion = (NSData?, NSURLResponse?, NSError?) -> ()
     
     var completionHandler: OperationCompletion?
     var queue: dispatch_queue_t?
@@ -45,7 +45,7 @@ class NetworkingOperation: NSOperation {
             NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { [weak self] data, response, error in
                 guard let this = self else { return }
                 if let queue = this.queue {
-                   dispatch_async(queue, { () -> Void in
+                   dispatch_async(queue, {
                     this.completionHandler?(data, response, error)
                     this.willChangeValueForKey("isFinished")
                     this._isFinished = true

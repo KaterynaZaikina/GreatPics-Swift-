@@ -52,7 +52,7 @@ class NetworkingManager {
         networkOperation.queue = dispatch_get_main_queue()
         networkOperation.queuePriority = .High
         
-        networkOperation.completionHandler = { (data, response, error) -> Void in
+        networkOperation.completionHandler = { (data, response, error) in
             guard let data = data where error == nil else {
                 print(error)
                 return
@@ -65,7 +65,7 @@ class NetworkingManager {
                 print("error with data")
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            dispatch_async(dispatch_get_main_queue(), {
                 success?(json)
             })
             if json == nil {
@@ -73,7 +73,7 @@ class NetworkingManager {
             }
             
             if let acceptedError = error {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue(), {
                     failure?(acceptedError)
                 })
             }

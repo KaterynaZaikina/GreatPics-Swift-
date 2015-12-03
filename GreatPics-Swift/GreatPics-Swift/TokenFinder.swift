@@ -6,9 +6,6 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-
-// https://yalantis.com/#access_token=189787506.ffce67c.3b0bf48fa6c245d99db64a2baa9b9fd9
-
 import Foundation
 
 class TokenFinder {
