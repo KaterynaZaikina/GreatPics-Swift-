@@ -11,6 +11,7 @@ import Foundation
 class ImageLoader {
     
     private let operationManager = NetworkOperationManager()
+    static let sharedLoader = ImageLoader()
     
     func loadImageWithURL(imageURL: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
         let networkOperation = NetworkingOperation(requestURL: imageURL)
@@ -23,7 +24,7 @@ class ImageLoader {
         return networkOperation
     }
     
-    func clearImage(imageURL: NSURL) {
+    func stopImageLoading(imageURL: NSURL) {
         let key = imageURL.absoluteString
         operationManager.cancelNetworkOperationWithKey(key)
     }

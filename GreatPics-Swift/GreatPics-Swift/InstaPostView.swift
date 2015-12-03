@@ -13,7 +13,7 @@ class InstaPostView: UIImageView {
     
     var url: NSURL?
     var operation: NSOperation?
-    private let imageLoader = ImageLoader()
+    private let imageLoader = ImageLoader.sharedLoader
     
     func loadImageWithURL(imageURL: NSURL?, placeholderImage: UIImage)  {
         url = imageURL
@@ -44,7 +44,7 @@ class InstaPostView: UIImageView {
     func clear() {
         image = nil
         if let imageURL = url {
-            imageLoader.clearImage(imageURL)
+            imageLoader.stopImageLoading(imageURL)
         }
         operation = nil
         url = nil
