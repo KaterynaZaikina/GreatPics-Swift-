@@ -10,20 +10,11 @@ import Foundation
 import UIKit
 import CoreData
 
-private let numberOfPosts = 3
 private let fetchBatchSize = 20
 private let errorDomain = "com.yalantis.GreatPics.request"
 private let errorCode = 5555
 private let placeholder = "placeholder.png"
 
-
-
-//MARK: - InstaPostDataSourceDelegate
-protocol InstaPostDataSourceDelegate: class {
-    
-    func dataSourceWillDisplayLastCell(dataSource: InstaPostDataSource)
-    
-}
 
 //MARK: - InstaPostDataSource class
 class InstaPostDataSource: NSObject {
@@ -33,7 +24,6 @@ class InstaPostDataSource: NSObject {
     }
     
     let collectionView: UICollectionView
-    weak var delegate: InstaPostDataSourceDelegate?
     private var blockOperations: [NSBlockOperation] = []
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
@@ -110,6 +100,17 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
             })
     }
     
+    func postAtIndexPath(indexPath: NSIndexPath) -> InstaPost? {
+        let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost
+    return post
+    }
+    
+    func numberOfItemsAtIndexPath(indexPath: NSIndexPath) -> Int? {
+        let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[indexPath.section]
+        let numberOfItems = sectionInfo?.numberOfObjects
+        return numberOfItems
+    }
+    
 }
 
 //MARK: - UICollectionViewDataSource
@@ -133,15 +134,3 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     
 }
 
-//MARK: - UICollectionViewDelegate
-extension InstaPostDataSource: UICollectionViewDelegate {
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[indexPath.section]
-        let numberOfItems = sectionInfo?.numberOfObjects
-        if numberOfItems != nil && indexPath.item == numberOfItems! - numberOfPosts {
-            delegate?.dataSourceWillDisplayLastCell(self)
-        }
-    }
-    
-}

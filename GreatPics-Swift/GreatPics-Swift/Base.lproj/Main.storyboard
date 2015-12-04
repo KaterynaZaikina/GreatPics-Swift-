@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -80,10 +81,47 @@
                             </collectionViewCell>
                         </cells>
                     </collectionView>
+                    <connections>
+                        <segue destination="D2Q-Rx-iPk" kind="custom" identifier="showImage" customClass="InstaPostSegue" customModule="GreatPics_Swift" customModuleProvider="target" animates="NO" id="msJ-ww-WtT"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="326"/>
+            <point key="canvasLocation" x="973" y="337"/>
+        </scene>
+        <!--Detail Image Controller-->
+        <scene sceneID="5wY-gC-ILg">
+            <objects>
+                <viewController storyboardIdentifier="DetailImageController" id="D2Q-Rx-iPk" customClass="DetailImageController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CD6-Bw-mKU"/>
+                        <viewControllerLayoutGuide type="bottom" id="c7N-g3-nxr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Way-9N-w2B">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i84-kf-dyW" customClass="InstaPostView" customModule="GreatPics_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="i84-kf-dyW" secondAttribute="height" multiplier="1:1" id="Xk8-FI-upK"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="NrV-Zz-byS"/>
+                            <constraint firstItem="i84-kf-dyW" firstAttribute="centerY" secondItem="Way-9N-w2B" secondAttribute="centerY" id="nXc-S1-PCI"/>
+                            <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="uvc-U4-2yy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="i84-kf-dyW" id="Loj-MR-JGc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lck-Jb-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973" y="1123"/>
         </scene>
     </scenes>
 </document>
