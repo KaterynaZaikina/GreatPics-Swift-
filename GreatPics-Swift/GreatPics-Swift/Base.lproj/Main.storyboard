@@ -111,6 +111,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="2y5-Xx-E4M"/>
                                     <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Nxd-15-cEq" secondAttribute="leading" id="IVd-eY-YEw"/>
@@ -120,6 +121,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="D2Q-Rx-iPk" id="ehh-Ao-B3n"/>
+                                    <outletCollection property="gestureRecognizers" destination="Apk-gK-q0D" appends="YES" id="g1p-UK-bDE"/>
                                 </connections>
                             </scrollView>
                         </subviews>
@@ -138,6 +140,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lck-Jb-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="Apk-gK-q0D">
+                    <connections>
+                        <action selector="handleDoubleTap:" destination="D2Q-Rx-iPk" id="jOL-ZR-Wsd"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="973" y="1123"/>
         </scene>

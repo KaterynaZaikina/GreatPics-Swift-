@@ -26,4 +26,21 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
         return self.image
     }
     
+    @IBAction func handleDoubleTap(sender: UITapGestureRecognizer) {
+        if (scrollView.zoomScale > scrollView.minimumZoomScale) {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        } else {
+            let pointInView = sender.locationOfTouch(0, inView: scrollView)
+            let scrollViewSize = scrollView.bounds.size
+            let zoomScale: CGFloat = 2
+            let w = scrollViewSize.width / zoomScale
+            let h = scrollViewSize.height / zoomScale
+            let x = pointInView.x - (w / 2.0)
+            let y = pointInView.y - (h / 2.0)
+            
+            let rectToZoomTo = CGRect(x: x, y: y, width: w, height: h)
+            scrollView.zoomToRect(rectToZoomTo, animated: true)
+        }
+    }
+    
 }
