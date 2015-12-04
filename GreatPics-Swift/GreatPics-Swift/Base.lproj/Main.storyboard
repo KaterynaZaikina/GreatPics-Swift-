@@ -92,7 +92,7 @@
         <!--Detail Image Controller-->
         <scene sceneID="5wY-gC-ILg">
             <objects>
-                <viewController storyboardIdentifier="DetailImageController" id="D2Q-Rx-iPk" customClass="DetailImageController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailImageController" automaticallyAdjustsScrollViewInsets="NO" id="D2Q-Rx-iPk" customClass="DetailImageController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CD6-Bw-mKU"/>
                         <viewControllerLayoutGuide type="bottom" id="c7N-g3-nxr"/>
@@ -101,23 +101,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i84-kf-dyW" customClass="InstaPostView" customModule="GreatPics_Swift" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" maximumZoomScale="4" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-15-cEq">
+                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i84-kf-dyW" customClass="InstaPostView" customModule="GreatPics_Swift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="i84-kf-dyW" secondAttribute="height" multiplier="1:1" id="Xk8-FI-upK"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="i84-kf-dyW" secondAttribute="height" multiplier="1:1" id="Xk8-FI-upK"/>
+                                    <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="2y5-Xx-E4M"/>
+                                    <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Nxd-15-cEq" secondAttribute="leading" id="IVd-eY-YEw"/>
+                                    <constraint firstItem="i84-kf-dyW" firstAttribute="top" secondItem="Nxd-15-cEq" secondAttribute="top" id="MEy-O8-DpM"/>
+                                    <constraint firstAttribute="bottom" secondItem="i84-kf-dyW" secondAttribute="bottom" id="lzK-HR-knq"/>
+                                    <constraint firstAttribute="width" secondItem="Nxd-15-cEq" secondAttribute="height" multiplier="1:1" id="wzM-04-SDW"/>
                                 </constraints>
-                            </imageView>
+                                <connections>
+                                    <outlet property="delegate" destination="D2Q-Rx-iPk" id="ehh-Ao-B3n"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="NrV-Zz-byS"/>
-                            <constraint firstItem="i84-kf-dyW" firstAttribute="centerY" secondItem="Way-9N-w2B" secondAttribute="centerY" id="nXc-S1-PCI"/>
-                            <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="uvc-U4-2yy"/>
+                            <constraint firstAttribute="trailing" secondItem="Nxd-15-cEq" secondAttribute="trailing" id="Cs6-QZ-vy2"/>
+                            <constraint firstItem="Nxd-15-cEq" firstAttribute="top" secondItem="CD6-Bw-mKU" secondAttribute="bottom" id="XiV-E3-l3o"/>
+                            <constraint firstItem="Nxd-15-cEq" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="hrh-6l-pkE"/>
+                            <constraint firstItem="i84-kf-dyW" firstAttribute="width" secondItem="Way-9N-w2B" secondAttribute="width" id="o8E-RX-F0X"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bPN-bm-PEw"/>
                     <connections>
                         <outlet property="image" destination="i84-kf-dyW" id="Loj-MR-JGc"/>
+                        <outlet property="scrollView" destination="Nxd-15-cEq" id="kuy-Sb-t1R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lck-Jb-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
