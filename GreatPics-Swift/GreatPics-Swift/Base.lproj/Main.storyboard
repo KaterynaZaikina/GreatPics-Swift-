@@ -82,7 +82,7 @@
                         </cells>
                     </collectionView>
                     <connections>
-                        <segue destination="D2Q-Rx-iPk" kind="custom" identifier="showImage" customClass="InstaPostSegue" customModule="GreatPics_Swift" customModuleProvider="target" animates="NO" id="msJ-ww-WtT"/>
+                        <segue destination="D2Q-Rx-iPk" kind="push" identifier="showImage" animates="NO" id="msJ-ww-WtT"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -115,6 +115,7 @@
                             <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="uvc-U4-2yy"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="bPN-bm-PEw"/>
                     <connections>
                         <outlet property="image" destination="i84-kf-dyW" id="Loj-MR-JGc"/>
                     </connections>
