@@ -34,12 +34,12 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
             let pointInView = sender.locationOfTouch(0, inView: scrollView)
             let scrollViewSize = scrollView.bounds.size
             let zoomScale: CGFloat = 2
-            let w = scrollViewSize.width / zoomScale
-            let h = scrollViewSize.height / zoomScale
-            let x = pointInView.x - (w / 2.0)
-            let y = pointInView.y - (h / 2.0)
+            let width = scrollViewSize.width / zoomScale
+            let height = scrollViewSize.height / zoomScale
+            let x = pointInView.x - (width / 2.0)
+            let y = pointInView.y - (height / 2.0)
             
-            let rectToZoomTo = CGRect(x: x, y: y, width: w, height: h)
+            let rectToZoomTo = CGRect(x: x, y: y, width: width, height: height)
             scrollView.zoomToRect(rectToZoomTo, animated: true)
         }
     }
