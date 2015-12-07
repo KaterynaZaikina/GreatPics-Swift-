@@ -13,6 +13,7 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var image: InstaPostView!
     @IBOutlet weak var scrollView: UIScrollView!
+    
     var postImageURL: String?
     
     override func viewDidLoad() {

@@ -79,11 +79,13 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
                 )
             }
         case .Update:
+            if let indexPath = indexPath {
                 blockOperations.append(
                     NSBlockOperation(block: { [unowned self] in
-                        self.collectionView.reloadItemsAtIndexPaths([indexPath!])
+                        self.collectionView.reloadItemsAtIndexPaths([indexPath])
                         })
                 )
+            }
         default:
             break
         }

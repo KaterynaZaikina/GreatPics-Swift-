@@ -28,8 +28,10 @@ class InstaPostController: UICollectionViewController {
     //MARK: - UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let post = dataSource.postAtIndexPath(indexPath)
-        imageURL = post!.imageURL
-        performSegueWithIdentifier("showImage", sender: self)
+        if let existPost = post {
+            imageURL = existPost.imageURL
+            performSegueWithIdentifier("showImage", sender: self)
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
