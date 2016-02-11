@@ -15,15 +15,13 @@ class InstaPostController: UICollectionViewController {
     private let serverManager = ServerManager.sharedManager
     private var dataSource: InstaPostDataSource!
     private var imageURL: String?
-    
+       
     //MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = InstaPostDataSource(collectionView: collectionView!)
         collectionView?.delegate = self
         collectionView?.dataSource = dataSource
-//        let layout = UICollectionViewFlowLayout()
-//        collectionView?.collectionViewLayout = layout
         serverManager.loadFirstPageOfPosts()
     }
     
@@ -49,4 +47,22 @@ class InstaPostController: UICollectionViewController {
             controller.postImageURL = imageURL
         }
     }
+    
 }
+
+extension InstaPostController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            
+            return dataSource.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAtIndexPath: indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    return 5
+    }
+    
+}
+
+

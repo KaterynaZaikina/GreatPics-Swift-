@@ -15,6 +15,7 @@ private let errorDomain = "com.yalantis.GreatPics.request"
 private let errorCode = 5555
 private let placeholder = "placeholder.png"
 private let reuseIdentifier = "CollectionViewCell"
+private let photoHeight: CGFloat = 200
 
 
 //MARK: - InstaPostDataSource class
@@ -25,7 +26,6 @@ class InstaPostDataSource: NSObject {
     }
     
     let collectionView: UICollectionView
-    private var prototypeCell: CollectionViewCell = CollectionViewCell()
     private var blockOperations: [NSBlockOperation] = []
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
@@ -60,6 +60,19 @@ class InstaPostDataSource: NSObject {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: placeholder)!)
             cell.textLabel.text = text
         }
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            
+            if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost {
+                
+                let commentHeight = post.heightForComment(photoHeight)
+                return CGSizeMake(photoHeight, photoHeight + commentHeight)
+            }
+            
+            return CGSizeMake(0, 0)
     }
     
 }
@@ -136,22 +149,4 @@ extension InstaPostDataSource: UICollectionViewDataSource {
         return cell
     }
     
-}
-
-//MARK: - UICollectionViewDelegateFlowLayout
-extension InstaPostDataSource: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-            prototypeCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
-            
-            self.configureCell(prototypeCell, indexPath: indexPath)
-            prototypeCell.layoutIfNeeded()
-            
-            let size: CGSize = prototypeCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-            return size
-    }
-
 }

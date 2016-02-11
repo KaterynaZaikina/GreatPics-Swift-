@@ -9,7 +9,7 @@
 import Foundation
 import AFNetworking
 
-private let tag = "heart"
+private let tag = "handmade"
 
 private let postNumber = "20"
 private let baseURL = "https://api.instagram.com/v1/"

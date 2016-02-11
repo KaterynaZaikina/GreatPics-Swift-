@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class InstaPost: NSManagedObject {
@@ -26,4 +27,11 @@ class InstaPost: NSManagedObject {
         }
     }
     
+    func heightForComment(width: CGFloat) -> CGFloat {
+        if let text = text {
+            let rect = NSString(string: text).boundingRectWithSize(CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .UsesLineFragmentOrigin, attributes:nil, context: nil)
+            return ceil(rect.height)
+        }
+        return 0
+    }
 }
