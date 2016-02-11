@@ -20,8 +20,11 @@ class InstaPostController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = InstaPostDataSource(collectionView: collectionView!)
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = dataSource
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+            layout.delegate = dataSource
+        }
+        collectionView?.delegate = self
+        collectionView?.dataSource = dataSource
         serverManager.loadFirstPageOfPosts()
     }
     

@@ -12,6 +12,7 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: InstaPostView!
+    @IBOutlet weak var textLabel: UILabel!
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.clear()

@@ -11,9 +11,11 @@ import UIKit
 import CoreData
 
 private let fetchBatchSize = 20
-private let errorDomain = "com.yalantis.GreatPics.request"
 private let errorCode = 5555
+private let fontSize: CGFloat = 14.0
+private let errorDomain = "com.yalantis.GreatPics.request"
 private let placeholder = "placeholder.png"
+private let fontName = "AvenirNext-Regular"
 
 
 //MARK: - InstaPostDataSource class
@@ -56,6 +58,9 @@ class InstaPostDataSource: NSObject {
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
         if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: placeholder)!)
+            if let text = post.text {
+            cell.textLabel.text = text
+            }
         }
     }
     
@@ -135,4 +140,19 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     }
     
 }
+
+//MARK: - PinterestLayoutDelegate
+extension InstaPostDataSource: PinterestLayoutDelegate {
+    
+    func collectionView(collectionView: UICollectionView,
+        heightForCommentAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+            let post = fetchedResultController.objectAtIndexPath(indexPath) as! InstaPost
+            let font = UIFont(name: fontName, size: fontSize)!
+            let commentHeight = post.heightForComment(font, width: width)
+            let height = commentHeight
+            return height
+    
+    }
+}
+
 

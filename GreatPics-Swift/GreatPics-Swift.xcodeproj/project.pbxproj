@@ -31,6 +31,7 @@
 		8033935B1C0DAEE1004E8DA0 /* NetworkingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8033935A1C0DAEE1004E8DA0 /* NetworkingOperation.swift */; };
 		803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D8C591C0C4C0000C48E93 /* InstaPostView.swift */; };
 		803D8C5C1C0C808500C48E93 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 803D8C5B1C0C808500C48E93 /* placeholder.png */; };
+		805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */; };
 		DFC01BB1BD68362761AB0358 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A081B496D74C3EABAD33A /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		8033935A1C0DAEE1004E8DA0 /* NetworkingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingOperation.swift; sourceTree = "<group>"; };
 		803D8C591C0C4C0000C48E93 /* InstaPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostView.swift; sourceTree = "<group>"; };
 		803D8C5B1C0C808500C48E93 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		947A081B496D74C3EABAD33A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 			children = (
 				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
 				803D8C591C0C4C0000C48E93 /* InstaPostView.swift */,
+				805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */,
 				8032F7C21C033B7400451C46 /* LoginViewController.swift in Sources */,
 				8032F7CD1C04C40400451C46 /* InstaPost+CoreDataProperties.swift in Sources */,
 				8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */,
