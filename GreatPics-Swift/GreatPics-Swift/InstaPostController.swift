@@ -15,6 +15,7 @@ class InstaPostController: UICollectionViewController {
     private let serverManager = ServerManager.sharedManager
     private var dataSource: InstaPostDataSource!
     private var imageURL: String?
+    private var detailInstaPost: InstaPost?
     
     //MARK: - Controller lifecycle
     override func viewDidLoad() {
@@ -33,6 +34,7 @@ class InstaPostController: UICollectionViewController {
         let post = dataSource.postAtIndexPath(indexPath)
         if let existPost = post {
             imageURL = existPost.imageURL
+            detailInstaPost = existPost
             performSegueWithIdentifier("showImage", sender: self)
         }
     }
@@ -47,6 +49,7 @@ class InstaPostController: UICollectionViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showImage"  {
             let controller =  segue.destinationViewController as! DetailImageController
+            controller.instaPost = detailInstaPost
             controller.postImageURL = imageURL
         }
     }

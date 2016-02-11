@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -65,7 +66,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOa-TJ-2ar">
                                             <rect key="frame" x="8" y="208" width="184" height="34"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="0.8637695312" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
@@ -107,51 +108,173 @@
         <!--Detail Image Controller-->
         <scene sceneID="5wY-gC-ILg">
             <objects>
-                <viewController storyboardIdentifier="DetailImageController" automaticallyAdjustsScrollViewInsets="NO" id="D2Q-Rx-iPk" customClass="DetailImageController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailImageController" id="D2Q-Rx-iPk" customClass="DetailImageController" customModule="GreatPics_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CD6-Bw-mKU"/>
                         <viewControllerLayoutGuide type="bottom" id="c7N-g3-nxr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Way-9N-w2B">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" maximumZoomScale="4" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-15-cEq">
-                                <rect key="frame" x="0.0" y="20" width="600" height="600"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFr-cO-hYm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i84-kf-dyW" customClass="InstaPostView" customModule="GreatPics_Swift" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Un-be-DWw" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="412"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" maximumZoomScale="4" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nxd-15-cEq">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i84-kf-dyW" customClass="InstaPostView" customModule="GreatPics_Swift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="i84-kf-dyW" secondAttribute="height" multiplier="1:1" id="Xk8-FI-upK"/>
+                                                            <constraint firstAttribute="width" secondItem="i84-kf-dyW" secondAttribute="height" multiplier="1:1" id="Zuf-c9-abW"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Zuf-c9-abW"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </imageView>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="2y5-Xx-E4M"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Nxd-15-cEq" secondAttribute="leading" id="8dJ-HG-JWl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="D8j-MG-cLI"/>
+                                                    <constraint firstAttribute="width" secondItem="Nxd-15-cEq" secondAttribute="height" multiplier="1:1" id="HoY-lS-f8a"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Nxd-15-cEq" secondAttribute="leading" id="IVd-eY-YEw"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="centerX" secondItem="Nxd-15-cEq" secondAttribute="centerX" id="JTs-hM-1NB"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="top" secondItem="Nxd-15-cEq" secondAttribute="top" id="MEy-O8-DpM"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="height" secondItem="Nxd-15-cEq" secondAttribute="height" id="S67-b4-dLf"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="width" secondItem="Nxd-15-cEq" secondAttribute="width" id="Vgq-cq-8xe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="i84-kf-dyW" secondAttribute="bottom" id="Ys7-yb-C8T"/>
+                                                    <constraint firstAttribute="bottom" secondItem="i84-kf-dyW" secondAttribute="bottom" id="lzK-HR-knq"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="top" secondItem="Nxd-15-cEq" secondAttribute="top" id="qLb-yc-t8H"/>
+                                                    <constraint firstItem="i84-kf-dyW" firstAttribute="centerY" secondItem="Nxd-15-cEq" secondAttribute="centerY" id="rzp-pe-cXU"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="2y5-Xx-E4M"/>
+                                                        <exclude reference="IVd-eY-YEw"/>
+                                                        <exclude reference="JTs-hM-1NB"/>
+                                                        <exclude reference="MEy-O8-DpM"/>
+                                                        <exclude reference="S67-b4-dLf"/>
+                                                        <exclude reference="Vgq-cq-8xe"/>
+                                                        <exclude reference="lzK-HR-knq"/>
+                                                        <exclude reference="rzp-pe-cXU"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="D2Q-Rx-iPk" id="ehh-Ao-B3n"/>
+                                                    <outletCollection property="gestureRecognizers" destination="Apk-gK-q0D" appends="YES" id="g1p-UK-bDE"/>
+                                                </connections>
+                                            </scrollView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJL-PX-ug8">
+                                                <rect key="frame" x="8" y="383" width="359" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="i84-kf-dyW" secondAttribute="height" multiplier="1:1" id="Xk8-FI-upK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Nxd-15-cEq" secondAttribute="trailing" id="1P0-Qd-BJI"/>
+                                            <constraint firstItem="qJL-PX-ug8" firstAttribute="top" secondItem="Nxd-15-cEq" secondAttribute="bottom" constant="8" id="2KF-Mg-Om9"/>
+                                            <constraint firstItem="Nxd-15-cEq" firstAttribute="top" secondItem="0Un-be-DWw" secondAttribute="top" id="G6F-2D-EpT"/>
+                                            <constraint firstItem="qJL-PX-ug8" firstAttribute="leading" secondItem="0Un-be-DWw" secondAttribute="leading" constant="8" id="RSp-5A-c2K"/>
+                                            <constraint firstItem="Nxd-15-cEq" firstAttribute="top" secondItem="0Un-be-DWw" secondAttribute="top" id="Sb8-SB-dnC"/>
+                                            <constraint firstAttribute="trailing" secondItem="qJL-PX-ug8" secondAttribute="trailing" constant="8" id="ZGW-qN-Rv2"/>
+                                            <constraint firstItem="qJL-PX-ug8" firstAttribute="leading" secondItem="0Un-be-DWw" secondAttribute="leading" constant="8" id="bF3-x0-DmJ"/>
+                                            <constraint firstAttribute="bottom" secondItem="qJL-PX-ug8" secondAttribute="bottom" constant="20" id="cSn-Pw-iTU"/>
+                                            <constraint firstItem="i84-kf-dyW" firstAttribute="width" secondItem="0Un-be-DWw" secondAttribute="width" id="e30-8V-1zj"/>
+                                            <constraint firstAttribute="bottom" secondItem="qJL-PX-ug8" secondAttribute="bottom" constant="8" id="eU6-2V-BXa"/>
+                                            <constraint firstAttribute="trailing" secondItem="qJL-PX-ug8" secondAttribute="trailing" constant="8" id="ikc-cu-RmM"/>
+                                            <constraint firstAttribute="trailing" secondItem="Nxd-15-cEq" secondAttribute="trailing" id="nG5-ka-UTZ"/>
+                                            <constraint firstItem="Nxd-15-cEq" firstAttribute="leading" secondItem="0Un-be-DWw" secondAttribute="leading" id="ndo-AO-XLw"/>
+                                            <constraint firstItem="Nxd-15-cEq" firstAttribute="top" secondItem="0Un-be-DWw" secondAttribute="top" id="ujc-fU-3M2"/>
+                                            <constraint firstItem="Nxd-15-cEq" firstAttribute="leading" secondItem="0Un-be-DWw" secondAttribute="leading" id="yF5-8p-sRY"/>
                                         </constraints>
-                                    </imageView>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1P0-Qd-BJI"/>
+                                                <exclude reference="Sb8-SB-dnC"/>
+                                                <exclude reference="ujc-fU-3M2"/>
+                                                <exclude reference="yF5-8p-sRY"/>
+                                                <exclude reference="ZGW-qN-Rv2"/>
+                                                <exclude reference="bF3-x0-DmJ"/>
+                                                <exclude reference="cSn-Pw-iTU"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
                                 </subviews>
-                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="i84-kf-dyW" secondAttribute="trailing" id="2y5-Xx-E4M"/>
-                                    <constraint firstItem="i84-kf-dyW" firstAttribute="leading" secondItem="Nxd-15-cEq" secondAttribute="leading" id="IVd-eY-YEw"/>
-                                    <constraint firstItem="i84-kf-dyW" firstAttribute="top" secondItem="Nxd-15-cEq" secondAttribute="top" id="MEy-O8-DpM"/>
-                                    <constraint firstAttribute="bottom" secondItem="i84-kf-dyW" secondAttribute="bottom" id="lzK-HR-knq"/>
-                                    <constraint firstAttribute="width" secondItem="Nxd-15-cEq" secondAttribute="height" multiplier="1:1" id="wzM-04-SDW"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="leading" secondItem="hFr-cO-hYm" secondAttribute="leading" id="13w-Wi-zE0"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="centerX" secondItem="hFr-cO-hYm" secondAttribute="centerX" id="3EK-hY-c11"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="centerY" secondItem="hFr-cO-hYm" secondAttribute="centerY" id="6jZ-2u-hiF"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Un-be-DWw" secondAttribute="bottom" id="GXD-Wh-H27"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Un-be-DWw" secondAttribute="trailing" id="HBc-uS-byT"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="width" secondItem="hFr-cO-hYm" secondAttribute="width" id="SZ0-OO-GOa"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="height" secondItem="hFr-cO-hYm" secondAttribute="height" id="VsY-Hn-gkA"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="top" secondItem="hFr-cO-hYm" secondAttribute="top" id="cnv-Xk-SXg"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Un-be-DWw" secondAttribute="bottom" id="jFS-4m-6rT"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="leading" secondItem="hFr-cO-hYm" secondAttribute="leading" id="jre-9v-aJY"/>
+                                    <constraint firstAttribute="trailing" secondItem="0Un-be-DWw" secondAttribute="trailing" id="yUP-hZ-lWi"/>
+                                    <constraint firstItem="0Un-be-DWw" firstAttribute="top" secondItem="hFr-cO-hYm" secondAttribute="top" id="zZv-8s-uha"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="delegate" destination="D2Q-Rx-iPk" id="ehh-Ao-B3n"/>
-                                    <outletCollection property="gestureRecognizers" destination="Apk-gK-q0D" appends="YES" id="g1p-UK-bDE"/>
-                                </connections>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="13w-Wi-zE0"/>
+                                        <exclude reference="3EK-hY-c11"/>
+                                        <exclude reference="6jZ-2u-hiF"/>
+                                        <exclude reference="HBc-uS-byT"/>
+                                        <exclude reference="SZ0-OO-GOa"/>
+                                        <exclude reference="VsY-Hn-gkA"/>
+                                        <exclude reference="jFS-4m-6rT"/>
+                                        <exclude reference="zZv-8s-uha"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Nxd-15-cEq" secondAttribute="trailing" id="Cs6-QZ-vy2"/>
-                            <constraint firstItem="Nxd-15-cEq" firstAttribute="top" secondItem="CD6-Bw-mKU" secondAttribute="bottom" id="XiV-E3-l3o"/>
-                            <constraint firstItem="Nxd-15-cEq" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="hrh-6l-pkE"/>
-                            <constraint firstItem="i84-kf-dyW" firstAttribute="width" secondItem="Way-9N-w2B" secondAttribute="width" id="o8E-RX-F0X"/>
+                            <constraint firstItem="c7N-g3-nxr" firstAttribute="top" secondItem="hFr-cO-hYm" secondAttribute="bottom" id="2ZR-zw-XRs"/>
+                            <constraint firstItem="0Un-be-DWw" firstAttribute="width" secondItem="Way-9N-w2B" secondAttribute="width" id="5uI-xZ-0h4"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="height" secondItem="Way-9N-w2B" secondAttribute="height" id="9id-fU-xLJ"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="top" secondItem="Way-9N-w2B" secondAttribute="topMargin" id="AYD-Mr-et7"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="top" secondItem="Way-9N-w2B" secondAttribute="top" id="B7n-Rm-iVe"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="H4L-Uo-239"/>
+                            <constraint firstAttribute="trailing" secondItem="hFr-cO-hYm" secondAttribute="trailing" id="J69-cW-xxh"/>
+                            <constraint firstItem="c7N-g3-nxr" firstAttribute="top" secondItem="hFr-cO-hYm" secondAttribute="bottom" id="MNw-Zb-XoC"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="top" secondItem="Way-9N-w2B" secondAttribute="top" id="VNQ-By-18P"/>
+                            <constraint firstItem="c7N-g3-nxr" firstAttribute="top" secondItem="hFr-cO-hYm" secondAttribute="bottom" id="Z5X-iO-I8X"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="width" secondItem="Way-9N-w2B" secondAttribute="width" id="kXh-Oa-fcq"/>
+                            <constraint firstItem="hFr-cO-hYm" firstAttribute="leading" secondItem="Way-9N-w2B" secondAttribute="leading" id="nEz-XC-4oJ"/>
+                            <constraint firstAttribute="trailing" secondItem="hFr-cO-hYm" secondAttribute="trailing" id="viM-uv-1bA"/>
+                            <constraint firstItem="c7N-g3-nxr" firstAttribute="top" secondItem="hFr-cO-hYm" secondAttribute="bottom" id="wGq-8t-f5a"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9id-fU-xLJ"/>
+                                <exclude reference="B7n-Rm-iVe"/>
+                                <exclude reference="H4L-Uo-239"/>
+                                <exclude reference="VNQ-By-18P"/>
+                                <exclude reference="kXh-Oa-fcq"/>
+                                <exclude reference="viM-uv-1bA"/>
+                                <exclude reference="2ZR-zw-XRs"/>
+                                <exclude reference="Z5X-iO-I8X"/>
+                                <exclude reference="wGq-8t-f5a"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bPN-bm-PEw"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="image" destination="i84-kf-dyW" id="Loj-MR-JGc"/>
                         <outlet property="scrollView" destination="Nxd-15-cEq" id="kuy-Sb-t1R"/>
+                        <outlet property="textLabel" destination="qJL-PX-ug8" id="Com-3Z-IkL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lck-Jb-Y34" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -161,7 +284,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="973" y="1123"/>
+            <point key="canvasLocation" x="972.5" y="1122.5"/>
         </scene>
     </scenes>
 </document>

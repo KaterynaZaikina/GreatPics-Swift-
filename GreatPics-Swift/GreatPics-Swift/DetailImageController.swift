@@ -13,14 +13,20 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var image: InstaPostView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var textLabel: UILabel!
     
+    var instaPost: InstaPost?
     var postImageURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let url = postImageURL {
-            self.image.loadImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder.png")!)
+            image.loadImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder.png")!)
         }
+        if let instaPost = instaPost {
+            textLabel.text = instaPost.text
+        }
+        
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
