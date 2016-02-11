@@ -14,6 +14,7 @@ private let fetchBatchSize = 20
 private let errorDomain = "com.yalantis.GreatPics.request"
 private let errorCode = 5555
 private let placeholder = "placeholder.png"
+private let reuseIdentifier = "CollectionViewCell"
 
 
 //MARK: - InstaPostDataSource class
@@ -24,6 +25,7 @@ class InstaPostDataSource: NSObject {
     }
     
     let collectionView: UICollectionView
+    private var prototypeCell: CollectionViewCell = CollectionViewCell()
     private var blockOperations: [NSBlockOperation] = []
     
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
@@ -54,8 +56,9 @@ class InstaPostDataSource: NSObject {
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
-        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
+        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL, let text = post.text  {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: placeholder)!)
+            cell.textLabel.text = text
         }
     }
     
@@ -128,7 +131,6 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let reuseIdentifier = "CollectionViewCell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
         configureCell(cell, indexPath: indexPath)
         return cell
@@ -136,3 +138,20 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
+extension InstaPostDataSource: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+            prototypeCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+            
+            self.configureCell(prototypeCell, indexPath: indexPath)
+            prototypeCell.layoutIfNeeded()
+            
+            let size: CGSize = prototypeCell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+            return size
+    }
+
+}

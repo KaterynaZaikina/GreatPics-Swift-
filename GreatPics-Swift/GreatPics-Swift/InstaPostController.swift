@@ -20,8 +20,10 @@ class InstaPostController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = InstaPostDataSource(collectionView: collectionView!)
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = dataSource
+        collectionView?.delegate = self
+        collectionView?.dataSource = dataSource
+//        let layout = UICollectionViewFlowLayout()
+//        collectionView?.collectionViewLayout = layout
         serverManager.loadFirstPageOfPosts()
     }
     
