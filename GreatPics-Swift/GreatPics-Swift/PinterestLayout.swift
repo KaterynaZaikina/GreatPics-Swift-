@@ -17,7 +17,7 @@ protocol PinterestLayoutDelegate {
 class PinterestLayout: UICollectionViewLayout {
     var delegate: PinterestLayoutDelegate!
     var numberOfColumns = 2
-    var cellPadding: CGFloat = 5.0
+    var cellPadding: CGFloat = 6.0
     private var cache = [UICollectionViewLayoutAttributes]()
     
     private var contentHeight: CGFloat  = 0.0
@@ -38,10 +38,11 @@ class PinterestLayout: UICollectionViewLayout {
             for item in 0 ..< collectionView!.numberOfItemsInSection(0) {
                 let indexPath = NSIndexPath(forItem: item, inSection: 0)
                 
-                let width = columnWidth - 2 * cellPadding
+                let width = columnWidth - 4 * cellPadding
+                let photoHeight = columnWidth
                 let annotationHeight = delegate.collectionView(collectionView!,
                     heightForCommentAtIndexPath: indexPath, withWidth: width)
-                let height =  width + annotationHeight + 2 * cellPadding
+                let height =  photoHeight + annotationHeight + 2 * cellPadding
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = CGRectInset(frame, cellPadding, cellPadding)
                 

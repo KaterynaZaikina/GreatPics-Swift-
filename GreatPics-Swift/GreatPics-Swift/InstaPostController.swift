@@ -20,6 +20,8 @@ class InstaPostController: UICollectionViewController {
     //MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView!.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
+
         dataSource = InstaPostDataSource(collectionView: collectionView!)
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = dataSource
@@ -27,6 +29,13 @@ class InstaPostController: UICollectionViewController {
         collectionView?.delegate = self
         collectionView?.dataSource = dataSource
         serverManager.loadFirstPageOfPosts()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+            layout.invalidateLayout()
+        }
     }
     
     //MARK: - UICollectionViewDelegate

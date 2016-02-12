@@ -32,6 +32,7 @@
 		803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D8C591C0C4C0000C48E93 /* InstaPostView.swift */; };
 		803D8C5C1C0C808500C48E93 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 803D8C5B1C0C808500C48E93 /* placeholder.png */; };
 		805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */; };
+		805FBDFA1C6CE3EF0068B815 /* LandscapeDetailImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 805FBDF91C6CE3EF0068B815 /* LandscapeDetailImageView.xib */; };
 		DFC01BB1BD68362761AB0358 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A081B496D74C3EABAD33A /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		803D8C591C0C4C0000C48E93 /* InstaPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostView.swift; sourceTree = "<group>"; };
 		803D8C5B1C0C808500C48E93 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		805FBDF91C6CE3EF0068B815 /* LandscapeDetailImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandscapeDetailImageView.xib; sourceTree = "<group>"; };
 		947A081B496D74C3EABAD33A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +179,7 @@
 				8021DDEF1C08B54900F3FD0E /* Server */,
 				8021DDF01C08B55500F3FD0E /* Helpers */,
 				8032F7AC1C0326A300451C46 /* Main.storyboard */,
+				805FBDF91C6CE3EF0068B815 /* LandscapeDetailImageView.xib */,
 				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
 				8032F7B21C0326A300451C46 /* Assets.xcassets */,
 				8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8032F7BE1C032FC300451C46 /* .gitignore in Resources */,
+				805FBDFA1C6CE3EF0068B815 /* LandscapeDetailImageView.xib in Resources */,
 				8032F7B61C0326A300451C46 /* LaunchScreen.storyboard in Resources */,
 				8032F7B31C0326A300451C46 /* Assets.xcassets in Resources */,
 				803D8C5C1C0C808500C48E93 /* placeholder.png in Resources */,

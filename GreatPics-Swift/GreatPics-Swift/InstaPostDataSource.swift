@@ -15,7 +15,7 @@ private let errorCode = 5555
 private let fontSize: CGFloat = 14.0
 private let errorDomain = "com.yalantis.GreatPics.request"
 private let placeholder = "placeholder.png"
-private let fontName = "AvenirNext-Regular"
+private let fontName = "Helvetica Neue"
 
 
 //MARK: - InstaPostDataSource class
