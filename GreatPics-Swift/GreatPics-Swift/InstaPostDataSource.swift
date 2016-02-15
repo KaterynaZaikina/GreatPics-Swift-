@@ -74,6 +74,7 @@ class InstaPostDataSource: NSObject {
             if let text = post.text {
                 cell.instaTextLabel.text = text
             }
+            cell.backgroundColor = cell.backgroundColor
         }
     }
 
