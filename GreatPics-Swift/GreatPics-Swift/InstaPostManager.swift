@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import FastEasyMapping
 
 class InstaPostManager {
     
@@ -53,11 +54,14 @@ class InstaPostManager {
                             post = existPost
                         }  else {
                             
-                            post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost",
-                                inManagedObjectContext: self.managedObjectContext) as? InstaPost
+//                            post = NSEntityDescription.insertNewObjectForEntityForName("InstaPost",
+//                                inManagedObjectContext: self.managedObjectContext) as? InstaPost
+                            post = FEMManagedObjectDeserializer.deserializeObjectExternalRepresentation(postDictionary, usingMapping: InstaPost.defaultMapping(), context: self.managedObjectContext) as? InstaPost
+                            
                             post.createdAtDate = NSDate()
                         }
-                        post?.updateWithDictionary(postDictionary)
+                       // post?.updateWithDictionary(postDictionary)
+//                        FEMManagedObjectDeserializer.fillObject(post, fromExternalRepresentation: postDictionary, usingMapping: InstaPost.defaultMapping())
                     }
                 }
             }

@@ -1,10 +1,13 @@
 PODS:
+  - FastEasyMapping (0.3.7)
   - KeychainAccess (2.3.1)
 
 DEPENDENCIES:
+  - FastEasyMapping
   - KeychainAccess
 
 SPEC CHECKSUMS:
+  FastEasyMapping: 9caf93c0d861a68296932a771b63ad686d495528
   KeychainAccess: d54b31c75745cfa595b3654590e8cb491a75d411
 
 COCOAPODS: 0.39.0

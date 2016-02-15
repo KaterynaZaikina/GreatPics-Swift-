@@ -6,20 +6,29 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-import Foundation
 import CoreData
 import UIKit
+import FastEasyMapping
 
 class InstaPost: NSManagedObject {
     
     typealias RespondDictionary = [String: AnyObject]
+    
+    class func defaultMapping() -> FEMManagedObjectMapping {
+        let mapping = FEMManagedObjectMapping.init(entityName: "InstaPost")
+        mapping.addAttributeMappingDictionary(["identifier" : "id"])
+        mapping.addAttributeMappingOfProperty("imageURL", atKeypath: "images.standard_resolution.url")
+        mapping.addAttributeMappingOfProperty("text", atKeypath: "caption.text")
+        
+        return mapping;
+    }
     
     func updateWithDictionary(responseObject: [String : AnyObject]?) {
         if let id = responseObject?["id"] as? String {
             identifier = id
         }
         if let caption = responseObject?["caption"] as? RespondDictionary, let text = caption["text"] as? String {
-
+            
             self.text = text
         }
         
@@ -29,7 +38,7 @@ class InstaPost: NSManagedObject {
             }
         }
     }
-
+    
     func heightForComment(font: UIFont, width: CGFloat) -> CGFloat {
         if let text = text {
             let boundingSize = CGSize(width: width, height: CGFloat(MAXFLOAT))
@@ -38,5 +47,5 @@ class InstaPost: NSManagedObject {
         }
         return 0
     }
-    
+
 }
