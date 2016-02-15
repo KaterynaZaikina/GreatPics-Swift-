@@ -8,7 +8,8 @@
 
 import UIKit
 
-private let numberOfPosts = 3
+private let cNumberOfPosts = 3
+private let cEstimatedRowHeight: CGFloat = 120
 
 class InstaListController: UITableViewController {
     
@@ -19,16 +20,18 @@ class InstaListController: UITableViewController {
         super.viewDidLoad()
         dataSource = InstaPostDataSource(tableView: tableView!)
         tableView.dataSource = dataSource
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = cEstimatedRowHeight
         
     }
 
     //MARK: - UITableViewDelegate
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
-        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - numberOfPosts
+        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - cNumberOfPosts
         if shouldLoadNextPage {
             serverManager.loadNextPageOfPosts()
         }
     }
-    
+
 }

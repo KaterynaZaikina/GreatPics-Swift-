@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let numberOfPosts = 3
-private let showImageSegueIdentifier = "showImage"
+private let cNumberOfPosts = 3
+private let kShowImageSegueIdentifier = "showImage"
 
 class InstaPostController: UICollectionViewController {
 
@@ -45,20 +45,20 @@ class InstaPostController: UICollectionViewController {
         if let existPost = post {
             imageURL = existPost.imageURL
             detailInstaPost = existPost
-            performSegueWithIdentifier(showImageSegueIdentifier, sender: self)
+            performSegueWithIdentifier(kShowImageSegueIdentifier, sender: self)
         }
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
-        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - numberOfPosts
+        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - cNumberOfPosts
         if shouldLoadNextPage {
             serverManager.loadNextPageOfPosts()
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == showImageSegueIdentifier  {
+        if segue.identifier == kShowImageSegueIdentifier  {
             let controller =  segue.destinationViewController as! DetailImageController
             controller.instaPost = detailInstaPost
             controller.postImageURL = imageURL
