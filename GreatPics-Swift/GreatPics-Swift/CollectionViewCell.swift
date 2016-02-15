@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UICollectionViewCell {
+extension CollectionViewCell {
 
     static var reuseIdentifier: String {
         return String(self)

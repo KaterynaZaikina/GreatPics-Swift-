@@ -21,7 +21,7 @@ class InstaPostView: UIImageView {
             return
         }
     
-        operation = imageLoader.loadImageWithURL(existedURL) { [unowned self] data, response, error in
+        operation = imageLoader.loadImageWithURL(existedURL) { [weak self] data, response, error in
             
             guard let data = data else {
                 print(error)
@@ -29,7 +29,9 @@ class InstaPostView: UIImageView {
             }
             
             let image = UIImage(data: data)
-            self.performSelectorOnMainThread("updateImage:", withObject: image, waitUntilDone: true)
+            if let weakSelf = self {
+                weakSelf.performSelectorOnMainThread("updateImage:", withObject: image, waitUntilDone: true)
+            }
         }
         if image == nil {
             image = placeholderImage

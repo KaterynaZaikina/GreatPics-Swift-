@@ -24,7 +24,7 @@ class InstaPostController: UICollectionViewController {
         collectionView!.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
 
         dataSource = InstaPostDataSource(collectionView: collectionView!)
-        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+        if let layout = collectionView!.collectionViewLayout as? PinterestLayout {
             layout.delegate = dataSource
         }
         

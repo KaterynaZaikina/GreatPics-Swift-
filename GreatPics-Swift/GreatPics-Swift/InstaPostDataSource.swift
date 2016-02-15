@@ -20,7 +20,8 @@ private let kFontName = "Helvetica Neue"
 //MARK: - InstaPostDataSource class
 class InstaPostDataSource: NSObject {
     
-    let collectionView: UICollectionView
+    private var collectionView: UICollectionView?
+    private var tableView: UITableView?
     
     private var blockOperations: [NSBlockOperation] = []
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
@@ -54,7 +55,11 @@ class InstaPostDataSource: NSObject {
         self.collectionView = collectionView
     }
     
-    func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
+    init(tableView: UITableView) {
+        self.tableView = tableView
+    }
+    
+    func configureCollectionViewCell(cell:CollectionViewCell, indexPath: NSIndexPath) {
         if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: kPlaceholder)!)
             if let text = post.text {
@@ -62,6 +67,16 @@ class InstaPostDataSource: NSObject {
             }
         }
     }
+    
+    func configureTableViewCell(cell:InstaListTableViewCell, indexPath: NSIndexPath) {
+        if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
+            cell.instaImageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: kPlaceholder)!)
+            if let text = post.text {
+                cell.instaTextLabel.text = text
+            }
+        }
+    }
+
     
 }
 
@@ -75,34 +90,52 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            if let newIndexPath = newIndexPath {
-                blockOperations.append(
-                    NSBlockOperation(block: { [unowned self] in
-                        self.collectionView.insertItemsAtIndexPaths([newIndexPath])
-                        })
-                )
-            }
+            blockOperations.append(
+                NSBlockOperation(block: { [unowned self] in
+                    if let collectionView = self.collectionView, let newIndexPath = newIndexPath {
+                        collectionView.insertItemsAtIndexPaths([newIndexPath])
+                    }
+                    if let tableView = self.tableView, let newIndexPath = newIndexPath {
+                        tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation:.Fade)
+
+                    }
+                    })
+            )
         case .Update:
-            if let indexPath = indexPath {
-                blockOperations.append(
-                    NSBlockOperation(block: { [unowned self] in
-                        self.collectionView.reloadItemsAtIndexPaths([indexPath])
-                        })
-                )
-            }
+            blockOperations.append(
+                NSBlockOperation(block: { [unowned self] in
+                    if let collectionView = self.collectionView, let indexPath = indexPath {
+                        collectionView.reloadItemsAtIndexPaths([indexPath])
+                    }
+                    if let tableView = self.tableView, let indexPath = indexPath {
+                        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation:.Fade)
+                    }
+                    })
+            )
         default:
             break
         }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        collectionView.performBatchUpdates({ [unowned self] in
-            for operation in self.blockOperations {
+        if let collectionView = collectionView {
+            collectionView.performBatchUpdates({ [unowned self] in
+                for operation in self.blockOperations {
+                    operation.start()
+                }
+                }, completion: { [unowned self] finished in
+                    self.blockOperations.removeAll(keepCapacity: false)
+                })
+        }
+        
+        if let tableView = tableView {
+            tableView.beginUpdates()
+            for operation in blockOperations {
                 operation.start()
             }
-            }, completion: { [unowned self] finished in
-                self.blockOperations.removeAll(keepCapacity: false)
-            })
+            tableView.endUpdates()
+            blockOperations.removeAll(keepCapacity: false)
+        }
     }
     
     func postAtIndexPath(indexPath: NSIndexPath) -> InstaPost? {
@@ -128,11 +161,28 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewCell.reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
-        configureCell(cell, indexPath: indexPath)
+        configureCollectionViewCell(cell, indexPath: indexPath)
         return cell
     }
     
 }
+
+//MARK: - UITableViewDataSource
+extension InstaPostDataSource: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[section]
+        return sectionInfo?.numberOfObjects ?? 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(InstaListTableViewCell.reuseIdentifier, forIndexPath: indexPath) as! InstaListTableViewCell
+        configureTableViewCell(cell, indexPath: indexPath)
+        return cell
+    }
+    
+}
+
 
 //MARK: - PinterestLayoutDelegate
 extension InstaPostDataSource: PinterestLayoutDelegate {

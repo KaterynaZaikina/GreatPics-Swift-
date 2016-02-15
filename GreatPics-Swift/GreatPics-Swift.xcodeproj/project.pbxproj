@@ -31,6 +31,8 @@
 		803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D8C591C0C4C0000C48E93 /* InstaPostView.swift */; };
 		805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */; };
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
+		80DCFED21C71C53C0052DA6B /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED11C71C53C0052DA6B /* InstaListController.swift */; };
+		80DCFED41C71C5750052DA6B /* InstaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */; };
 		DFC01BB1BD68362761AB0358 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A081B496D74C3EABAD33A /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		803D8C591C0C4C0000C48E93 /* InstaPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostView.swift; sourceTree = "<group>"; };
 		805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		80DCFED11C71C53C0052DA6B /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
+		80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListTableViewCell.swift; sourceTree = "<group>"; };
 		947A081B496D74C3EABAD33A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,7 @@
 				8032F7C11C033B7400451C46 /* LoginViewController.swift */,
 				801ED9B51C1180AD004CA991 /* DetailImageController.swift */,
 				8032F7AA1C0326A300451C46 /* InstaPostController.swift */,
+				80DCFED11C71C53C0052DA6B /* InstaListController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
 				803D8C591C0C4C0000C48E93 /* InstaPostView.swift */,
 				805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */,
+				80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -327,6 +333,8 @@
 				8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */,
 				8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */,
 				8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */,
+				80DCFED21C71C53C0052DA6B /* InstaListController.swift in Sources */,
+				80DCFED41C71C5750052DA6B /* InstaListTableViewCell.swift in Sources */,
 				8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */,
 				8032F7CE1C04C40400451C46 /* InstaPost.swift in Sources */,
 				8032F7CA1C04B90000451C46 /* CoreDataManager.swift in Sources */,
