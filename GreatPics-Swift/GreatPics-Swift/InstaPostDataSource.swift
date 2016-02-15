@@ -6,32 +6,27 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import CoreData
 
-private let fetchBatchSize = 20
-private let errorCode = 5555
-private let fontSize: CGFloat = 14.0
-private let errorDomain = "com.yalantis.GreatPics.request"
-private let placeholder = "placeholder.png"
-private let fontName = "Helvetica Neue"
+private let cFetchBatchSize = 20
+private let cErrorCode = 5555
+private let cFontSize: CGFloat = 14.0
+private let kErrorDomain = "com.yalantis.GreatPics.request"
+private let kPlaceholder = "placeholder.png"
+private let kFontName = "Helvetica Neue"
 
 
 //MARK: - InstaPostDataSource class
 class InstaPostDataSource: NSObject {
     
-    init(collectionView: UICollectionView) {
-        self.collectionView = collectionView
-    }
-    
     let collectionView: UICollectionView
-    private var blockOperations: [NSBlockOperation] = []
     
+    private var blockOperations: [NSBlockOperation] = []
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
         
-        fetchRequest.fetchBatchSize = fetchBatchSize
+        fetchRequest.fetchBatchSize = cFetchBatchSize
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAtDate", ascending: true)]
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -46,7 +41,7 @@ class InstaPostDataSource: NSObject {
         catch {
             var userInfo = [String: AnyObject]()
             userInfo[NSLocalizedDescriptionKey] = "Failed to fetch request"
-            let error = NSError(domain: errorDomain, code: errorCode, userInfo: userInfo)
+            let error = NSError(domain: kErrorDomain, code: cErrorCode, userInfo: userInfo)
             print("Unresolved error: \(error.userInfo)")
         }
         
@@ -55,9 +50,13 @@ class InstaPostDataSource: NSObject {
     
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
     
+    init(collectionView: UICollectionView) {
+        self.collectionView = collectionView
+    }
+    
     func configureCell(cell: CollectionViewCell, indexPath: NSIndexPath) {
         if let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost, let imageURL = post.imageURL  {
-            cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: placeholder)!)
+            cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: kPlaceholder)!)
             if let text = post.text {
             cell.textLabel.text = text
             }
@@ -74,7 +73,7 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch(type) {
+        switch type {
         case .Insert:
             if let newIndexPath = newIndexPath {
                 blockOperations.append(
@@ -94,12 +93,11 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
         default:
             break
         }
-        
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         collectionView.performBatchUpdates({ [unowned self] in
-            for operation: NSBlockOperation in self.blockOperations {
+            for operation in self.blockOperations {
                 operation.start()
             }
             }, completion: { [unowned self] finished in
@@ -109,11 +107,11 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
     
     func postAtIndexPath(indexPath: NSIndexPath) -> InstaPost? {
         let post = fetchedResultController.objectAtIndexPath(indexPath) as? InstaPost
-    return post
+        return post
     }
     
     func numberOfItemsAtIndexPath(indexPath: NSIndexPath) -> Int? {
-        let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[indexPath.section]
+        let sectionInfo = fetchedResultController.sections?[indexPath.section]
         let numberOfItems = sectionInfo?.numberOfObjects
         return numberOfItems
     }
@@ -125,16 +123,11 @@ extension InstaPostDataSource: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let sectionInfo: NSFetchedResultsSectionInfo? = fetchedResultController.sections?[section]
-        if sectionInfo?.numberOfObjects != nil {
-            return sectionInfo!.numberOfObjects
-        } else {
-            return 1
-        }
+        return sectionInfo?.numberOfObjects ?? 1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let reuseIdentifier = "CollectionViewCell"
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionViewCell.reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
         configureCell(cell, indexPath: indexPath)
         return cell
     }
@@ -144,14 +137,11 @@ extension InstaPostDataSource: UICollectionViewDataSource {
 //MARK: - PinterestLayoutDelegate
 extension InstaPostDataSource: PinterestLayoutDelegate {
     
-    func collectionView(collectionView: UICollectionView,
-        heightForCommentAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
+    func collectionView(collectionView: UICollectionView, heightForCommentAtIndexPath indexPath: NSIndexPath, withWidth width: CGFloat) -> CGFloat {
             let post = fetchedResultController.objectAtIndexPath(indexPath) as! InstaPost
-            let font = UIFont(name: fontName, size: fontSize)!
-            let commentHeight = post.heightForComment(font, width: width)
-            let height = commentHeight
+            let font = UIFont(name: kFontName, size: cFontSize)!
+            let height = post.heightForComment(font, width: width)
             return height
-    
     }
 }
 

@@ -60,7 +60,7 @@ class NetworkingManager {
             
             var json: [String : AnyObject]?
             do {
-                json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject]
+                json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? [String : AnyObject]
             } catch {
                 print("error with data")
             }
@@ -97,5 +97,3 @@ class NetworkingManager {
     }
     
 }
-
-

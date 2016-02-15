@@ -21,14 +21,17 @@ class NetworkingOperation: NSOperation {
             return _isFinished
         }
     }
+    
     override func cancel() {
         super.cancel()
     }
+    
     override var executing: Bool {
         get {
             return !_isFinished
         }
     }
+    
     override var asynchronous: Bool {
         get {
             return true
@@ -40,15 +43,17 @@ class NetworkingOperation: NSOperation {
     }
     
     override func main() {
-        if let requestURL = requestURL {
+        guard let requestURL = requestURL else {
+            return
+        }
             NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { [weak self] data, response, error in
-                guard let this = self else { return }
-                if let queue = this.queue {
+                guard let weakSelf = self else { return }
+                if let queue = weakSelf.queue {
                    dispatch_async(queue, {
-                    this.completionHandler?(data, response, error)
-                    this.willChangeValueForKey("isFinished")
-                    this._isFinished = true
-                    this.didChangeValueForKey("isFinished")
+                    weakSelf.completionHandler?(data, response, error)
+                    weakSelf.willChangeValueForKey("isFinished")
+                    weakSelf._isFinished = true
+                    weakSelf.didChangeValueForKey("isFinished")
                    })
                 }
             }).resume()
@@ -57,6 +62,5 @@ class NetworkingOperation: NSOperation {
         _isFinished = true
         self.didChangeValueForKey("isFinished")
         }
-    }
     
 }

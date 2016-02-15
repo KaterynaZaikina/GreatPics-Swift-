@@ -11,8 +11,8 @@ import UIKit
 
 class InstaPostView: UIImageView {
     
-    var url: NSURL?
-    var operation: NSOperation?
+    private var url: NSURL?
+    private var operation: NSOperation?
     private let imageLoader = ImageLoader.sharedLoader
     
     func loadImageWithURL(imageURL: NSURL?, placeholderImage: UIImage)  {
@@ -20,25 +20,27 @@ class InstaPostView: UIImageView {
         guard let existedURL = imageURL else {
             return
         }
-        
-        operation = imageLoader.loadImageWithURL(existedURL) { data, response, error in
-            guard let data = data where error == nil else {
+    
+        operation = imageLoader.loadImageWithURL(existedURL) { [unowned self] data, response, error in
+            
+            guard let data = data else {
                 print(error)
                 return
             }
+            
             let image = UIImage(data: data)
             self.performSelectorOnMainThread("updateImage:", withObject: image, waitUntilDone: true)
         }
         if image == nil {
-            self.image = placeholderImage
+            image = placeholderImage
         }
     }
     
-    func updateImage(image: UIImage?) {
+    dynamic private func updateImage(image: UIImage?) {
         if let existImage = image {
             self.image = existImage
         }
-        self.setNeedsDisplay()
+        setNeedsDisplay()
     }
     
     func clear() {

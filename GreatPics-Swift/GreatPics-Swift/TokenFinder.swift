@@ -10,14 +10,12 @@ import Foundation
 
 class TokenFinder {
     
-    class func findAccessToken(urlString: String) -> (String) {
+    class func findAccessToken(urlString: String) -> String {
         var accessToken = ""
         if urlString.rangeOfString("access_token=") != nil {
-            var trimmedString: String!
             let splitedArray = urlString.characters.split("#").map{String($0)}
-            
             if splitedArray.count > 1 {
-                trimmedString = splitedArray[splitedArray.count - 1]
+                let trimmedString = splitedArray[splitedArray.count - 1]
                 let values = trimmedString.characters.split("=").map{String($0)}
                 if values.count == 2 {
                     let key = values[0]

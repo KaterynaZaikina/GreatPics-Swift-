@@ -22,7 +22,7 @@ class ServerManager {
     
     private var maxTagID: String? {
         get {
-           return defaults.valueForKey("maxTagID") as? String
+            return defaults.valueForKey("maxTagID") as? String
         }
         set(newValue) {
             defaults.setObject(newValue, forKey: "maxTagID")
@@ -61,7 +61,7 @@ class ServerManager {
         
     }
     
-    private func loadPostsWithMaxTagID(maxTagID:String?) {
+    private func loadPostsWithMaxTagID(maxTagID: String?) {
         recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { [unowned self] responseObject in
             if let paginationDictionary = responseObject?["pagination"] as? [String : String]  {
                 self.pagination = paginationDictionary
@@ -71,9 +71,9 @@ class ServerManager {
             if let postsDictionary = responseObject?["data"] as? [AnyObject]  {
                 manager.importPost(postsDictionary)
             }
-            }) { error in
+            }, failure: { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
-        }
+        })
     }
     
 }

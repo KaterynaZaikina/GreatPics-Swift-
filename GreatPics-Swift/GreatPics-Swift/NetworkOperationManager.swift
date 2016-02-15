@@ -11,7 +11,7 @@ import Foundation
 class NetworkOperationManager {
     
     private let networkOperationQueue: NSOperationQueue
-    private var operations = [String : NSOperation]()
+    private var operations = [String: NSOperation]()
     
     init() {
         networkOperationQueue = NSOperationQueue()

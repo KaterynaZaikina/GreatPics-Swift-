@@ -9,6 +9,7 @@
 import UIKit
 
 private let numberOfPosts = 3
+private let showImageSegueIdentifier = "showImage"
 
 class InstaPostController: UICollectionViewController {
 
@@ -26,7 +27,7 @@ class InstaPostController: UICollectionViewController {
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = dataSource
         }
-        collectionView?.delegate = self
+        
         collectionView?.dataSource = dataSource
         serverManager.loadFirstPageOfPosts()
     }
@@ -44,19 +45,20 @@ class InstaPostController: UICollectionViewController {
         if let existPost = post {
             imageURL = existPost.imageURL
             detailInstaPost = existPost
-            performSegueWithIdentifier("showImage", sender: self)
+            performSegueWithIdentifier(showImageSegueIdentifier, sender: self)
         }
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
-        if numberOfItems != nil && indexPath.item == numberOfItems! - numberOfPosts {
+        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - numberOfPosts
+        if shouldLoadNextPage {
             serverManager.loadNextPageOfPosts()
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showImage"  {
+        if segue.identifier == showImageSegueIdentifier  {
             let controller =  segue.destinationViewController as! DetailImageController
             controller.instaPost = detailInstaPost
             controller.postImageURL = imageURL

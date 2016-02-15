@@ -11,26 +11,30 @@ import CoreData
 import UIKit
 
 class InstaPost: NSManagedObject {
-    typealias R = [String : AnyObject]
+    
+    typealias RespondDictionary = [String: AnyObject]
     
     func updateWithDictionary(responseObject: [String : AnyObject]?) {
         if let id = responseObject?["id"] as? String {
             identifier = id
         }
-        if let caption = responseObject?["caption"] as? R,  let text = caption["text"] as? String {
+        if let caption = responseObject?["caption"] as? RespondDictionary, let text = caption["text"] as? String {
+
             self.text = text
         }
-        if let images = responseObject?["images"] as? R, let standard_resolution = images["standard_resolution"] as? R {
-            if let url = standard_resolution["url"] as? String {
+        
+        if let images = responseObject?["images"] as? RespondDictionary, let standardResolution = images["standard_resolution"] as? RespondDictionary {
+            if let url = standardResolution["url"] as? String {
                 imageURL = url
             }
         }
     }
-    
+
     func heightForComment(font: UIFont, width: CGFloat) -> CGFloat {
         if let text = text {
-        let rect = NSString(string: text).boundingRectWithSize(CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        return ceil(rect.height)
+            let boundingSize = CGSize(width: width, height: CGFloat(MAXFLOAT))
+            let rect = NSString(string: text).boundingRectWithSize(boundingSize, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+            return ceil(rect.height)
         }
         return 0
     }

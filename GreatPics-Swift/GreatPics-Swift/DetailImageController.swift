@@ -9,19 +9,27 @@
 import Foundation
 import UIKit
 
+extension UIImage {
+ 
+    static var placeholder: UIImage {
+        return UIImage(named: "placeholder.png")!
+    }
+}
+
 class DetailImageController: UIViewController, UIScrollViewDelegate {
     
-    @IBOutlet weak var image: InstaPostView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet private weak var image: InstaPostView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var textLabel: UILabel!
     
     var instaPost: InstaPost?
     var postImageURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let url = postImageURL {
-            image.loadImageWithURL(NSURL(string: url), placeholderImage: UIImage(named: "placeholder.png")!)
+            image.loadImageWithURL(NSURL(string: url), placeholderImage: UIImage.placeholder)
         }
         if let instaPost = instaPost {
             textLabel.text = instaPost.text
@@ -29,11 +37,11 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return self.image
     }
     
-    @IBAction func handleDoubleTap(sender: UITapGestureRecognizer) {
+    @IBAction private func handleDoubleTap(sender: UITapGestureRecognizer) {
         if (scrollView.zoomScale > scrollView.minimumZoomScale) {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
         } else {
