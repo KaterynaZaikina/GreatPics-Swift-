@@ -22,22 +22,15 @@ class InstaListController: UITableViewController {
         tableView.dataSource = dataSource
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = cEstimatedRowHeight
-        
-        refreshControl?.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
-     func handleRefresh(refreshControl: UIRefreshControl) {
-        serverManager.loadNextPageOfPosts()
-        refreshControl.endRefreshing()
-    }
-
     //MARK: - UITableViewDelegate
-//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
-//        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - cNumberOfPosts
-//        if shouldLoadNextPage {
-//            serverManager.loadNextPageOfPosts()
-//        }
-//    }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
+        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - cNumberOfPosts
+        if shouldLoadNextPage {
+            serverManager.loadNextPageOfPosts()
+        }
+    }
 
 }
