@@ -17,8 +17,8 @@ protocol PinterestLayoutDelegate {
 class PinterestLayout: UICollectionViewLayout {
     
     var delegate: PinterestLayoutDelegate!
-    var numberOfColumns = 2
-    var cellPadding: CGFloat = 6.0
+    private var numberOfColumns = 2
+    private var cellPadding: CGFloat = 6.0
     private var cache = [UICollectionViewLayoutAttributes]()
     
     private var contentHeight: CGFloat  = 0.0
@@ -26,13 +26,14 @@ class PinterestLayout: UICollectionViewLayout {
         let insets = collectionView!.contentInset
         return CGRectGetWidth(collectionView!.bounds) - (insets.left + insets.right)
     }
-    
+
     override func prepareLayout() {
             let columnWidth = contentWidth / CGFloat(numberOfColumns)
             var xOffset = [CGFloat]()
             for column in 0 ..< numberOfColumns {
                 xOffset.append(CGFloat(column) * columnWidth )
             }
+        
             var column = 0
             var yOffset = [CGFloat](count: numberOfColumns, repeatedValue: 0)
         
@@ -54,7 +55,7 @@ class PinterestLayout: UICollectionViewLayout {
                 contentHeight = max(contentHeight, CGRectGetMaxY(frame))
                 yOffset[column] = yOffset[column] + height
                 
-                column = column >= (numberOfColumns - 1) ? 0 : ++column
+                column = yOffset[0] >= yOffset[1] ? 1 : 0
             }
     }
     
