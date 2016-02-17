@@ -11,7 +11,7 @@ import AFNetworking
 
 private let tag = "dnepr"
 
-private let postNumber = "20"
+private let postNumber = "10"
 private let baseURL = "https://api.instagram.com/v1/"
 
 class ServerManager {

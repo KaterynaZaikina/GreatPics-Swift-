@@ -1,13 +1,19 @@
 PODS:
+  - CCBottomRefreshControl (0.5.1):
+    - Masonry (~> 0.6.2)
   - FastEasyMapping (0.3.7)
   - KeychainAccess (2.3.1)
+  - Masonry (0.6.4)
 
 DEPENDENCIES:
+  - CCBottomRefreshControl
   - FastEasyMapping
   - KeychainAccess
 
 SPEC CHECKSUMS:
+  CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
   FastEasyMapping: 9caf93c0d861a68296932a771b63ad686d495528
   KeychainAccess: d54b31c75745cfa595b3654590e8cb491a75d411
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
 
 COCOAPODS: 0.39.0
