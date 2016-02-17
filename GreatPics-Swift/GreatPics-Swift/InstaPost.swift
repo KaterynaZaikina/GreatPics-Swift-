@@ -10,45 +10,34 @@ import CoreData
 import UIKit
 import FastEasyMapping
 
-//MARK: CodeReview_17.02.2016: magic strings. use structs
+private struct Constants {
+    
+    static let id = "id"
+    static let imageResolution = "standard_resolution"
+    static let images = "images"
+    static let caption = "caption"
+    static let text = "text"
+    static let url = "url"
+    
+}
 
-class InstaPost: NSManagedObject {
+final public class InstaPost: NSManagedObject {
     
     typealias RespondDictionary = [String: AnyObject]
-
-    class func defaultMapping() -> FEMManagedObjectMapping {
-        let mapping = FEMManagedObjectMapping.init(entityName: "InstaPost")
-        mapping.addAttributeMappingDictionary(["identifier" : "id"])
-        mapping.addAttributeMappingOfProperty("imageURL", atKeypath: "images.standard_resolution.url")
-        mapping.addAttributeMappingOfProperty("text", atKeypath: "caption.text")
-        
-        return mapping;
-    }
     
+    //MARK: public methods
     func updateWithDictionary(responseObject: [String : AnyObject]?) {
-        if let id = responseObject?["id"] as? String {
+        if let id = responseObject?[Constants.id] as? String {
             identifier = id
         }
-        if let caption = responseObject?["caption"] as? RespondDictionary, let text = caption["text"] as? String {
-            
+        if let caption = responseObject?[Constants.caption] as? RespondDictionary, let text = caption[Constants.text] as? String {
             self.text = text
         }
-        
-        if let images = responseObject?["images"] as? RespondDictionary, let standardResolution = images["standard_resolution"] as? RespondDictionary {
-            if let url = standardResolution["url"] as? String {
+        if let images = responseObject?[Constants.images] as? RespondDictionary, let standardResolution = images[Constants.imageResolution] as? RespondDictionary {
+            if let url = standardResolution[Constants.url] as? String {
                 imageURL = url
             }
         }
     }
     
-//MARK: CodeReview_17.02.2016: Model should not do this
-    func heightForComment(font: UIFont, width: CGFloat) -> CGFloat {
-        if let text = text {
-            let boundingSize = CGSize(width: width, height: CGFloat(MAXFLOAT))
-            let rect = NSString(string: text).boundingRectWithSize(boundingSize, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-            return ceil(rect.height)
-        }
-        return 0
-    }
-
 }

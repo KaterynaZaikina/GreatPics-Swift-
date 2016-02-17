@@ -6,7 +6,6 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension CollectionViewCell {
@@ -17,12 +16,12 @@ extension CollectionViewCell {
     
 }
 
-class CollectionViewCell: UICollectionViewCell {
+final public class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: InstaPostView!
     @IBOutlet weak var textLabel: UILabel!
     
-    override func prepareForReuse() {
+    override public func prepareForReuse() {
         super.prepareForReuse()
         imageView.clear()
     }

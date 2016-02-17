@@ -8,31 +8,34 @@
 
 import Foundation
 
-class NetworkingOperation: NSOperation {
+final public class NetworkingOperation: NSOperation {
 
     typealias OperationCompletion = (NSData?, NSURLResponse?, NSError?) -> ()
     
-    var completionHandler: OperationCompletion?
-    var queue: dispatch_queue_t?
     private let requestURL: NSURL?
     private var _isFinished = false
-    override var finished: Bool {
+    
+    var completionHandler: OperationCompletion?
+    var queue: dispatch_queue_t?
+
+    //MARK: Override public methods
+    override public var finished: Bool {
         get {
             return _isFinished
         }
     }
     
-    override func cancel() {
+    override public func cancel() {
         super.cancel()
     }
     
-    override var executing: Bool {
+    override public var executing: Bool {
         get {
             return !_isFinished
         }
     }
     
-    override var asynchronous: Bool {
+    override public var asynchronous: Bool {
         get {
             return true
         }
@@ -42,25 +45,27 @@ class NetworkingOperation: NSOperation {
        self.requestURL = requestURL
     }
     
-    override func main() {
+    override public func main() {
         guard let requestURL = requestURL else {
             return
         }
-            NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { [weak self] data, response, error in
-                guard let weakSelf = self else { return }
-                if let queue = weakSelf.queue {
-                   dispatch_async(queue, {
+        
+        NSURLSession.sharedSession().dataTaskWithURL(requestURL, completionHandler: { [weak self] data, response, error in
+            guard let weakSelf = self else { return }
+            if let queue = weakSelf.queue {
+
+                dispatch_async(queue, {
                     weakSelf.completionHandler?(data, response, error)
                     weakSelf.willChangeValueForKey("isFinished")
                     weakSelf._isFinished = true
                     weakSelf.didChangeValueForKey("isFinished")
-                   })
-                }
+                })
+            }
             }).resume()
-            
+        
         self.willChangeValueForKey("isFinished")
         _isFinished = true
         self.didChangeValueForKey("isFinished")
-        }
+    }
     
 }

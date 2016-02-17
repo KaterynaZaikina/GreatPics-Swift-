@@ -33,6 +33,7 @@
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
 		80DCFED21C71C53C0052DA6B /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED11C71C53C0052DA6B /* InstaListController.swift */; };
 		80DCFED41C71C5750052DA6B /* InstaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */; };
+		80DCFED61C748E850052DA6B /* InstaListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED51C748E850052DA6B /* InstaListDataSource.swift */; };
 		DFC01BB1BD68362761AB0358 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A081B496D74C3EABAD33A /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80DCFED11C71C53C0052DA6B /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
 		80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListTableViewCell.swift; sourceTree = "<group>"; };
+		80DCFED51C748E850052DA6B /* InstaListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListDataSource.swift; sourceTree = "<group>"; };
 		947A081B496D74C3EABAD33A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 				8032F7CB1C04C40400451C46 /* InstaPost+CoreDataProperties.swift */,
 				8032F7CC1C04C40400451C46 /* InstaPost.swift */,
 				8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */,
+				80DCFED51C748E850052DA6B /* InstaListDataSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -135,10 +138,9 @@
 		8021DDF11C08B5B300F3FD0E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */,
 				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
 				803D8C591C0C4C0000C48E93 /* InstaPostView.swift */,
-				805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */,
-				80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -179,6 +181,7 @@
 				8021DDEE1C08B54100F3FD0E /* Controllers */,
 				8021DDF21C08B5BA00F3FD0E /* Managers */,
 				8021DDEF1C08B54900F3FD0E /* Server */,
+				80DCFED71C74ACA70052DA6B /* Layout */,
 				8021DDF01C08B55500F3FD0E /* Helpers */,
 				8032F7AC1C0326A300451C46 /* Main.storyboard */,
 				80DCFECF1C71BD900052DA6B /* Assets.xcassets */,
@@ -189,6 +192,14 @@
 				8032F7BD1C032FC300451C46 /* .gitignore */,
 			);
 			path = "GreatPics-Swift";
+			sourceTree = "<group>";
+		};
+		80DCFED71C74ACA70052DA6B /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */,
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 		DB5F0953CC348002F05DD42F /* Frameworks */ = {
@@ -327,6 +338,7 @@
 				8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */,
 				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
 				8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */,
+				80DCFED61C748E850052DA6B /* InstaListDataSource.swift in Sources */,
 				8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */,
 				801ED9B21C0F0DBB004CA991 /* NetworkOperationManager.swift in Sources */,
 				803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */,

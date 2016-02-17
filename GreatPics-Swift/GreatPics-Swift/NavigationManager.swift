@@ -9,17 +9,27 @@
 import UIKit
 import KeychainAccess
 
-class NavigationManager {
+private struct Constants {
     
-    private let keychainStorage = Keychain(service: "com.kateryna.GreatPics-Swift.instagram-token")
+    static let service = "com.kateryna.GreatPics-Swift.instagram-token"
+    static let accessToken = "accessToken"
+    static let mainStoryboardID = "Main"
+    static let InstaPostcontrollerID = "InstaPostController"
+    
+}
+
+final public class NavigationManager {
+    
+    private let keychainStorage = Keychain(service: Constants.service)
     private var accessTokenExist: Bool {
-        return keychainStorage["accessToken"] != nil
+        return keychainStorage[Constants.accessToken] != nil
     }
 
+    //MARK: - Private methods
     private func createdLoginController(window: UIWindow?) {
         let loginBlock = { [unowned self] (accessToken: String?) in
             if let accessToken = accessToken {
-                self.keychainStorage["accessToken"] = accessToken
+                self.keychainStorage[Constants.accessToken] = accessToken
             }
         }
         
@@ -31,15 +41,16 @@ class NavigationManager {
     private func createCollectionController(window: UIWindow?) {
         if accessTokenExist == true {
             let serverManager = ServerManager.sharedManager
-            serverManager.accessToken = keychainStorage["accessToken"]
+            serverManager.accessToken = keychainStorage[Constants.accessToken]
         }
         
-        let sb = UIStoryboard(name:"Main", bundle:nil)
-        let collectionController = sb.instantiateViewControllerWithIdentifier("InstaPostController") as! InstaPostController
+        let sb = UIStoryboard(name:Constants.mainStoryboardID, bundle:nil)
+        let collectionController = sb.instantiateViewControllerWithIdentifier(Constants.InstaPostcontrollerID) as! InstaPostController
         let navigationController = UINavigationController(rootViewController: collectionController)
         window?.rootViewController = navigationController
     }
     
+    //MARK: - Public methods
     func showMainScreen(window: UIWindow) {
         if (accessTokenExist == false) {
             createdLoginController(window)

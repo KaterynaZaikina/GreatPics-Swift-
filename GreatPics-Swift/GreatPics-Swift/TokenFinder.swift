@@ -8,8 +8,9 @@
 
 import Foundation
 
-class TokenFinder {
+final public class TokenFinder {
     
+    //MARK: - Class methods
     class func findAccessToken(urlString: String) -> String {
         var accessToken = ""
         if urlString.rangeOfString("access_token=") != nil {

@@ -9,50 +9,54 @@
 import Foundation
 import AFNetworking
 
-private let tag = "dnepr"
-
-private let postNumber = "10"
-private let baseURL = "https://api.instagram.com/v1/"
-
-class ServerManager {
+private struct Constants {
     
-    var accessToken: String?
-    private let defaults = NSUserDefaults.standardUserDefaults()
+    static let postNumber = "20"
+    static let tag = "dnepr"
+    static let baseURL = "https://api.instagram.com/v1/"
+    static let maxTagID = "maxTagID"
+    static let maxTagIDRequest = "max_tag_id"
+    static let nextMaxTagID = "next_max_id"
+    static let urlString = "tags/" + Constants.tag + "/media/recent"
+    static let accessToken = "access_token"
+    static let pagination = "pagination"
+    static let data = "data"
+    static let count = "count"
+    
+}
+
+
+final public class ServerManager {
+    
     private var pagination: [String: String]?
+    private let defaults = NSUserDefaults.standardUserDefaults()
+    private let networkingManger = NetworkingManager(baseURL: Constants.baseURL)
     
     private var maxTagID: String? {
         get {
-            return defaults.valueForKey("maxTagID") as? String
+            return defaults.valueForKey(Constants.maxTagID) as? String
         }
         set(newValue) {
-            defaults.setObject(newValue, forKey: "maxTagID")
+            defaults.setObject(newValue, forKey: Constants.maxTagID)
         }
     }
     
+    var accessToken: String?
     static let sharedManager = ServerManager()
-    private let networkingManger = NetworkingManager(baseURL: baseURL)
     
-    func loadFirstPageOfPosts() {
-        loadPostsWithMaxTagID(maxTagID)
-    }
-    
-    func loadNextPageOfPosts() {
-        maxTagID = pagination?["next_max_id"]
-        loadPostsWithMaxTagID(maxTagID)
-    }
-    
+    //MARK: - Private methods
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
-        let urlString = "tags/\(tagName)/media/recent"
+        let urlString = Constants.urlString
         var parameters = [String: String]()
         if accessToken != nil {
-            parameters["access_token"] = accessToken
+            parameters[Constants.accessToken] = accessToken
         }
         
         if maxTagID != nil {
-            parameters["max_tag_id"] = maxTagID
+            parameters[Constants.maxTagIDRequest] = maxTagID
         }
         
-        parameters["count"] = count
+        parameters[Constants.count] = count
         do {
             try networkingManger.sendGETRequest(urlString, parameters: parameters, success: success, failure: failure)
         } catch  {
@@ -62,18 +66,28 @@ class ServerManager {
     }
     
     private func loadPostsWithMaxTagID(maxTagID: String?) {
-        recentPostsForTagName(tag, count: postNumber, maxTagID: maxTagID, success: { [unowned self] responseObject in
-            if let paginationDictionary = responseObject?["pagination"] as? [String : String]  {
+        recentPostsForTagName(Constants.tag, count: Constants.postNumber, maxTagID: maxTagID, success: { [unowned self] responseObject in
+            if let paginationDictionary = responseObject?[Constants.pagination] as? [String : String]  {
                 self.pagination = paginationDictionary
             }
             
             let manager = InstaPostManager()
-            if let postsDictionary = responseObject?["data"] as? [AnyObject]  {
+            if let postsDictionary = responseObject?[Constants.data] as? [AnyObject]  {
                 manager.importPost(postsDictionary)
             }
             }, failure: { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         })
+    }
+    
+    //MARK: - Public methods
+    func loadFirstPageOfPosts() {
+        loadPostsWithMaxTagID(maxTagID)
+    }
+    
+    func loadNextPageOfPosts() {
+        maxTagID = pagination?[Constants.nextMaxTagID]
+        loadPostsWithMaxTagID(maxTagID)
     }
     
 }

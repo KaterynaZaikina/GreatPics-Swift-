@@ -16,12 +16,12 @@ extension InstaListTableViewCell {
     
 }
 
-class InstaListTableViewCell: UITableViewCell {
+final public class InstaListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var instaImageView: InstaPostView!
     @IBOutlet weak var instaTextLabel: UILabel!
     
-    override func prepareForReuse() {
+    override public func prepareForReuse() {
         super.prepareForReuse()
         instaImageView.clear()
     }

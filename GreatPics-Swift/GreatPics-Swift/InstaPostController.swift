@@ -9,21 +9,28 @@
 import UIKit
 import CCBottomRefreshControl
 
-private let cNumberOfPosts = 3
-private let kShowImageSegueIdentifier = "showImage"
+private struct Constants {
+    
+    static let showImageSegueIdentifier = "showImage"
+    static let triggerVerticalOffset: CGFloat = 100.0
+    static let insets: CGFloat = 5.0
+    
+}
 
-class InstaPostController: UICollectionViewController {
+final public class InstaPostController: UICollectionViewController {
 
     private let serverManager = ServerManager.sharedManager
+    private let refreshControl = UIRefreshControl()
+    
     private var dataSource: InstaPostDataSource!
     private var imageURL: String?
     private var detailInstaPost: InstaPost?
-    private let refreshControl = UIRefreshControl()
     
     //MARK: - Controller lifecycle
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
-        collectionView!.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 5)
+        collectionView!.contentInset = UIEdgeInsets(top: Constants.insets, left: Constants.insets,
+                                                 bottom: Constants.insets, right: Constants.insets)
 
         dataSource = InstaPostDataSource(collectionView: collectionView!)
         dataSource.data = dataSource.fetchRequestWithOffset(0)
@@ -32,51 +39,43 @@ class InstaPostController: UICollectionViewController {
         }
         
         collectionView?.dataSource = dataSource
-        // serverManager.loadFirstPageOfPosts()
         
-        refreshControl.triggerVerticalOffset = 100.0
+        refreshControl.triggerVerticalOffset = Constants.triggerVerticalOffset
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         collectionView!.bottomRefreshControl = refreshControl
     }
     
+    //MARK: - Public methods
     func refresh() {
         dataSource.refreshCollectionView()
         refreshControl.endRefreshing()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.invalidateLayout()
         }
     }
     
-    //MARK: - UICollectionViewDelegate
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //  let post = dataSource.postAtIndexPath(indexPath)
-        if  dataSource.data.count > 0 {
-            let post = dataSource.data[indexPath.item] as? InstaPost
-            if let existPost = post {
-                imageURL = existPost.imageURL
-                detailInstaPost = existPost
-                performSegueWithIdentifier(kShowImageSegueIdentifier, sender: self)
-            }
-        }
-    }
-//
-//    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-//        let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
-//        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - cNumberOfPosts
-//        if shouldLoadNextPage {
-//            serverManager.loadNextPageOfPosts()
-//        }
-//    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == kShowImageSegueIdentifier  {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Constants.showImageSegueIdentifier  {
             let controller =  segue.destinationViewController as! DetailImageController
             controller.instaPost = detailInstaPost
             controller.postImageURL = imageURL
         }
     }
+    
+    //MARK: - UICollectionViewDelegate
+    override public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+            if  dataSource.data.count > 0 {
+            let post = dataSource.data[indexPath.item] as? InstaPost
+            if let existPost = post {
+                imageURL = existPost.imageURL
+                detailInstaPost = existPost
+                performSegueWithIdentifier(Constants.showImageSegueIdentifier, sender: self)
+            }
+        }
+    }
+    
 }

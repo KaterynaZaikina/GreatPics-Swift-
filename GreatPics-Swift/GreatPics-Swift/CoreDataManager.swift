@@ -9,10 +9,24 @@
 import Foundation
 import CoreData
 
-private let errorDomain = "com.yalantis.GreatPics.database"
-private let errorCode = 9999
+private struct Constants {
+    
+    struct Errors {
+        static let errorCode = 9999
+        static let errorDomain = "com.yalantis.GreatPics.database"
+        static let loadError = "There was an error creating or loading the application's saved data."
+        static let initError = "Failed to initialize the application's saved data"
+    }
+    
+    struct CoreData {
+        static let resource = "GreatPics_Swift"
+        static let bundleExtension = "momd"
+        static let directory = "SingleViewCoreData.sqlite"
+    }
+    
+}
 
-class CoreDataManager {
+final public class CoreDataManager {
     
     static let sharedManager = CoreDataManager()
     lazy var importContext: NSManagedObjectContext = {
@@ -28,24 +42,24 @@ class CoreDataManager {
     }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource("GreatPics_Swift", withExtension: "momd")!
+        let modelURL = NSBundle.mainBundle().URLForResource(Constants.CoreData.resource, withExtension: Constants.CoreData.bundleExtension)!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
-        var failureReason = "There was an error creating or loading the application's saved data."
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(Constants.CoreData.directory)
+        var failureReason = Constants.Errors.loadError
         do {
             try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
         } catch {
             var errorUserInfo = [String: AnyObject]()
-            errorUserInfo[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            errorUserInfo[NSLocalizedDescriptionKey] = Constants.Errors.initError
             errorUserInfo[NSLocalizedFailureReasonErrorKey] = failureReason
             
             errorUserInfo[NSUnderlyingErrorKey] = error as NSError
             
-            let wrappedError = NSError(domain: errorDomain, code: errorCode, userInfo: errorUserInfo)
+            let wrappedError = NSError(domain: Constants.Errors.errorDomain, code: Constants.Errors.errorCode, userInfo: errorUserInfo)
             print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
             assertionFailure(wrappedError.localizedDescription)
         }

@@ -10,13 +10,14 @@ import Foundation
 import UIKit
 
 extension UIImage {
- 
+    
     static var placeholder: UIImage {
         return UIImage(named: "placeholder.png")!
     }
 }
 
-class DetailImageController: UIViewController, UIScrollViewDelegate {
+//MARK: - DetailImageController class
+final public class DetailImageController: UIViewController {
     
     @IBOutlet private weak var image: InstaPostView!
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -25,7 +26,8 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
     var instaPost: InstaPost?
     var postImageURL: String?
     
-    override func viewDidLoad() {
+    //MARK: - Controller lifecycle
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         if let url = postImageURL {
@@ -37,10 +39,7 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
         
     }
     
-     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return self.image
-    }
-    
+    //MARK: - Actions
     @IBAction private func handleDoubleTap(sender: UITapGestureRecognizer) {
         if (scrollView.zoomScale > scrollView.minimumZoomScale) {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
@@ -48,14 +47,25 @@ class DetailImageController: UIViewController, UIScrollViewDelegate {
             let pointInView = sender.locationOfTouch(0, inView: scrollView)
             let scrollViewSize = scrollView.bounds.size
             let zoomScale: CGFloat = 2
+            
             let width = scrollViewSize.width / zoomScale
             let height = scrollViewSize.height / zoomScale
-            let x = pointInView.x - (width / 2.0)
-            let y = pointInView.y - (height / 2.0)
             
-            let rectToZoomTo = CGRect(x: x, y: y, width: width, height: height)
+            let zoomOriginX = pointInView.x - (width / 2.0)
+            let zoomOriginY = pointInView.y - (height / 2.0)
+            
+            let rectToZoomTo = CGRect(x: zoomOriginX, y: zoomOriginY, width: width, height: height)
             scrollView.zoomToRect(rectToZoomTo, animated: true)
         }
+    }
+    
+}
+
+//MARK: - UIScrollViewDelegate
+extension DetailImageController: UIScrollViewDelegate {
+    
+    public func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.image
     }
     
 }

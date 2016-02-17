@@ -13,16 +13,18 @@ enum NetworkingError: ErrorType {
     case InvalidURLRequest
 }
 
-class NetworkingManager {
+final public class NetworkingManager {
     
     private var baseURL: String?
     private let operationManager = NetworkOperationManager()
     
+    
+    //MARK: - init/deinit
     init(baseURL: String?) {
         self.baseURL = baseURL
     }
     
-    // MARK: - Loading functions
+    // MARK: - Public methods
     func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) throws {
         
         guard let baseURL = self.baseURL else {

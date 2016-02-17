@@ -9,44 +9,42 @@
 import UIKit
 import CCBottomRefreshControl
 
-private let cNumberOfPosts = 3
-private let cEstimatedRowHeight: CGFloat = 120
+private struct Constants {
+    
+    static let estimatedRowHeight: CGFloat = 120.0
+    static let triggerVerticalOffset: CGFloat = 100.0
+    
+}
 
-class InstaListController: UITableViewController {
+final public class InstaListController: UITableViewController {
     
     private let serverManager = ServerManager.sharedManager
-    private var dataSource: InstaPostDataSource!
     private let bottomRefresh = UIRefreshControl()
+    private var dataSource: InstaListDataSource!
 
-    override func viewDidLoad() {
+    //MARK: - Controller lifecycle
+    override public func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = InstaPostDataSource(tableView: tableView!)
+        
+        dataSource = InstaListDataSource(tableView: tableView!)
         dataSource.data = dataSource.fetchRequestWithOffset(0)
         tableView.dataSource = dataSource
-        //tableView.rowHeight = 100
+    
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = cEstimatedRowHeight
+        tableView.estimatedRowHeight = Constants.estimatedRowHeight
     }
     
-    override func viewDidAppear(animated: Bool) {
+    public override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        bottomRefresh.triggerVerticalOffset = 100.0
+        bottomRefresh.triggerVerticalOffset = Constants.triggerVerticalOffset
         bottomRefresh.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView!.bottomRefreshControl = bottomRefresh
     }
     
+    //MARK: - Public methods
     func refresh() {
         dataSource.refreshTableView()
         bottomRefresh.endRefreshing()
     }
     
-    //MARK: - UITableViewDelegate
-//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        let numberOfItems = dataSource.numberOfItemsAtIndexPath(indexPath)
-//        let shouldLoadNextPage: Bool = numberOfItems != nil && indexPath.item == numberOfItems! - cNumberOfPosts
-//        if shouldLoadNextPage {
-//          //  serverManager.loadNextPageOfPosts()
-//        }
-//    }
-
 }
