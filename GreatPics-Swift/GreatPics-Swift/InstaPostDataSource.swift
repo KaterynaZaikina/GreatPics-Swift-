@@ -16,6 +16,7 @@ private let kErrorDomain = "com.yalantis.GreatPics.request"
 private let kPlaceholder = "placeholder.png"
 private let kFontName = "Helvetica Neue"
 
+//MARK: CodeReview_17.02.2016: devide UICollectionView and UITableView
 
 //MARK: - InstaPostDataSource class
 class InstaPostDataSource: NSObject {
@@ -28,7 +29,7 @@ class InstaPostDataSource: NSObject {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
         
         fetchRequest.fetchBatchSize = cFetchBatchSize
-        
+//MARK: CodeReview_17.02.2016: magic strings.
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAtDate", ascending: true)]
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.managedObjectContext,
@@ -50,6 +51,8 @@ class InstaPostDataSource: NSObject {
     }()
     
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
+
+//MARK: CodeReview_17.02.2016: Mark init, public and etc methods
     
     init(collectionView: UICollectionView) {
         self.collectionView = collectionView
