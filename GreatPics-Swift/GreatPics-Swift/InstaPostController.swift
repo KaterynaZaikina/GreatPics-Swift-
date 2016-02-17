@@ -32,7 +32,7 @@ class InstaPostController: UICollectionViewController {
         }
         
         collectionView?.dataSource = dataSource
-       // serverManager.loadFirstPageOfPosts()
+        // serverManager.loadFirstPageOfPosts()
         
         refreshControl.triggerVerticalOffset = 100.0
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)

@@ -10,10 +10,12 @@ import CoreData
 import UIKit
 import FastEasyMapping
 
+//MARK: CodeReview_17.02.2016: magic strings. use structs
+
 class InstaPost: NSManagedObject {
     
     typealias RespondDictionary = [String: AnyObject]
-    
+
     class func defaultMapping() -> FEMManagedObjectMapping {
         let mapping = FEMManagedObjectMapping.init(entityName: "InstaPost")
         mapping.addAttributeMappingDictionary(["identifier" : "id"])
@@ -39,6 +41,7 @@ class InstaPost: NSManagedObject {
         }
     }
     
+//MARK: CodeReview_17.02.2016: Model should not do this
     func heightForComment(font: UIFont, width: CGFloat) -> CGFloat {
         if let text = text {
             let boundingSize = CGSize(width: width, height: CGFloat(MAXFLOAT))

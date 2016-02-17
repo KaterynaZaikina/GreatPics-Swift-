@@ -16,6 +16,7 @@ private let kErrorDomain = "com.yalantis.GreatPics.request"
 private let kPlaceholder = "placeholder.png"
 private let kFontName = "Helvetica Neue"
 
+//MARK: CodeReview_17.02.2016: devide UICollectionView and UITableView
 
 //MARK: - InstaPostDataSource class
 class InstaPostDataSource: NSObject {
@@ -27,13 +28,15 @@ class InstaPostDataSource: NSObject {
     
     private var blockOperations: [NSBlockOperation] = []
    
-    /*
+    
     private(set) lazy var fetchedResultController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName:"InstaPost")
         
         fetchRequest.fetchBatchSize = cFetchBatchSize
         fetchRequest.fetchLimit = cFetchBatchSize
         
+//MARK: CodeReview_17.02.2016: magic strings.
+
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAtDate", ascending: true)]
         let fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest,
             managedObjectContext: self.managedObjectContext,
@@ -53,9 +56,11 @@ class InstaPostDataSource: NSObject {
         
         return fetchedResultController
     }()
-    */
+
     
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
+
+//MARK: CodeReview_17.02.2016: Mark init, public and etc methods
     
     init(collectionView: UICollectionView) {
         self.collectionView = collectionView
@@ -107,7 +112,7 @@ class InstaPostDataSource: NSObject {
             ServerManager.sharedManager.loadNextPageOfPosts()
         }
         
-//        data = data + fetchRequestWithOffset(fetchOffset)
+        data = data + fetchRequestWithOffset(fetchOffset)
         
         if let collectionView = collectionView {
             var indexPathArray = [NSIndexPath]()
@@ -120,7 +125,6 @@ class InstaPostDataSource: NSObject {
 
     func refreshTableView() {
         fetchOffset = data.count
-        print("begin count \(data.count)")
         
         if fetchRequestWithOffset(fetchOffset).count == 0 {
             ServerManager.sharedManager.loadNextPageOfPosts()
@@ -145,10 +149,10 @@ class InstaPostDataSource: NSObject {
 }
 
 
-/*
+
 //MARK: - FetchedresultsControllerDelegate
 extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
-    
+/*
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         blockOperations.removeAll(keepCapacity: false)
     }
@@ -214,10 +218,10 @@ extension InstaPostDataSource: NSFetchedResultsControllerDelegate {
         let numberOfItems = sectionInfo?.numberOfObjects
         return numberOfItems
     }
+*/
     
 }
 
-*/
 
 //MARK: - UICollectionViewDataSource
 extension InstaPostDataSource: UICollectionViewDataSource {
