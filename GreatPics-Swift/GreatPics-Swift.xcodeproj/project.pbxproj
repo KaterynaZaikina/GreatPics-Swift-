@@ -7,67 +7,67 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		801ED9B21C0F0DBB004CA991 /* NetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801ED9B11C0F0DBB004CA991 /* NetworkOperationManager.swift */; };
-		801ED9B41C106E87004CA991 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801ED9B31C106E87004CA991 /* ImageLoader.swift */; };
-		801ED9B61C1180AD004CA991 /* DetailImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801ED9B51C1180AD004CA991 /* DetailImageController.swift */; };
-		8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */; };
-		8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */; };
-		8021DDF41C08BF8A00F3FD0E /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8021DDF31C08BF8A00F3FD0E /* NetworkingManager.swift */; };
 		8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7A81C0326A300451C46 /* AppDelegate.swift */; };
-		8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7AA1C0326A300451C46 /* InstaPostController.swift */; };
-		8032F7AE1C0326A300451C46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7AC1C0326A300451C46 /* Main.storyboard */; };
-		8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */; };
-		8032F7B61C0326A300451C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */; };
 		8032F7BE1C032FC300451C46 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7BD1C032FC300451C46 /* .gitignore */; };
-		8032F7C21C033B7400451C46 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C11C033B7400451C46 /* LoginViewController.swift */; };
-		8032F7C41C036DFE00451C46 /* InstagramConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C31C036DFE00451C46 /* InstagramConfig.swift */; };
-		8032F7C61C037F2700451C46 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C51C037F2600451C46 /* NavigationManager.swift */; };
-		8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C71C0481ED00451C46 /* ServerManager.swift */; };
-		8032F7CA1C04B90000451C46 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */; };
-		8032F7CE1C04C40400451C46 /* InstaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7CC1C04C40400451C46 /* InstaPost.swift */; };
-		8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */; };
-		8033935B1C0DAEE1004E8DA0 /* NetworkingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8033935A1C0DAEE1004E8DA0 /* NetworkingOperation.swift */; };
-		803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803D8C591C0C4C0000C48E93 /* InstaPostView.swift */; };
-		805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */; };
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
-		80DCFED21C71C53C0052DA6B /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED11C71C53C0052DA6B /* InstaListController.swift */; };
-		80DCFED41C71C5750052DA6B /* InstaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */; };
-		80DCFED61C748E850052DA6B /* InstaListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFED51C748E850052DA6B /* InstaListDataSource.swift */; };
-		80DCFEDB1C760A190052DA6B /* InstaPost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DCFEDA1C760A190052DA6B /* InstaPost+CoreDataProperties.swift */; };
+		80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD971C7622E800D68977 /* DetailImageController.swift */; };
+		80DECDB31C7622E800D68977 /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD981C7622E800D68977 /* InstaListController.swift */; };
+		80DECDB41C7622E800D68977 /* InstaPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD991C7622E800D68977 /* InstaPostController.swift */; };
+		80DECDB51C7622E800D68977 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD9A1C7622E800D68977 /* LoginViewController.swift */; };
+		80DECDB61C7622E800D68977 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD9C1C7622E800D68977 /* ImageLoader.swift */; };
+		80DECDB71C7622E800D68977 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD9D1C7622E800D68977 /* NetworkingManager.swift */; };
+		80DECDB81C7622E800D68977 /* NetworkingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD9E1C7622E800D68977 /* NetworkingOperation.swift */; };
+		80DECDB91C7622E800D68977 /* NetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD9F1C7622E800D68977 /* NetworkOperationManager.swift */; };
+		80DECDBA1C7622E800D68977 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDA01C7622E800D68977 /* ServerManager.swift */; };
+		80DECDBB1C7622E800D68977 /* InstagramConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDA21C7622E800D68977 /* InstagramConfig.swift */; };
+		80DECDBC1C7622E800D68977 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDA41C7622E800D68977 /* PinterestLayout.swift */; };
+		80DECDBD1C7622E800D68977 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDA61C7622E800D68977 /* CollectionViewCell.swift */; };
+		80DECDBE1C7622E800D68977 /* InstaListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDA71C7622E800D68977 /* InstaListTableViewCell.swift */; };
+		80DECDBF1C7622E800D68977 /* InstaPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDA81C7622E800D68977 /* InstaPostView.swift */; };
+		80DECDC01C7622E800D68977 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDAA1C7622E800D68977 /* CoreDataManager.swift */; };
+		80DECDC11C7622E800D68977 /* InstaPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDAB1C7622E800D68977 /* InstaPostManager.swift */; };
+		80DECDC21C7622E800D68977 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDAC1C7622E800D68977 /* NavigationManager.swift */; };
+		80DECDC31C7622E800D68977 /* InstaListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDAE1C7622E800D68977 /* InstaListDataSource.swift */; };
+		80DECDC41C7622E800D68977 /* InstaPost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDAF1C7622E800D68977 /* InstaPost+CoreDataProperties.swift */; };
+		80DECDC51C7622E800D68977 /* InstaPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDB01C7622E800D68977 /* InstaPost.swift */; };
+		80DECDC61C7622E800D68977 /* InstaPostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDB11C7622E800D68977 /* InstaPostDataSource.swift */; };
+		80DECDD01C7623E300D68977 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80DECDC81C7623E300D68977 /* LaunchScreen.storyboard */; };
+		80DECDD11C7623E300D68977 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80DECDCA1C7623E300D68977 /* Main.storyboard */; };
+		80DECDE01C76265900D68977 /* GreatPics_Swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80DECDDD1C76265900D68977 /* GreatPics_Swift.xcdatamodeld */; };
 		DFC01BB1BD68362761AB0358 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947A081B496D74C3EABAD33A /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4420183F556435587225877B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		801ED9B11C0F0DBB004CA991 /* NetworkOperationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationManager.swift; sourceTree = "<group>"; };
-		801ED9B31C106E87004CA991 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
-		801ED9B51C1180AD004CA991 /* DetailImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageController.swift; sourceTree = "<group>"; };
-		8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostDataSource.swift; sourceTree = "<group>"; };
-		8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		8021DDF31C08BF8A00F3FD0E /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		8032F7A51C0326A300451C46 /* GreatPics-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GreatPics-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8032F7A81C0326A300451C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8032F7AA1C0326A300451C46 /* InstaPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPostController.swift; sourceTree = "<group>"; };
-		8032F7AD1C0326A300451C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8032F7B01C0326A300451C46 /* GreatPics_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreatPics_Swift.xcdatamodel; sourceTree = "<group>"; };
-		8032F7B51C0326A300451C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8032F7B71C0326A300451C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8032F7BD1C032FC300451C46 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		8032F7C11C033B7400451C46 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
-		8032F7C31C036DFE00451C46 /* InstagramConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramConfig.swift; sourceTree = "<group>"; };
-		8032F7C51C037F2600451C46 /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
-		8032F7C71C0481ED00451C46 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
-		8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		8032F7CC1C04C40400451C46 /* InstaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPost.swift; sourceTree = "<group>"; };
-		8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostManager.swift; sourceTree = "<group>"; };
-		8033935A1C0DAEE1004E8DA0 /* NetworkingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingOperation.swift; sourceTree = "<group>"; };
-		803D8C591C0C4C0000C48E93 /* InstaPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostView.swift; sourceTree = "<group>"; };
-		805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		80DCFED11C71C53C0052DA6B /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
-		80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListTableViewCell.swift; sourceTree = "<group>"; };
-		80DCFED51C748E850052DA6B /* InstaListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListDataSource.swift; sourceTree = "<group>"; };
-		80DCFEDA1C760A190052DA6B /* InstaPost+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InstaPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		80DECD971C7622E800D68977 /* DetailImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageController.swift; sourceTree = "<group>"; };
+		80DECD981C7622E800D68977 /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
+		80DECD991C7622E800D68977 /* InstaPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostController.swift; sourceTree = "<group>"; };
+		80DECD9A1C7622E800D68977 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		80DECD9C1C7622E800D68977 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		80DECD9D1C7622E800D68977 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		80DECD9E1C7622E800D68977 /* NetworkingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingOperation.swift; sourceTree = "<group>"; };
+		80DECD9F1C7622E800D68977 /* NetworkOperationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationManager.swift; sourceTree = "<group>"; };
+		80DECDA01C7622E800D68977 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
+		80DECDA21C7622E800D68977 /* InstagramConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramConfig.swift; sourceTree = "<group>"; };
+		80DECDA41C7622E800D68977 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		80DECDA61C7622E800D68977 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		80DECDA71C7622E800D68977 /* InstaListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListTableViewCell.swift; sourceTree = "<group>"; };
+		80DECDA81C7622E800D68977 /* InstaPostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostView.swift; sourceTree = "<group>"; };
+		80DECDAA1C7622E800D68977 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		80DECDAB1C7622E800D68977 /* InstaPostManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostManager.swift; sourceTree = "<group>"; };
+		80DECDAC1C7622E800D68977 /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		80DECDAE1C7622E800D68977 /* InstaListDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListDataSource.swift; sourceTree = "<group>"; };
+		80DECDAF1C7622E800D68977 /* InstaPost+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InstaPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		80DECDB01C7622E800D68977 /* InstaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPost.swift; sourceTree = "<group>"; };
+		80DECDB11C7622E800D68977 /* InstaPostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostDataSource.swift; sourceTree = "<group>"; };
+		80DECDC91C7623E300D68977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		80DECDCB1C7623E300D68977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		80DECDDE1C76265900D68977 /* GreatPics_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreatPics_Swift.xcdatamodel; sourceTree = "<group>"; };
+		80DECDDF1C76265900D68977 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		947A081B496D74C3EABAD33A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,68 +93,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8021DDED1C08B53300F3FD0E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8032F7CC1C04C40400451C46 /* InstaPost.swift */,
-				80DCFEDA1C760A190052DA6B /* InstaPost+CoreDataProperties.swift */,
-				8021DDE91C07179F00F3FD0E /* InstaPostDataSource.swift */,
-				80DCFED51C748E850052DA6B /* InstaListDataSource.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		8021DDEE1C08B54100F3FD0E /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				8032F7C11C033B7400451C46 /* LoginViewController.swift */,
-				801ED9B51C1180AD004CA991 /* DetailImageController.swift */,
-				8032F7AA1C0326A300451C46 /* InstaPostController.swift */,
-				80DCFED11C71C53C0052DA6B /* InstaListController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		8021DDEF1C08B54900F3FD0E /* Server */ = {
-			isa = PBXGroup;
-			children = (
-				801ED9B31C106E87004CA991 /* ImageLoader.swift */,
-				8033935A1C0DAEE1004E8DA0 /* NetworkingOperation.swift */,
-				8032F7C71C0481ED00451C46 /* ServerManager.swift */,
-				8021DDF31C08BF8A00F3FD0E /* NetworkingManager.swift */,
-				801ED9B11C0F0DBB004CA991 /* NetworkOperationManager.swift */,
-			);
-			name = Server;
-			sourceTree = "<group>";
-		};
-		8021DDF01C08B55500F3FD0E /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				8032F7C31C036DFE00451C46 /* InstagramConfig.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
-		8021DDF11C08B5B300F3FD0E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				80DCFED31C71C5750052DA6B /* InstaListTableViewCell.swift */,
-				8021DDEB1C0745B700F3FD0E /* CollectionViewCell.swift */,
-				803D8C591C0C4C0000C48E93 /* InstaPostView.swift */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		8021DDF21C08B5BA00F3FD0E /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				8032F7C51C037F2600451C46 /* NavigationManager.swift */,
-				8032F7CF1C04C5D800451C46 /* InstaPostManager.swift */,
-				8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */,
-			);
-			name = Managers;
-			sourceTree = "<group>";
-		};
 		8032F79C1C0326A300451C46 = {
 			isa = PBXGroup;
 			children = (
@@ -176,30 +114,108 @@
 		8032F7A71C0326A300451C46 /* GreatPics-Swift */ = {
 			isa = PBXGroup;
 			children = (
-				8021DDED1C08B53300F3FD0E /* Model */,
-				8021DDF11C08B5B300F3FD0E /* View */,
-				8021DDEE1C08B54100F3FD0E /* Controllers */,
-				8021DDF21C08B5BA00F3FD0E /* Managers */,
-				8021DDEF1C08B54900F3FD0E /* Server */,
-				80DCFED71C74ACA70052DA6B /* Layout */,
-				8021DDF01C08B55500F3FD0E /* Helpers */,
-				8032F7AC1C0326A300451C46 /* Main.storyboard */,
+				80DECDAD1C7622E800D68977 /* Models */,
+				80DECDA51C7622E800D68977 /* Views */,
+				80DECD961C7622E800D68977 /* Controllers */,
+				80DECD9B1C7622E800D68977 /* Server */,
+				80DECDA91C7622E800D68977 /* Managers */,
+				80DECDA11C7622E800D68977 /* Helpers */,
+				80DECDA31C7622E800D68977 /* Layout */,
+				80DECDC71C7623E300D68977 /* Storyboards */,
+				80DECDDC1C76265900D68977 /* SupportingFiles */,
 				80DCFECF1C71BD900052DA6B /* Assets.xcassets */,
-				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
-				8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */,
-				8032F7B71C0326A300451C46 /* Info.plist */,
-				8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */,
 				8032F7BD1C032FC300451C46 /* .gitignore */,
+				8032F7A81C0326A300451C46 /* AppDelegate.swift */,
 			);
 			path = "GreatPics-Swift";
 			sourceTree = "<group>";
 		};
-		80DCFED71C74ACA70052DA6B /* Layout */ = {
+		80DECD961C7622E800D68977 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				805FBDF71C6CB29B0068B815 /* PinterestLayout.swift */,
+				80DECD971C7622E800D68977 /* DetailImageController.swift */,
+				80DECD981C7622E800D68977 /* InstaListController.swift */,
+				80DECD991C7622E800D68977 /* InstaPostController.swift */,
+				80DECD9A1C7622E800D68977 /* LoginViewController.swift */,
 			);
-			name = Layout;
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		80DECD9B1C7622E800D68977 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				80DECD9C1C7622E800D68977 /* ImageLoader.swift */,
+				80DECD9D1C7622E800D68977 /* NetworkingManager.swift */,
+				80DECD9E1C7622E800D68977 /* NetworkingOperation.swift */,
+				80DECD9F1C7622E800D68977 /* NetworkOperationManager.swift */,
+				80DECDA01C7622E800D68977 /* ServerManager.swift */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		80DECDA11C7622E800D68977 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDA21C7622E800D68977 /* InstagramConfig.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		80DECDA31C7622E800D68977 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDA41C7622E800D68977 /* PinterestLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		80DECDA51C7622E800D68977 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDA61C7622E800D68977 /* CollectionViewCell.swift */,
+				80DECDA71C7622E800D68977 /* InstaListTableViewCell.swift */,
+				80DECDA81C7622E800D68977 /* InstaPostView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		80DECDA91C7622E800D68977 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDAA1C7622E800D68977 /* CoreDataManager.swift */,
+				80DECDAB1C7622E800D68977 /* InstaPostManager.swift */,
+				80DECDAC1C7622E800D68977 /* NavigationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		80DECDAD1C7622E800D68977 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDAE1C7622E800D68977 /* InstaListDataSource.swift */,
+				80DECDAF1C7622E800D68977 /* InstaPost+CoreDataProperties.swift */,
+				80DECDB01C7622E800D68977 /* InstaPost.swift */,
+				80DECDB11C7622E800D68977 /* InstaPostDataSource.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		80DECDC71C7623E300D68977 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDC81C7623E300D68977 /* LaunchScreen.storyboard */,
+				80DECDCA1C7623E300D68977 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		80DECDDC1C76265900D68977 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				80DECDDD1C76265900D68977 /* GreatPics_Swift.xcdatamodeld */,
+				80DECDDF1C76265900D68977 /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		DB5F0953CC348002F05DD42F /* Frameworks */ = {
@@ -270,10 +286,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80DECDD01C7623E300D68977 /* LaunchScreen.storyboard in Resources */,
 				8032F7BE1C032FC300451C46 /* .gitignore in Resources */,
-				8032F7B61C0326A300451C46 /* LaunchScreen.storyboard in Resources */,
-				8032F7AE1C0326A300451C46 /* Main.storyboard in Resources */,
 				80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */,
+				80DECDD11C7623E300D68977 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,49 +348,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */,
-				8032F7C21C033B7400451C46 /* LoginViewController.swift in Sources */,
-				8032F7C41C036DFE00451C46 /* InstagramConfig.swift in Sources */,
-				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
-				8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */,
-				80DCFED61C748E850052DA6B /* InstaListDataSource.swift in Sources */,
-				8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */,
-				801ED9B21C0F0DBB004CA991 /* NetworkOperationManager.swift in Sources */,
-				803D8C5A1C0C4C0000C48E93 /* InstaPostView.swift in Sources */,
-				8021DDEA1C07179F00F3FD0E /* InstaPostDataSource.swift in Sources */,
-				8032F7D01C04C5D800451C46 /* InstaPostManager.swift in Sources */,
-				8021DDEC1C0745B700F3FD0E /* CollectionViewCell.swift in Sources */,
-				80DCFED21C71C53C0052DA6B /* InstaListController.swift in Sources */,
-				80DCFED41C71C5750052DA6B /* InstaListTableViewCell.swift in Sources */,
+				80DECDBB1C7622E800D68977 /* InstagramConfig.swift in Sources */,
+				80DECDB61C7622E800D68977 /* ImageLoader.swift in Sources */,
+				80DECDB51C7622E800D68977 /* LoginViewController.swift in Sources */,
+				80DECDC51C7622E800D68977 /* InstaPost.swift in Sources */,
+				80DECDB91C7622E800D68977 /* NetworkOperationManager.swift in Sources */,
+				80DECDC01C7622E800D68977 /* CoreDataManager.swift in Sources */,
+				80DECDC11C7622E800D68977 /* InstaPostManager.swift in Sources */,
+				80DECDE01C76265900D68977 /* GreatPics_Swift.xcdatamodeld in Sources */,
+				80DECDB81C7622E800D68977 /* NetworkingOperation.swift in Sources */,
+				80DECDB41C7622E800D68977 /* InstaPostController.swift in Sources */,
 				8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */,
-				8032F7CE1C04C40400451C46 /* InstaPost.swift in Sources */,
-				8032F7CA1C04B90000451C46 /* CoreDataManager.swift in Sources */,
-				801ED9B61C1180AD004CA991 /* DetailImageController.swift in Sources */,
-				801ED9B41C106E87004CA991 /* ImageLoader.swift in Sources */,
-				8032F7C61C037F2700451C46 /* NavigationManager.swift in Sources */,
-				8021DDF41C08BF8A00F3FD0E /* NetworkingManager.swift in Sources */,
-				80DCFEDB1C760A190052DA6B /* InstaPost+CoreDataProperties.swift in Sources */,
-				8033935B1C0DAEE1004E8DA0 /* NetworkingOperation.swift in Sources */,
+				80DECDC21C7622E800D68977 /* NavigationManager.swift in Sources */,
+				80DECDBC1C7622E800D68977 /* PinterestLayout.swift in Sources */,
+				80DECDB71C7622E800D68977 /* NetworkingManager.swift in Sources */,
+				80DECDC61C7622E800D68977 /* InstaPostDataSource.swift in Sources */,
+				80DECDC41C7622E800D68977 /* InstaPost+CoreDataProperties.swift in Sources */,
+				80DECDBD1C7622E800D68977 /* CollectionViewCell.swift in Sources */,
+				80DECDC31C7622E800D68977 /* InstaListDataSource.swift in Sources */,
+				80DECDBE1C7622E800D68977 /* InstaListTableViewCell.swift in Sources */,
+				80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */,
+				80DECDB31C7622E800D68977 /* InstaListController.swift in Sources */,
+				80DECDBF1C7622E800D68977 /* InstaPostView.swift in Sources */,
+				80DECDBA1C7622E800D68977 /* ServerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8032F7AC1C0326A300451C46 /* Main.storyboard */ = {
+		80DECDC81C7623E300D68977 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8032F7AD1C0326A300451C46 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8032F7B51C0326A300451C46 /* Base */,
+				80DECDC91C7623E300D68977 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		80DECDCA1C7623E300D68977 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80DECDCB1C7623E300D68977 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -468,7 +484,7 @@
 			baseConfigurationReference = A4482AB1E80D8EA4324A2555 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "GreatPics-Swift/Info.plist";
+				INFOPLIST_FILE = "GreatPics-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kateryna.GreatPics-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -480,7 +496,7 @@
 			baseConfigurationReference = 4420183F556435587225877B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "GreatPics-Swift/Info.plist";
+				INFOPLIST_FILE = "GreatPics-Swift/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kateryna.GreatPics-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -511,12 +527,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8032F7AF1C0326A300451C46 /* GreatPics_Swift.xcdatamodeld */ = {
+		80DECDDD1C76265900D68977 /* GreatPics_Swift.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8032F7B01C0326A300451C46 /* GreatPics_Swift.xcdatamodel */,
+				80DECDDE1C76265900D68977 /* GreatPics_Swift.xcdatamodel */,
 			);
-			currentVersion = 8032F7B01C0326A300451C46 /* GreatPics_Swift.xcdatamodel */;
+			currentVersion = 80DECDDE1C76265900D68977 /* GreatPics_Swift.xcdatamodel */;
 			path = GreatPics_Swift.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

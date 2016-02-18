@@ -49,6 +49,7 @@ final public class NetworkingManager {
         guard request != nil else {
             throw NetworkingError.InvalidURLRequest
         }
+        
         let networkOperation = NetworkingOperation(requestURL: requestURL)
         
         networkOperation.queue = dispatch_get_main_queue()
