@@ -9,6 +9,7 @@
 import UIKit
 import KeychainAccess
 
+//MARK: Code_Review_18.02.2016: ViewController should not know about Insta urls, ids and atc
 private struct Constants {
     struct Instagram {
         static let instagramAuthURL = "https://api.instagram.com/oauth/authorize/?"

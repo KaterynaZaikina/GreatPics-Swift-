@@ -37,7 +37,7 @@ final public class NavigationManager {
         let navigationController = UINavigationController(rootViewController: loginViewController)
         window?.rootViewController = navigationController
     }
-    
+//MARK: Code_Review_18.02.2016: Naming
     private func createCollectionController(window: UIWindow?) {
         if accessTokenExist == true {
             let serverManager = ServerManager.sharedManager
@@ -51,6 +51,7 @@ final public class NavigationManager {
     }
     
     //MARK: - Public methods
+//MARK: Code_Review_18.02.2016: Naming
     func showMainScreen(window: UIWindow) {
         if (accessTokenExist == false) {
             createdLoginController(window)

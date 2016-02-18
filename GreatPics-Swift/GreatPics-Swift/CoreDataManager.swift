@@ -38,6 +38,7 @@ final public class CoreDataManager {
     // MARK: - Core Data stack
     private lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//MARK: Code_Review_18.02.2016: '[urls.count - 1]'
         return urls[urls.count-1]
     }()
     

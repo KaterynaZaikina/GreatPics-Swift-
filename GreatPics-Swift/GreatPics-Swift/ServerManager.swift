@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import AFNetworking
+//MARK: Code_Review_18.02.2016: Remove it
+//import AFNetworking
 
 private struct Constants {
     
@@ -79,7 +80,7 @@ final public class ServerManager {
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         })
     }
-    
+//MARK: Code_Review_18.02.2016: Use only one func
     //MARK: - Public methods
     func loadFirstPageOfPosts() {
         loadPostsWithMaxTagID(maxTagID)

@@ -9,6 +9,8 @@
 import UIKit
 import KeychainAccess
 
+//MARK: Code_Review_18.02.2016: File structure
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
