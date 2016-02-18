@@ -33,7 +33,7 @@ final public class CoreDataManager {
     // MARK: - Core Data stack
     private lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1]
+        return urls[urls.count - 1]
     }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {

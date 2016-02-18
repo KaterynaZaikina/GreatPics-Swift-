@@ -37,8 +37,8 @@ final public class NavigationManager {
         let navigationController = UINavigationController(rootViewController: loginViewController)
         window?.rootViewController = navigationController
     }
-    
-    private func createCollectionController(window: UIWindow?) {
+
+    private func createInstaPostController(window: UIWindow?) {
         if accessTokenExist == true {
             let serverManager = ServerManager.sharedManager
             serverManager.accessToken = keychainStorage[Constants.accessToken]
@@ -51,11 +51,11 @@ final public class NavigationManager {
     }
     
     //MARK: - Public methods
-    func showMainScreen(window: UIWindow) {
+    func showViewControllerInWindow(window: UIWindow) {
         if (accessTokenExist == false) {
             createdLoginController(window)
         } else {
-           createCollectionController(window)
+           createInstaPostController(window)
         }
     }
     

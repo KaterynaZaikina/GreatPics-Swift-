@@ -78,11 +78,8 @@ final public class ServerManager {
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         })
     }
-    
+
     //MARK: - Public methods
-    func loadFirstPageOfPosts(completionBlock: (Void) -> (Void)) {
-        loadPostsWithMaxTagID(maxTagID, completion:completionBlock)
-    }
     
     func loadNextPageOfPosts(completionBlock: (Void) -> (Void)) {
         maxTagID = pagination?[Constants.nextMaxTagID]

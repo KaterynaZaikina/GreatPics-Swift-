@@ -20,7 +20,7 @@
 		8032F7B61C0326A300451C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7B41C0326A300451C46 /* LaunchScreen.storyboard */; };
 		8032F7BE1C032FC300451C46 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7BD1C032FC300451C46 /* .gitignore */; };
 		8032F7C21C033B7400451C46 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C11C033B7400451C46 /* LoginViewController.swift */; };
-		8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C31C036DFE00451C46 /* TokenFinder.swift */; };
+		8032F7C41C036DFE00451C46 /* InstagramConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C31C036DFE00451C46 /* InstagramConfig.swift */; };
 		8032F7C61C037F2700451C46 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C51C037F2600451C46 /* NavigationManager.swift */; };
 		8032F7C81C0481ED00451C46 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C71C0481ED00451C46 /* ServerManager.swift */; };
 		8032F7CA1C04B90000451C46 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */; };
@@ -54,7 +54,7 @@
 		8032F7B71C0326A300451C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8032F7BD1C032FC300451C46 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8032F7C11C033B7400451C46 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
-		8032F7C31C036DFE00451C46 /* TokenFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenFinder.swift; sourceTree = "<group>"; };
+		8032F7C31C036DFE00451C46 /* InstagramConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstagramConfig.swift; sourceTree = "<group>"; };
 		8032F7C51C037F2600451C46 /* NavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		8032F7C71C0481ED00451C46 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		8032F7C91C04B8FF00451C46 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		8021DDF01C08B55500F3FD0E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				8032F7C31C036DFE00451C46 /* TokenFinder.swift */,
+				8032F7C31C036DFE00451C46 /* InstagramConfig.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -334,7 +334,7 @@
 			files = (
 				805FBDF81C6CB29B0068B815 /* PinterestLayout.swift in Sources */,
 				8032F7C21C033B7400451C46 /* LoginViewController.swift in Sources */,
-				8032F7C41C036DFE00451C46 /* TokenFinder.swift in Sources */,
+				8032F7C41C036DFE00451C46 /* InstagramConfig.swift in Sources */,
 				8032F7B11C0326A300451C46 /* GreatPics_Swift.xcdatamodeld in Sources */,
 				8032F7AB1C0326A300451C46 /* InstaPostController.swift in Sources */,
 				80DCFED61C748E850052DA6B /* InstaListDataSource.swift in Sources */,

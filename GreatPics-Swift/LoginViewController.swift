@@ -10,14 +10,6 @@ import UIKit
 import KeychainAccess
 
 private struct Constants {
-    struct Instagram {
-        static let instagramAuthURL = "https://api.instagram.com/oauth/authorize/?"
-        static let instagramRedirectURL = "https://yalantis.com"
-        static let instagramClientSecret = "5d245e1de66a4f75a4779468c03a8f8d"
-        static let instagramClientID  = "ffce67cce0814cb996eef468646cf08f"
-        static var loginURL = Constants.Instagram.instagramAuthURL + "client_id=" + Constants.Instagram.instagramClientID + "&redirect_uri=" + Constants.Instagram.instagramRedirectURL + "&response_type=token"
-        
-    }
     
     struct StoryboardID {
         static let mainStoryboardID = "Main"
@@ -49,7 +41,7 @@ final public class LoginViewController: UIViewController {
     
     //MARK: - Public methods
     func login() {
-        let url = NSURL(string: Constants.Instagram.loginURL)
+        let url = NSURL(string: InstagramConfig.loginURLString())
         if let url = url {
             let request = NSURLRequest(URL: url)
             webView.loadRequest(request)
@@ -66,7 +58,7 @@ extension LoginViewController: UIWebViewDelegate {
         guard let urlStringExist = urlString else {
             return false
         }
-        let accessToken = TokenFinder.findAccessToken(urlStringExist)
+        let accessToken = InstagramConfig.findAccessToken(urlStringExist)
         if !accessToken.isEmpty {
             if let completionBlock = completionBlock {
                 completionBlock(accessToken)

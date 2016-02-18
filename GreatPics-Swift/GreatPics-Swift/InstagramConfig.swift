@@ -1,5 +1,5 @@
 //
-//  TokenFinder.swift
+//  InstagramConfig.swift
 //  GreatPics-Swift
 //
 //  Created by kateryna.zaikina on 11/23/15.
@@ -8,7 +8,18 @@
 
 import Foundation
 
-final public class TokenFinder {
+private struct Constants {
+    
+    static let instagramAuthURL = "https://api.instagram.com/oauth/authorize/?"
+    static let instagramRedirectURL = "https://yalantis.com"
+    static let instagramClientSecret = "5d245e1de66a4f75a4779468c03a8f8d"
+    static let instagramClientID  = "ffce67cce0814cb996eef468646cf08f"
+    static var loginURL = Constants.instagramAuthURL + "client_id=" + Constants.instagramClientID + "&redirect_uri=" + Constants.instagramRedirectURL + "&response_type=token"
+    
+}
+
+
+final public class InstagramConfig {
     
     //MARK: - Class methods
     class func findAccessToken(urlString: String) -> String {
@@ -27,6 +38,10 @@ final public class TokenFinder {
             }
         }
         return accessToken
+    }
+    
+    class func loginURLString() -> String {
+        return Constants.loginURL
     }
     
 }
