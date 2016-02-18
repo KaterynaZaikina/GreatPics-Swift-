@@ -18,6 +18,7 @@ private struct Constants {
     static let caption = "caption"
     static let text = "text"
     static let url = "url"
+    static let createdTime = "created_time"
     
 }
 
@@ -27,6 +28,9 @@ final public class InstaPost: NSManagedObject {
     
     //MARK: public methods
     func updateWithDictionary(responseObject: [String : AnyObject]?) {
+        if let createdTime = responseObject?[Constants.createdTime] {
+            self.createdTime = createdTime as? String
+        }
         if let id = responseObject?[Constants.id] as? String {
             identifier = id
         }

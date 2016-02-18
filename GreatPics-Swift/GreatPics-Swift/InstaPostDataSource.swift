@@ -15,7 +15,7 @@ final public class InstaPostDataSource: NSObject {
     private var collectionView: UICollectionView!
     private var fetchOffset: NSInteger = 0
     private let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedManager.managedObjectContext
-
+    
     var data = [AnyObject]()
     
     //MARK: - init/deinit
@@ -34,9 +34,13 @@ final public class InstaPostDataSource: NSObject {
     func fetchRequestWithOffset(offset: NSInteger) -> [AnyObject] {
         let fetchRequest = NSFetchRequest(entityName:DataSourceConstants.DataFetching.entityName)
         
-        fetchRequest.fetchBatchSize = DataSourceConstants.DataFetching.fetchLimit
         fetchRequest.fetchLimit = DataSourceConstants.DataFetching.fetchLimit
         fetchRequest.fetchOffset = offset
+        
+        let sortDescriptorKey = "createdTime"
+        let sortDescriptor = NSSortDescriptor(key: sortDescriptorKey, ascending: false)
+        let sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
         
         do {
             return try managedObjectContext.executeFetchRequest(fetchRequest)
@@ -61,21 +65,21 @@ final public class InstaPostDataSource: NSObject {
     func refreshCollectionView() {
         fetchOffset = data.count
         
-        if fetchRequestWithOffset(fetchOffset).count == 0 {
-            ServerManager.sharedManager.loadNextPageOfPosts()
-        }
-        
-        data = data + fetchRequestWithOffset(fetchOffset)
-        
-        if let collectionView = collectionView {
-            var indexPathArray = [NSIndexPath]()
-            for item in fetchOffset ..< data.count {
-                indexPathArray.append(NSIndexPath.init(forItem: item, inSection: 0))
+        ServerManager.sharedManager.loadNextPageOfPosts({ [unowned self] in
+            self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
+            
+            if let collectionView = self.collectionView {
+                var indexPathArray = [NSIndexPath]()
+                for item in self.fetchOffset ..< self.data.count {
+                    indexPathArray.append(NSIndexPath.init(forItem: item, inSection: 0))
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    collectionView.insertItemsAtIndexPaths(indexPathArray)
+                })
             }
-            collectionView.insertItemsAtIndexPaths(indexPathArray)
-        }
+            })
     }
-
 }
 
 //MARK: - UICollectionViewDataSource
@@ -108,5 +112,4 @@ extension InstaPostDataSource: PinterestLayoutDelegate {
     }
     
 }
-
 

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         navigationManager.showMainScreen(window!)
         window!.makeKeyAndVisible()
+        
         return true
     }
 

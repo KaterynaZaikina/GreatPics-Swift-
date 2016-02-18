@@ -47,6 +47,12 @@ final public class InstaListDataSource: NSObject {
         fetchRequest.fetchBatchSize = DataSourceConstants.DataFetching.fetchLimit
         fetchRequest.fetchLimit = DataSourceConstants.DataFetching.fetchLimit
         fetchRequest.fetchOffset = offset
+        
+        let sortDescriptorKey = "createdTime"
+        let sortDescriptor = NSSortDescriptor(key: sortDescriptorKey, ascending: false)
+        let sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
+        
         do {
             return try managedObjectContext.executeFetchRequest(fetchRequest)
         } catch {
@@ -58,7 +64,7 @@ final public class InstaListDataSource: NSObject {
         return []
     }
     
- 
+    
     func configureTableViewCell(cell:InstaListTableViewCell, indexPath: NSIndexPath) {
         if let post = data[indexPath.item] as? InstaPost, let imageURL = post.imageURL  {
             cell.instaImageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: DataSourceConstants.DataEditing.placeholder)!)
@@ -71,27 +77,26 @@ final public class InstaListDataSource: NSObject {
     func refreshTableView() {
         fetchOffset = data.count
         
-        if fetchRequestWithOffset(fetchOffset).count == 0 {
-            ServerManager.sharedManager.loadNextPageOfPosts()
-        }
-        
-        data = data + fetchRequestWithOffset(fetchOffset)
-        
-        if let tableView = tableView {
-            var newIndexPathArray = [NSIndexPath]()
-            for row in fetchOffset ..< data.count {
-                newIndexPathArray.append(NSIndexPath.init(forRow: row, inSection: 0))
+        ServerManager.sharedManager.loadNextPageOfPosts({ [unowned self] in
+            self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
+            
+            if let tableView = self.tableView {
+                var newIndexPathArray = [NSIndexPath]()
+                for row in self.fetchOffset ..< self.data.count {
+                    newIndexPathArray.append(NSIndexPath.init(forRow: row, inSection: 0))
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    tableView.beginUpdates()
+                    tableView.insertRowsAtIndexPaths(newIndexPathArray, withRowAnimation:.Fade)
+                    tableView.endUpdates()
+                    tableView.reloadRowsAtIndexPaths(newIndexPathArray, withRowAnimation: .None)
+                })
             }
-            
-            tableView.beginUpdates()
-            tableView.insertRowsAtIndexPaths(newIndexPathArray, withRowAnimation:.Fade)
-            tableView.endUpdates()
-            
-            tableView.reloadRowsAtIndexPaths(newIndexPathArray, withRowAnimation:.Fade)
-        }
+            })
     }
+    
 }
-
 
 //MARK: - UITableViewDataSource
 extension InstaListDataSource: UITableViewDataSource {

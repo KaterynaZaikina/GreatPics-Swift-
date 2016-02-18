@@ -29,12 +29,7 @@ private struct Constants {
 final public class CoreDataManager {
     
     static let sharedManager = CoreDataManager()
-    lazy var importContext: NSManagedObjectContext = {
-        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        context.parentContext = self.managedObjectContext
-        return context
-    }()
-    
+        
     // MARK: - Core Data stack
     private lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
@@ -80,7 +75,6 @@ final public class CoreDataManager {
             if self.managedObjectContext.hasChanges {
                 do {
                     try self.managedObjectContext.save()
-                    
                 } catch {
                     let coreDataError  = error as NSError
                     print("Unresolved error \(coreDataError), \(coreDataError .userInfo)")
@@ -88,15 +82,6 @@ final public class CoreDataManager {
                 }
             }
         }
-    }
-    
-    func saveImportContext(context: NSManagedObjectContext) {
-        do {
-            try context.save()
-        } catch {
-            fatalError("Failure to save context: \(error)")
-        }
-        saveContext()
     }
     
 }

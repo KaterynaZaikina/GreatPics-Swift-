@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import AFNetworking
 
 private struct Constants {
     
-    static let postNumber = "20"
-    static let tag = "dnepr"
+    static let postNumber = "10"
+    static let tag = "selfie"
     static let baseURL = "https://api.instagram.com/v1/"
     static let maxTagID = "maxTagID"
     static let maxTagIDRequest = "max_tag_id"
@@ -25,14 +24,14 @@ private struct Constants {
     
 }
 
-
 final public class ServerManager {
     
     private var pagination: [String: String]?
     private let defaults = NSUserDefaults.standardUserDefaults()
     private let networkingManger = NetworkingManager(baseURL: Constants.baseURL)
     
-    private var maxTagID: String? {
+    private var maxTagID: String?
+        {
         get {
             return defaults.valueForKey(Constants.maxTagID) as? String
         }
@@ -65,7 +64,7 @@ final public class ServerManager {
         
     }
     
-    private func loadPostsWithMaxTagID(maxTagID: String?) {
+    private func loadPostsWithMaxTagID(maxTagID: String?, completion: (Void) -> (Void)) {
         recentPostsForTagName(Constants.tag, count: Constants.postNumber, maxTagID: maxTagID, success: { [unowned self] responseObject in
             if let paginationDictionary = responseObject?[Constants.pagination] as? [String : String]  {
                 self.pagination = paginationDictionary
@@ -73,7 +72,7 @@ final public class ServerManager {
             
             let manager = InstaPostManager()
             if let postsDictionary = responseObject?[Constants.data] as? [AnyObject]  {
-                manager.importPost(postsDictionary)
+                manager.importPost(postsDictionary, completionBlock: completion)
             }
             }, failure: { error in
                 print("error - \(error.localizedDescription), status code - \(error.code)")
@@ -81,13 +80,13 @@ final public class ServerManager {
     }
     
     //MARK: - Public methods
-    func loadFirstPageOfPosts() {
-        loadPostsWithMaxTagID(maxTagID)
+    func loadFirstPageOfPosts(completionBlock: (Void) -> (Void)) {
+        loadPostsWithMaxTagID(maxTagID, completion:completionBlock)
     }
     
-    func loadNextPageOfPosts() {
+    func loadNextPageOfPosts(completionBlock: (Void) -> (Void)) {
         maxTagID = pagination?[Constants.nextMaxTagID]
-        loadPostsWithMaxTagID(maxTagID)
+        loadPostsWithMaxTagID(maxTagID, completion:completionBlock)
     }
     
 }
