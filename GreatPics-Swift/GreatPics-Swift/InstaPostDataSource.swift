@@ -23,6 +23,13 @@ final public class InstaPostDataSource: NSObject {
         self.collectionView = collectionView
     }
     
+    //MARK: private methods
+    private func heightForComment(text: String, font: UIFont, width: CGFloat) -> CGFloat {
+        let boundingSize = CGSize(width: width, height: CGFloat(MAXFLOAT))
+        let rect = NSString(string: text).boundingRectWithSize(boundingSize, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return ceil(rect.height)
+    }
+    
     //MARK: - public methods
     func fetchRequestWithOffset(offset: NSInteger) -> [AnyObject] {
         let fetchRequest = NSFetchRequest(entityName:DataSourceConstants.DataFetching.entityName)
@@ -67,13 +74,6 @@ final public class InstaPostDataSource: NSObject {
             }
             collectionView.insertItemsAtIndexPaths(indexPathArray)
         }
-    }
-    
-    //MARK: helper methods
-    func heightForComment(text: String, font: UIFont, width: CGFloat) -> CGFloat {
-            let boundingSize = CGSize(width: width, height: CGFloat(MAXFLOAT))
-            let rect = NSString(string: text).boundingRectWithSize(boundingSize, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-            return ceil(rect.height)
     }
 
 }

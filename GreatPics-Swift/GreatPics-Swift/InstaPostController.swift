@@ -33,7 +33,11 @@ final public class InstaPostController: UICollectionViewController {
                                                  bottom: Constants.insets, right: Constants.insets)
 
         dataSource = InstaPostDataSource(collectionView: collectionView!)
-        dataSource.data = dataSource.fetchRequestWithOffset(0)
+        
+        if dataSource.fetchRequestWithOffset(0).count == 0 {
+            serverManager.loadFirstPageOfPosts()
+        }
+        
         if let layout = collectionView!.collectionViewLayout as? PinterestLayout {
             layout.delegate = dataSource
         }
@@ -43,6 +47,11 @@ final public class InstaPostController: UICollectionViewController {
         refreshControl.triggerVerticalOffset = Constants.triggerVerticalOffset
         refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         collectionView!.bottomRefreshControl = refreshControl
+    }
+    
+    override public func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        dataSource.data = dataSource.fetchRequestWithOffset(0) 
     }
     
     //MARK: - Public methods

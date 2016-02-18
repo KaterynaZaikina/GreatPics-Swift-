@@ -48,11 +48,11 @@ final public class ServerManager {
     private func recentPostsForTagName(tagName:String, count:String, maxTagID:String?, success:([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) {
         let urlString = Constants.urlString
         var parameters = [String: String]()
-        if accessToken != nil {
+        if let accessToken = accessToken {
             parameters[Constants.accessToken] = accessToken
         }
         
-        if maxTagID != nil {
+        if let maxTagID = maxTagID {
             parameters[Constants.maxTagIDRequest] = maxTagID
         }
         
