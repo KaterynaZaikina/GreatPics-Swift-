@@ -87,8 +87,7 @@ final public class InstaPostDataSource: NSObject {
     
     func refreshCollectionView() {
         fetchOffset = data.count
-        
-        ServerManager.sharedManager.loadNextPageOfPosts({ [unowned self] in
+        ServerManager.sharedManager.loadPostsWithTagID(.NextPage, completionBlock:{ [unowned self] in
             self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
             
             if let collectionView = self.collectionView {
@@ -107,7 +106,7 @@ final public class InstaPostDataSource: NSObject {
     func topRefreshCollectionView() {
         fetchOffset = 0
         
-        ServerManager.sharedManager.loadFirstPageOfPosts({ [unowned self] in
+        ServerManager.sharedManager.loadPostsWithTagID(.FirstPage, completionBlock:{ [unowned self] in
             if let collectionView = self.collectionView {
                 self.data = self.fetchRequestWithOffset(self.fetchOffset)
                 
