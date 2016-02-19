@@ -13,12 +13,14 @@ import KeychainAccess
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private let navigationManager: NavigationManager = NavigationManager()
+
+    private let navigationManager = NavigationManager()
         
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        navigationManager.showMainScreen(window!)
+        navigationManager.showViewControllerInWindow(window!)
         window!.makeKeyAndVisible()
+        
         return true
     }
 

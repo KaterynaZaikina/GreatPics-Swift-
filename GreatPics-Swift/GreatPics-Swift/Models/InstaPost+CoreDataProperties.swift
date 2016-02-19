@@ -2,8 +2,8 @@
 //  InstaPost+CoreDataProperties.swift
 //  GreatPics-Swift
 //
-//  Created by kateryna.zaikina on 11/24/15.
-//  Copyright © 2015 kateryna.zaikina. All rights reserved.
+//  Created by kateryna.zaikina on 2/18/16.
+//  Copyright © 2016 kateryna.zaikina. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -18,5 +18,6 @@ extension InstaPost {
     @NSManaged var identifier: String?
     @NSManaged var imageURL: String?
     @NSManaged var text: String?
+    @NSManaged var createdTime: String?
 
 }

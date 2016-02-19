@@ -6,13 +6,14 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class ImageLoader {
+final public class ImageLoader {
     
     private let operationManager = NetworkOperationManager()
     static let sharedLoader = ImageLoader()
     
+    //MARK: - Public methods
     func loadImageWithURL(imageURL: NSURL, completionBlock: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSOperation {
         let networkOperation = NetworkingOperation(requestURL: imageURL)
         networkOperation.queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)

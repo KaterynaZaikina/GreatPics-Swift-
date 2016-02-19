@@ -13,16 +13,18 @@ enum NetworkingError: ErrorType {
     case InvalidURLRequest
 }
 
-class NetworkingManager {
+final public class NetworkingManager {
     
     private var baseURL: String?
     private let operationManager = NetworkOperationManager()
     
+    
+    //MARK: - init/deinit
     init(baseURL: String?) {
         self.baseURL = baseURL
     }
     
-    // MARK: - Loading functions
+    // MARK: - Public methods
     func sendGETRequest(urlString: String?, parameters:[String : AnyObject]?, success: ([String : AnyObject]? -> Void)?, failure:(NSError -> Void)?) throws {
         
         guard let baseURL = self.baseURL else {
@@ -47,6 +49,7 @@ class NetworkingManager {
         guard request != nil else {
             throw NetworkingError.InvalidURLRequest
         }
+        
         let networkOperation = NetworkingOperation(requestURL: requestURL)
         
         networkOperation.queue = dispatch_get_main_queue()
@@ -60,7 +63,7 @@ class NetworkingManager {
             
             var json: [String : AnyObject]?
             do {
-                json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? [String : AnyObject]
+                json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? [String : AnyObject]
             } catch {
                 print("error with data")
             }
@@ -97,5 +100,3 @@ class NetworkingManager {
     }
     
 }
-
-

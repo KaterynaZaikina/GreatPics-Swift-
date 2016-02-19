@@ -6,15 +6,24 @@
 //  Copyright © 2015 kateryna.zaikina. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+extension CollectionViewCell {
+
+    static var reuseIdentifier: String {
+        return String(self)
+    }
+    
+}
+
+final public class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: InstaPostView!
-    override func prepareForReuse() {
+    @IBOutlet weak var textLabel: UILabel!
+    
+    override public func prepareForReuse() {
         super.prepareForReuse()
         imageView.clear()
     }
-
+    
 }

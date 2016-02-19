@@ -8,16 +8,18 @@
 
 import Foundation
 
-class NetworkOperationManager {
+final public class NetworkOperationManager {
     
     private let networkOperationQueue: NSOperationQueue
-    private var operations = [String : NSOperation]()
+    private var operations = [String: NSOperation]()
     
+    //MARK: - init/deinit
     init() {
         networkOperationQueue = NSOperationQueue()
         networkOperationQueue.maxConcurrentOperationCount = 5
     }
     
+    //MARK: - Public methods
     func addNewOperation(operation: NSOperation, key: String) {
         operations[key] = operation
         networkOperationQueue.addOperation(operation)
