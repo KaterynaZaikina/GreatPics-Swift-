@@ -24,6 +24,10 @@ private struct Constants {
     
 }
 
+enum Pagination {
+    case FirstPage, NextPage
+}
+
 final public class ServerManager {
     
     private var pagination: [String: String]?
@@ -78,12 +82,18 @@ final public class ServerManager {
                 print("error - \(error.localizedDescription), status code - \(error.code)")
         })
     }
-
+    
     //MARK: - Public methods
     
-    func loadNextPageOfPosts(completionBlock: (Void) -> (Void)) {
-        maxTagID = pagination?[Constants.nextMaxTagID]
-        loadPostsWithMaxTagID(maxTagID, completion:completionBlock)
+    func loadPostsWithTagID(tagID: Pagination, completionBlock: (Void) -> (Void)) {
+        switch tagID {
+        case .FirstPage:
+            loadPostsWithMaxTagID("", completion:completionBlock)
+            
+        case .NextPage:
+            let maxTagID = pagination?[Constants.nextMaxTagID]
+            loadPostsWithMaxTagID(maxTagID, completion:completionBlock)
+        }
     }
     
 }

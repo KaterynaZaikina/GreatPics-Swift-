@@ -20,7 +20,8 @@ private struct Constants {
 final public class InstaPostController: UICollectionViewController {
 
     private let serverManager = ServerManager.sharedManager
-    private let refreshControl = UIRefreshControl()
+    private let bottomRefreshControl = UIRefreshControl()
+    private let topRefreshControl = UIRefreshControl()
     
     private var dataSource: InstaPostDataSource!
     private var imageURL: String?
@@ -40,15 +41,24 @@ final public class InstaPostController: UICollectionViewController {
             layout.delegate = dataSource
         }
         
-        refreshControl.triggerVerticalOffset = Constants.triggerVerticalOffset
-        refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
-        collectionView!.bottomRefreshControl = refreshControl
+        bottomRefreshControl.triggerVerticalOffset = Constants.triggerVerticalOffset
+        bottomRefreshControl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
+        collectionView!.bottomRefreshControl = bottomRefreshControl
+        
+        
+        topRefreshControl.addTarget(self, action: "topRefresh", forControlEvents: .ValueChanged)
+        collectionView!.addSubview(topRefreshControl)
     }
     
     //MARK: - Public methods
     func refresh() {
         dataSource.refreshCollectionView()
-        refreshControl.endRefreshing()
+        bottomRefreshControl.endRefreshing()
+    }
+    
+    func topRefresh() {
+        dataSource.topRefreshCollectionView()
+        topRefreshControl.endRefreshing()
     }
     
     public override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

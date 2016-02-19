@@ -77,7 +77,7 @@ final public class InstaListDataSource: NSObject {
     func refreshTableView() {
         fetchOffset = data.count
         
-        ServerManager.sharedManager.loadNextPageOfPosts({ [unowned self] in
+        ServerManager.sharedManager.loadPostsWithTagID(.NextPage, completionBlock:{ [unowned self] in
             self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
             
             if let tableView = self.tableView {
