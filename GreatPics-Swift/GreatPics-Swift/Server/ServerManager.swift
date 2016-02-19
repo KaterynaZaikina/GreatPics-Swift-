@@ -80,6 +80,9 @@ final public class ServerManager {
     }
 
     //MARK: - Public methods
+    func loadFirstPageOfPosts(completionBlock: (Void) -> (Void)) {
+        loadPostsWithMaxTagID("", completion:completionBlock)
+    }
     
     func loadNextPageOfPosts(completionBlock: (Void) -> (Void)) {
         maxTagID = pagination?[Constants.nextMaxTagID]

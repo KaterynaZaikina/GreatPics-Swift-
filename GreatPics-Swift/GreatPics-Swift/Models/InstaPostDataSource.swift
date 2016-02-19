@@ -53,6 +53,29 @@ final public class InstaPostDataSource: NSObject {
         return []
     }
     
+    func topFetchRequestWithOffset(offset: NSInteger) -> [AnyObject] {
+        let fetchRequest = NSFetchRequest(entityName:DataSourceConstants.DataFetching.entityName)
+        
+        fetchRequest.fetchLimit = DataSourceConstants.DataFetching.fetchLimit
+        fetchRequest.fetchOffset = offset
+        
+        let sortDescriptorKey = "createdTime"
+        let sortDescriptor = NSSortDescriptor(key: sortDescriptorKey, ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
+        
+        do {
+            return try managedObjectContext.executeFetchRequest(fetchRequest)
+        } catch {
+            var userInfo = [String: AnyObject]()
+            userInfo[NSLocalizedDescriptionKey] = DataSourceConstants.Errors.userInfo
+            let error = NSError(domain: DataSourceConstants.Errors.errorDomain, code: DataSourceConstants.Errors.errorCode, userInfo: userInfo)
+            print("Unresolved error: \(error.userInfo)")
+        }
+        return []
+    }
+
+    
     func configureCollectionViewCell(cell:CollectionViewCell, indexPath: NSIndexPath) {
         if let post = data[indexPath.item] as? InstaPost, let imageURL = post.imageURL  {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: DataSourceConstants.DataEditing.placeholder)!)
@@ -76,6 +99,20 @@ final public class InstaPostDataSource: NSObject {
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     collectionView.insertItemsAtIndexPaths(indexPathArray)
+                })
+            }
+            })
+    }
+    
+    func topRefreshCollectionView() {
+        fetchOffset = 0
+        
+        ServerManager.sharedManager.loadFirstPageOfPosts({ [unowned self] in
+            if let collectionView = self.collectionView {
+                self.data = self.fetchRequestWithOffset(self.fetchOffset)
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    collectionView.reloadData()
                 })
             }
             })
