@@ -21,8 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationManager.showViewControllerInWindow(window!)
         window!.makeKeyAndVisible()
         
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories:nil))
+        application.isRegisteredForRemoteNotifications()
+        
         return true
     }
-
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print("device token - \(deviceToken)")
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to get token, \(error)")
+    }
 }
 
