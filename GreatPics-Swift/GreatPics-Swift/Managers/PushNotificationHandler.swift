@@ -52,4 +52,8 @@ class PushNotificationHandler {
         }
     }
     
+    func handleRemoteNotification(application: UIApplication) {
+        print("WELCOME")
+    }
+    
 }

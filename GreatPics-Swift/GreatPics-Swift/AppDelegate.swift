@@ -42,6 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         notificationHandler.handleActionInApplication(application, identifier: identifier, forRemoteNotification: userInfo, completionHandler:completionHandler)
     }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        notificationHandler.handleRemoteNotification(application)
+    
+    }
         
 }
 
