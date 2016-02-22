@@ -47,9 +47,8 @@ class PushNotificationHandler {
     }
     
     func handleActionInApplication(application: UIApplication, identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
         if identifier == Constants.actionListIdentifier {
-            NavigationManager().showInstaListControllerInWindow(window)
+            NavigationManager().showInstaListControllerInWindow(application.keyWindow!)
         }
     }
     

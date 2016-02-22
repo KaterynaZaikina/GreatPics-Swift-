@@ -48,6 +48,8 @@ final public class InstaPostController: UICollectionViewController {
         
         topRefreshControl.addTarget(self, action: "topRefresh", forControlEvents: .ValueChanged)
         collectionView!.addSubview(topRefreshControl)
+        
+        
     }
     
     //MARK: - Public methods

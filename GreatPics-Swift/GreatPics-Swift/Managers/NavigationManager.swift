@@ -63,9 +63,8 @@ final public class NavigationManager {
     func showInstaListControllerInWindow(window: UIWindow) {
         let sb = UIStoryboard(name:Constants.mainStoryboardID, bundle:nil)
         let listController = sb.instantiateViewControllerWithIdentifier(Constants.InstaListControllerID) as! InstaListController
-        let navigationController = UINavigationController(rootViewController: listController)
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        let navigationController = window.rootViewController as! UINavigationController
+        navigationController.pushViewController(listController, animated: true)
     }
     
 }
