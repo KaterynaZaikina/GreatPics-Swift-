@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7A81C0326A300451C46 /* AppDelegate.swift */; };
 		8032F7BE1C032FC300451C46 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7BD1C032FC300451C46 /* .gitignore */; };
+		8050A8881C7B425E00425624 /* PushNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8050A8871C7B425E00425624 /* PushNotificationHandler.swift */; };
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
 		80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD971C7622E800D68977 /* DetailImageController.swift */; };
 		80DECDB31C7622E800D68977 /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD981C7622E800D68977 /* InstaListController.swift */; };
@@ -42,6 +43,7 @@
 		8032F7A51C0326A300451C46 /* GreatPics-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GreatPics-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8032F7A81C0326A300451C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8032F7BD1C032FC300451C46 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8050A8871C7B425E00425624 /* PushNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationHandler.swift; sourceTree = "<group>"; };
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80DECD971C7622E800D68977 /* DetailImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageController.swift; sourceTree = "<group>"; };
 		80DECD981C7622E800D68977 /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		80DECDA91C7622E800D68977 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				8050A8871C7B425E00425624 /* PushNotificationHandler.swift */,
 				80DECDAA1C7622E800D68977 /* CoreDataManager.swift */,
 				80DECDAB1C7622E800D68977 /* InstaPostManager.swift */,
 				80DECDAC1C7622E800D68977 /* NavigationManager.swift */,
@@ -369,6 +372,7 @@
 				80DECDBE1C7622E800D68977 /* InstaListTableViewCell.swift in Sources */,
 				80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */,
 				80DECDB31C7622E800D68977 /* InstaListController.swift in Sources */,
+				8050A8881C7B425E00425624 /* PushNotificationHandler.swift in Sources */,
 				80DECDBF1C7622E800D68977 /* InstaPostView.swift in Sources */,
 				80DECDBA1C7622E800D68977 /* ServerManager.swift in Sources */,
 			);

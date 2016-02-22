@@ -14,7 +14,8 @@ private struct Constants {
     static let service = "com.kateryna.GreatPics-Swift.instagram-token"
     static let accessToken = "accessToken"
     static let mainStoryboardID = "Main"
-    static let InstaPostcontrollerID = "InstaPostController"
+    static let InstaPostControllerID = "InstaPostController"
+    static let InstaListControllerID = "InstaListController"
     
 }
 
@@ -45,7 +46,7 @@ final public class NavigationManager {
         }
         
         let sb = UIStoryboard(name:Constants.mainStoryboardID, bundle:nil)
-        let collectionController = sb.instantiateViewControllerWithIdentifier(Constants.InstaPostcontrollerID) as! InstaPostController
+        let collectionController = sb.instantiateViewControllerWithIdentifier(Constants.InstaPostControllerID) as! InstaPostController
         let navigationController = UINavigationController(rootViewController: collectionController)
         window?.rootViewController = navigationController
     }
@@ -57,6 +58,14 @@ final public class NavigationManager {
         } else {
            createInstaPostController(window)
         }
+    }
+    
+    func showInstaListControllerInWindow(window: UIWindow) {
+        let sb = UIStoryboard(name:Constants.mainStoryboardID, bundle:nil)
+        let listController = sb.instantiateViewControllerWithIdentifier(Constants.InstaListControllerID) as! InstaListController
+        let navigationController = UINavigationController(rootViewController: listController)
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
     
 }
