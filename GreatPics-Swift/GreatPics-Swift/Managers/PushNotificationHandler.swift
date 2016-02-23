@@ -50,10 +50,18 @@ class PushNotificationHandler {
         if identifier == Constants.actionListIdentifier {
             NavigationManager().showInstaListControllerInWindow(application.keyWindow!)
         }
+        completionHandler()
     }
     
     func handleRemoteNotification(application: UIApplication) {
          NavigationManager().showDetailViewControllerInWindow(application.keyWindow!)
+    }
+    
+    func handleSilentPushNotification(application: UIApplication, userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        let navigationController = application.keyWindow!.rootViewController as! UINavigationController
+        let instaPostController = navigationController.topViewController as! InstaPostController
+        instaPostController.topRefresh()
+        completionHandler(.NewData)
     }
     
 }
