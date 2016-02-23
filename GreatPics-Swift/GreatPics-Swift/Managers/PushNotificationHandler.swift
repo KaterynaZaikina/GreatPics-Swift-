@@ -73,12 +73,10 @@ class PushNotificationHandler {
     }
     
     func handleSilentPushNotification(application: UIApplication, userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if application.applicationState != .Active {
-            let navigationController = application.keyWindow!.rootViewController as! UINavigationController
-            let instaPostController = navigationController.topViewController as! InstaPostController
-            instaPostController.topRefresh()
-            completionHandler(.NewData)
-        }
+        let navigationController = application.keyWindow!.rootViewController as! UINavigationController
+        let instaPostController = navigationController.topViewController as! InstaPostController
+        instaPostController.topRefresh()
+        completionHandler(.NewData)
     }
     
 }
