@@ -20,10 +20,12 @@ private struct Constants {
 
 class PushNotificationHandler {
     
+    private let navigationManager = NavigationManager()
+    
     func registerForNotifications(application: UIApplication) {
         let actionList = UIMutableUserNotificationAction()
         actionList.activationMode = .Foreground
-        actionList.title = NSLocalizedString(Constants.actionListIdentifier, comment: "") 
+        actionList.title = NSLocalizedString(Constants.actionListIdentifier, comment: "")
         actionList.identifier = Constants.actionListIdentifier
         
         let actionGrid = UIMutableUserNotificationAction()
@@ -49,19 +51,24 @@ class PushNotificationHandler {
     }
     
     func handleActionInApplication(application: UIApplication, identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
-        if identifier == Constants.actionListIdentifier {
-            NavigationManager().showInstaListControllerInWindow(application.keyWindow!)
+        if application.applicationState != .Active {
+            if identifier == Constants.actionListIdentifier {
+                navigationManager.showInstaListControllerInWindow(application.keyWindow!)
+            } else {
+                navigationManager.showInstaPostControllerInWindow(application.keyWindow!)
+            }
+            completionHandler()
         }
-        completionHandler()
     }
     
     func handleRemoteNotification(application: UIApplication, userInfo: [NSObject : AnyObject], completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-        if let check = userInfo[Constants.apsInfoKey] as? [String: AnyObject] where check[Constants.contentavailableInfoKey] != nil {
-            handleSilentPushNotification(application, userInfo: userInfo, fetchCompletionHandler: completionHandler)
-        } else {
-            NavigationManager().showDetailViewControllerInWindow(application.keyWindow!)
-            completionHandler(.NoData)
+        if application.applicationState != .Active {
+            if let check = userInfo[Constants.apsInfoKey] as? [String: AnyObject] where check[Constants.contentavailableInfoKey] != nil {
+                handleSilentPushNotification(application, userInfo: userInfo, fetchCompletionHandler: completionHandler)
+            } else {
+                navigationManager.showDetailViewControllerInWindow(application.keyWindow!)
+                completionHandler(.NoData)
+            }
         }
     }
     

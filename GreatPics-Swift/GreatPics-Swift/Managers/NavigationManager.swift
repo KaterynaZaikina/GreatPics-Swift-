@@ -60,6 +60,11 @@ final public class NavigationManager {
         }
     }
     
+    func showInstaPostControllerInWindow(window: UIWindow) {
+        let navigationController = window.rootViewController as! UINavigationController
+        navigationController.popToRootViewControllerAnimated(true)
+    }
+    
     func showInstaListControllerInWindow(window: UIWindow) {
         let sb = UIStoryboard(name:Constants.mainStoryboardID, bundle:nil)
         let listController = sb.instantiateViewControllerWithIdentifier(Constants.InstaListControllerID) as! InstaListController
@@ -69,7 +74,7 @@ final public class NavigationManager {
     
     func showDetailViewControllerInWindow(window: UIWindow) {
         let navigationController = window.rootViewController as! UINavigationController
-        navigationController.popToRootViewControllerAnimated(true)
+        navigationController.popToRootViewControllerAnimated(false)
         
         if let instaPostController = navigationController.topViewController as? InstaPostController {
             let numberOfItems = instaPostController.collectionView!.numberOfItemsInSection(0)
