@@ -11,7 +11,7 @@ import CCBottomRefreshControl
 
 private struct Constants {
     
-    static let showImageSegueIdentifier = "showImage"
+    static let showImageSegueIdentifier = "showImageFromPostVC"
     static let triggerVerticalOffset: CGFloat = 100.0
     static let insets: CGFloat = 5.0
     
@@ -24,7 +24,6 @@ final public class InstaPostController: UICollectionViewController {
     private let topRefreshControl = UIRefreshControl()
     
     private var dataSource: InstaPostDataSource!
-    private var imageURL: String?
     private var detailInstaPost: InstaPost?
     
     //MARK: - Controller lifecycle
@@ -74,7 +73,7 @@ final public class InstaPostController: UICollectionViewController {
         if segue.identifier == Constants.showImageSegueIdentifier  {
             let controller =  segue.destinationViewController as! DetailImageController
             controller.instaPost = detailInstaPost
-            controller.postImageURL = imageURL
+            controller.postImageURL = detailInstaPost?.imageURL
         }
     }
     
@@ -83,7 +82,6 @@ final public class InstaPostController: UICollectionViewController {
             if  dataSource.data.count > 0 {
             let post = dataSource.data[indexPath.item] as? InstaPost
             if let existPost = post {
-                imageURL = existPost.imageURL
                 detailInstaPost = existPost
                 performSegueWithIdentifier(Constants.showImageSegueIdentifier, sender: self)
             }

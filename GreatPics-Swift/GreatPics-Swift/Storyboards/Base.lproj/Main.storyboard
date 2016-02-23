@@ -111,7 +111,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <segue destination="D2Q-Rx-iPk" kind="show" identifier="showImage" animates="NO" id="msJ-ww-WtT"/>
+                        <segue destination="D2Q-Rx-iPk" kind="show" identifier="showImageFromPostVC" animates="NO" id="msJ-ww-WtT"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -476,10 +476,16 @@
                             <outlet property="delegate" destination="oVp-cW-7jz" id="XW4-0Y-a7F"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="D2Q-Rx-iPk" kind="show" identifier="showImageFromListVC" id="QEu-Lr-e3W"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDy-6A-UQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1743" y="498"/>
+            <point key="canvasLocation" x="1779" y="782"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="QEu-Lr-e3W"/>
+    </inferredMetricsTieBreakers>
 </document>
