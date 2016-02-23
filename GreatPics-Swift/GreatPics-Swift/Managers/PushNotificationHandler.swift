@@ -38,6 +38,7 @@ class PushNotificationHandler {
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories:[actionCategory]))
         application.registerForRemoteNotifications()
+        
     }
     
     func handleBadgeNumber(aplication: UIApplication) {
@@ -58,10 +59,13 @@ class PushNotificationHandler {
     }
     
     func handleSilentPushNotification(application: UIApplication, userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        let navigationController = application.keyWindow!.rootViewController as! UINavigationController
-        let instaPostController = navigationController.topViewController as! InstaPostController
-        instaPostController.topRefresh()
-        completionHandler(.NewData)
+        if application.applicationState != .Active {
+            print("WELCOME")
+            let navigationController = application.keyWindow!.rootViewController as! UINavigationController
+            let instaPostController = navigationController.topViewController as! InstaPostController
+            instaPostController.topRefresh()
+            completionHandler(.NewData)
+        }
     }
     
 }
