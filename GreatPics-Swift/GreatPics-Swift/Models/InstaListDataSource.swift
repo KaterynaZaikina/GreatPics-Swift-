@@ -17,7 +17,7 @@ struct DataSourceConstants {
     }
     struct DataFetching {
         static let entityName = "InstaPost"
-        static let fetchLimit = 10
+        static let fetchLimit = 20
     }
     struct DataEditing {
         static let fontSize: CGFloat = 14.0

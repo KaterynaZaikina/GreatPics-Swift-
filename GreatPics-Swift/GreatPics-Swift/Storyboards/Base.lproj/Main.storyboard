@@ -111,7 +111,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <segue destination="D2Q-Rx-iPk" kind="show" identifier="showImageFromPostVC" animates="NO" id="msJ-ww-WtT"/>
+                        <segue destination="D2Q-Rx-iPk" kind="show" identifier="showImageFromPostVC" id="msJ-ww-WtT"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zff-mZ-a8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -486,6 +486,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QEu-Lr-e3W"/>
+        <segue reference="msJ-ww-WtT"/>
     </inferredMetricsTieBreakers>
 </document>
