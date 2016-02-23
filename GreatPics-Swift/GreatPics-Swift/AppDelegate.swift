@@ -43,14 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationHandler.handleActionInApplication(application, identifier: identifier, forRemoteNotification: userInfo, completionHandler:completionHandler)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        notificationHandler.handleRemoteNotification(application)
-    }
-    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        notificationHandler.handleSilentPushNotification(application, userInfo: userInfo, fetchCompletionHandler: completionHandler)
+            notificationHandler.handleRemoteNotification(application, userInfo: userInfo, completionHandler: completionHandler)
     }
-    
     
 }
 

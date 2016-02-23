@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  
+
+  Created by kateryna.zaikina on 2/23/16.
+
+*/
+
+//Push Notification
+
+    "Hey there! Look at awesome Pics!" = "Привет! Взгляни-ка на крутые фото!";
+    "Welcome to GreatPics!" = "Добро пожаловать в GreatPics!";
+    "Wanna random GreatPic?" = "Хочешь случайный GreatPic?";
+    "Show List" = "Показать список";
+    "Show Grid" = "Показать коллекцию";

@@ -14,7 +14,8 @@ private struct Constants {
     static let actionListIdentifier = "Show List"
     static let actionGridIdentifier = "Show Grid"
     static let categoryIdentifier = "Actionable"
-    
+    static let contentavailableInfoKey = "content-available"
+    static let apsInfoKey = "aps"
 }
 
 class PushNotificationHandler {
@@ -22,12 +23,12 @@ class PushNotificationHandler {
     func registerForNotifications(application: UIApplication) {
         let actionList = UIMutableUserNotificationAction()
         actionList.activationMode = .Foreground
-        actionList.title = Constants.actionListIdentifier
+        actionList.title = NSLocalizedString(Constants.actionListIdentifier, comment: "") 
         actionList.identifier = Constants.actionListIdentifier
         
         let actionGrid = UIMutableUserNotificationAction()
         actionGrid.activationMode = .Foreground
-        actionGrid.title = Constants.actionGridIdentifier
+        actionGrid.title = NSLocalizedString(Constants.actionGridIdentifier, comment: "")
         actionGrid.identifier = Constants.actionGridIdentifier
         
         
@@ -54,13 +55,18 @@ class PushNotificationHandler {
         completionHandler()
     }
     
-    func handleRemoteNotification(application: UIApplication) {
-         NavigationManager().showDetailViewControllerInWindow(application.keyWindow!)
+    func handleRemoteNotification(application: UIApplication, userInfo: [NSObject : AnyObject], completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        if let check = userInfo[Constants.apsInfoKey] as? [String: AnyObject] where check[Constants.contentavailableInfoKey] != nil {
+            handleSilentPushNotification(application, userInfo: userInfo, fetchCompletionHandler: completionHandler)
+        } else {
+            NavigationManager().showDetailViewControllerInWindow(application.keyWindow!)
+            completionHandler(.NoData)
+        }
     }
     
     func handleSilentPushNotification(application: UIApplication, userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         if application.applicationState != .Active {
-            print("WELCOME")
             let navigationController = application.keyWindow!.rootViewController as! UINavigationController
             let instaPostController = navigationController.topViewController as! InstaPostController
             instaPostController.topRefresh()

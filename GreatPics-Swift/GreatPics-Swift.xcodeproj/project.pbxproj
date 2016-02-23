@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8032F7A81C0326A300451C46 /* AppDelegate.swift */; };
 		8032F7BE1C032FC300451C46 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7BD1C032FC300451C46 /* .gitignore */; };
+		803D19C21C7C81BE0070A57C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 803D19C41C7C81BE0070A57C /* Localizable.strings */; };
 		8050A8881C7B425E00425624 /* PushNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8050A8871C7B425E00425624 /* PushNotificationHandler.swift */; };
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
 		80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD971C7622E800D68977 /* DetailImageController.swift */; };
@@ -43,6 +44,9 @@
 		8032F7A51C0326A300451C46 /* GreatPics-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GreatPics-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8032F7A81C0326A300451C46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8032F7BD1C032FC300451C46 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		803D19BE1C7C7B020070A57C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		803D19C11C7C7FFC0070A57C /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		803D19C31C7C81BE0070A57C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8050A8871C7B425E00425624 /* PushNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationHandler.swift; sourceTree = "<group>"; };
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80DECD971C7622E800D68977 /* DetailImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageController.swift; sourceTree = "<group>"; };
@@ -66,7 +70,6 @@
 		80DECDAF1C7622E800D68977 /* InstaPost+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InstaPost+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		80DECDB01C7622E800D68977 /* InstaPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPost.swift; sourceTree = "<group>"; };
 		80DECDB11C7622E800D68977 /* InstaPostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaPostDataSource.swift; sourceTree = "<group>"; };
-		80DECDC91C7623E300D68977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		80DECDCB1C7623E300D68977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		80DECDDE1C76265900D68977 /* GreatPics_Swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreatPics_Swift.xcdatamodel; sourceTree = "<group>"; };
 		80DECDDF1C76265900D68977 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -216,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				80DECDDD1C76265900D68977 /* GreatPics_Swift.xcdatamodeld */,
+				803D19C41C7C81BE0070A57C /* Localizable.strings */,
 				80DECDDF1C76265900D68977 /* Info.plist */,
 			);
 			path = SupportingFiles;
@@ -278,6 +282,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 8032F79C1C0326A300451C46;
 			productRefGroup = 8032F7A61C0326A300451C46 /* Products */;
@@ -294,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				803D19C21C7C81BE0070A57C /* Localizable.strings in Resources */,
 				80DECDD01C7623E300D68977 /* LaunchScreen.storyboard in Resources */,
 				8032F7BE1C032FC300451C46 /* .gitignore in Resources */,
 				80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */,
@@ -386,10 +392,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		803D19C41C7C81BE0070A57C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				803D19C31C7C81BE0070A57C /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		80DECDC81C7623E300D68977 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				80DECDC91C7623E300D68977 /* Base */,
+				803D19BE1C7C7B020070A57C /* en */,
+				803D19C11C7C7FFC0070A57C /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
