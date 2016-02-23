@@ -53,7 +53,7 @@ class PushNotificationHandler {
     }
     
     func handleRemoteNotification(application: UIApplication) {
-        print("WELCOME")
+         NavigationManager().showDetailViewControllerInWindow(application.keyWindow!)
     }
     
 }
