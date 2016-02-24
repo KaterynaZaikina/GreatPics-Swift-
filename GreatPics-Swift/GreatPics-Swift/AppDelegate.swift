@@ -15,14 +15,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     private let navigationManager = NavigationManager()
+    private let notificationHandler = PushNotificationHandler()
         
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         navigationManager.showViewControllerInWindow(window!)
         window!.makeKeyAndVisible()
         
+        notificationHandler.registerForNotifications(application)
+        
         return true
     }
-
+    
+    func applicationWillEnterForeground(application: UIApplication) {
+        notificationHandler.handleBadgeNumber(application)
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print("device token - \(deviceToken)")
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Failed to get token, \(error)")
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        notificationHandler.handleActionInApplication(application, identifier: identifier, forRemoteNotification: userInfo, completionHandler:completionHandler)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+            notificationHandler.handleRemoteNotification(application, userInfo: userInfo, completionHandler: completionHandler)
+    }
+    
 }
 
