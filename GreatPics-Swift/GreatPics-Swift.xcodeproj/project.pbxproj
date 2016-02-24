@@ -11,6 +11,7 @@
 		8032F7BE1C032FC300451C46 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8032F7BD1C032FC300451C46 /* .gitignore */; };
 		803D19C21C7C81BE0070A57C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 803D19C41C7C81BE0070A57C /* Localizable.strings */; };
 		8050A8881C7B425E00425624 /* PushNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8050A8871C7B425E00425624 /* PushNotificationHandler.swift */; };
+		809E8FE71C7D970800676CA8 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E8FE61C7D970800676CA8 /* PushAnimator.swift */; };
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
 		80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD971C7622E800D68977 /* DetailImageController.swift */; };
 		80DECDB31C7622E800D68977 /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD981C7622E800D68977 /* InstaListController.swift */; };
@@ -48,6 +49,7 @@
 		803D19C11C7C7FFC0070A57C /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		803D19C31C7C81BE0070A57C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8050A8871C7B425E00425624 /* PushNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationHandler.swift; sourceTree = "<group>"; };
+		809E8FE61C7D970800676CA8 /* PushAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80DECD971C7622E800D68977 /* DetailImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageController.swift; sourceTree = "<group>"; };
 		80DECD981C7622E800D68977 /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				80DECDA41C7622E800D68977 /* PinterestLayout.swift */,
+				809E8FE61C7D970800676CA8 /* PushAnimator.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				80DECDB61C7622E800D68977 /* ImageLoader.swift in Sources */,
 				80DECDB51C7622E800D68977 /* LoginViewController.swift in Sources */,
 				80DECDC51C7622E800D68977 /* InstaPost.swift in Sources */,
+				809E8FE71C7D970800676CA8 /* PushAnimator.swift in Sources */,
 				80DECDB91C7622E800D68977 /* NetworkOperationManager.swift in Sources */,
 				80DECDC01C7622E800D68977 /* CoreDataManager.swift in Sources */,
 				80DECDC11C7622E800D68977 /* InstaPostManager.swift in Sources */,

@@ -22,6 +22,7 @@ final public class InstaPostController: UICollectionViewController {
     private let serverManager = ServerManager.sharedManager
     private let bottomRefreshControl = UIRefreshControl()
     private let topRefreshControl = UIRefreshControl()
+    private let transition = PushAnimator()
     
     private var dataSource: InstaPostDataSource!
     private var detailInstaPost: InstaPost?
@@ -29,6 +30,7 @@ final public class InstaPostController: UICollectionViewController {
     //MARK: - Controller lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         collectionView!.contentInset = UIEdgeInsets(top: Constants.insets, left: Constants.insets,
                                                  bottom: Constants.insets, right: Constants.insets)
 
@@ -86,6 +88,18 @@ final public class InstaPostController: UICollectionViewController {
                 performSegueWithIdentifier(Constants.showImageSegueIdentifier, sender: self)
             }
         }
+    }
+    
+}
+
+//MARK: - UINavigationControllerDelegate
+extension InstaPostController: UINavigationControllerDelegate {
+    
+    public func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .Push {
+            return transition
+        }
+        return nil
     }
     
 }
