@@ -76,12 +76,12 @@ final public class NavigationManager {
         let navigationController = window.rootViewController as! UINavigationController
         navigationController.popToRootViewControllerAnimated(false)
         
-        if let instaPostController = navigationController.topViewController as? InstaPostController {
-            let numberOfItems = instaPostController.collectionView!.numberOfItemsInSection(0)
+        if let instaPostController = navigationController.topViewController as? InstaPostController, let collectionView = instaPostController.collectionView {
+            let numberOfItems = collectionView.numberOfItemsInSection(0)
             let randomNumber = random() % numberOfItems
             
             let indexPath = NSIndexPath.init(forItem: randomNumber, inSection: 0)
-            instaPostController.collectionView(instaPostController.collectionView!, didSelectItemAtIndexPath: indexPath)
+            instaPostController.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
         }
     }
     

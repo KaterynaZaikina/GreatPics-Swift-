@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let navigationManager = NavigationManager()
     private let notificationHandler = PushNotificationHandler()
-        
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         navigationManager.showViewControllerInWindow(window!)
@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         notificationHandler.registerForNotifications(application)
         
+        if let _ = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            notificationHandler.isLaunchedFromPush = true
+        }
         return true
     }
     
@@ -43,8 +46,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationHandler.handleActionInApplication(application, identifier: identifier, forRemoteNotification: userInfo, completionHandler:completionHandler)
     }
     
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        NavigationManager().showInstaPostControllerInWindow(application.keyWindow!)
+    }
+    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-            notificationHandler.handleRemoteNotification(application, userInfo: userInfo, completionHandler: completionHandler)
+        notificationHandler.handleRemoteNotification(application, userInfo: userInfo, completionHandler: completionHandler)
     }
     
 }

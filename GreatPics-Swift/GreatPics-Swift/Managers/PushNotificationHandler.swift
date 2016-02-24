@@ -20,6 +20,7 @@ private struct Constants {
 
 class PushNotificationHandler {
     
+    var isLaunchedFromPush: Bool?
     private let navigationManager = NavigationManager()
     
     func registerForNotifications(application: UIApplication) {
@@ -45,9 +46,7 @@ class PushNotificationHandler {
     }
     
     func handleBadgeNumber(aplication: UIApplication) {
-        var value = aplication.applicationIconBadgeNumber
-        value = value - 1
-        aplication.applicationIconBadgeNumber = value
+        aplication.applicationIconBadgeNumber = 0
     }
     
     func handleActionInApplication(application: UIApplication, identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
@@ -65,10 +64,12 @@ class PushNotificationHandler {
         if application.applicationState != .Active {
             if let check = userInfo[Constants.apsInfoKey] as? [String: AnyObject] where check[Constants.contentavailableInfoKey] != nil {
                 handleSilentPushNotification(application, userInfo: userInfo, fetchCompletionHandler: completionHandler)
-            } else {
+                return
+            } else if isLaunchedFromPush == false {
                 navigationManager.showDetailViewControllerInWindow(application.keyWindow!)
-                completionHandler(.NoData)
             }
+            isLaunchedFromPush = false
+            completionHandler(.NoData)
         }
     }
     
