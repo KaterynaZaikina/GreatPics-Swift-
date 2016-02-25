@@ -18,11 +18,16 @@ protocol PinterestLayoutDelegate {
 final public class PinterestLayout: UICollectionViewLayout {
     
     var delegate: PinterestLayoutDelegate!
-    
-    private var numberOfColumns = 2
-    private var cellPadding: CGFloat = 6.0
     var cache = [UICollectionViewLayoutAttributes]()
-
+    
+    private var numberOfColumns: Int {
+        let maxColumns = Int(ceil(contentWidth / maxColumnWidth))
+        return min(maxColumns, 4)
+        
+    }
+    private var cellPadding: CGFloat = 6.0
+    private var maxColumnWidth: CGFloat = 319.0
+    
     private var contentHeight: CGFloat  = 0.0
     private var contentWidth: CGFloat {
         let insets = collectionView!.contentInset
@@ -35,6 +40,7 @@ final public class PinterestLayout: UICollectionViewLayout {
         contentHeight = 0
         
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
+        
         var xOffset = [CGFloat]()
         for column in 0 ..< numberOfColumns {
             xOffset.append(CGFloat(column) * columnWidth )
@@ -61,7 +67,11 @@ final public class PinterestLayout: UICollectionViewLayout {
             contentHeight = max(contentHeight, CGRectGetMaxY(frame))
             yOffset[column] = yOffset[column] + height
             
-            column = yOffset[0] >= yOffset[1] ? 1 : 0
+            if let minElement = yOffset.minElement(), let index = yOffset.indexOf(minElement) {
+                column = index
+            } else {
+                column = 0
+            }
         }
     }
     

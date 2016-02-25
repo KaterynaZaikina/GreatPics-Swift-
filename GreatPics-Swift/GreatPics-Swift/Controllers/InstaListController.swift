@@ -11,6 +11,7 @@ import CCBottomRefreshControl
 
 private struct Constants {
     
+    static let showImageSegueIdentifier = "showImageFromListVC"
     static let estimatedRowHeight: CGFloat = 120.0
     static let triggerVerticalOffset: CGFloat = 100.0
     
@@ -21,6 +22,7 @@ final public class InstaListController: UITableViewController {
     private let serverManager = ServerManager.sharedManager
     private let bottomRefresh = UIRefreshControl()
     private var dataSource: InstaListDataSource!
+    private var detailInstaPost: InstaPost?
 
     //MARK: - Controller lifecycle
     override public func viewDidLoad() {
@@ -41,10 +43,30 @@ final public class InstaListController: UITableViewController {
         tableView!.bottomRefreshControl = bottomRefresh
     }
     
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Constants.showImageSegueIdentifier  {
+            let controller =  segue.destinationViewController as! DetailImageController
+            controller.instaPost = detailInstaPost
+            controller.postImageURL = detailInstaPost?.imageURL
+        }
+    }
+    
     //MARK: - Public methods
     func refresh() {
         dataSource.refreshTableView()
         bottomRefresh.endRefreshing()
     }
+    
+    //MARK: - UITableViewDelegate
+    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        if  dataSource.data.count > 0 {
+            let post = dataSource.data[indexPath.item] as? InstaPost
+            if let existPost = post {
+                detailInstaPost = existPost
+                                performSegueWithIdentifier(Constants.showImageSegueIdentifier, sender: self)
+            }
+        }
+    }
+
     
 }

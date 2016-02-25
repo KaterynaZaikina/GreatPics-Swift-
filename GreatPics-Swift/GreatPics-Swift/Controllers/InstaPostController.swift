@@ -11,7 +11,7 @@ import CCBottomRefreshControl
 
 private struct Constants {
     
-    static let showImageSegueIdentifier = "showImage"
+    static let showImageSegueIdentifier = "showImageFromPostVC"
     static let triggerVerticalOffset: CGFloat = 100.0
     static let insets: CGFloat = 5.0
     
@@ -22,14 +22,15 @@ final public class InstaPostController: UICollectionViewController {
     private let serverManager = ServerManager.sharedManager
     private let bottomRefreshControl = UIRefreshControl()
     private let topRefreshControl = UIRefreshControl()
+    private let transition = PushAnimator()
     
     private var dataSource: InstaPostDataSource!
-    private var imageURL: String?
     private var detailInstaPost: InstaPost?
     
     //MARK: - Controller lifecycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         collectionView!.contentInset = UIEdgeInsets(top: Constants.insets, left: Constants.insets,
                                                  bottom: Constants.insets, right: Constants.insets)
 
@@ -48,6 +49,8 @@ final public class InstaPostController: UICollectionViewController {
         
         topRefreshControl.addTarget(self, action: "topRefresh", forControlEvents: .ValueChanged)
         collectionView!.addSubview(topRefreshControl)
+        
+        
     }
     
     //MARK: - Public methods
@@ -72,7 +75,7 @@ final public class InstaPostController: UICollectionViewController {
         if segue.identifier == Constants.showImageSegueIdentifier  {
             let controller =  segue.destinationViewController as! DetailImageController
             controller.instaPost = detailInstaPost
-            controller.postImageURL = imageURL
+            controller.postImageURL = detailInstaPost?.imageURL
         }
     }
     
@@ -81,11 +84,22 @@ final public class InstaPostController: UICollectionViewController {
             if  dataSource.data.count > 0 {
             let post = dataSource.data[indexPath.item] as? InstaPost
             if let existPost = post {
-                imageURL = existPost.imageURL
                 detailInstaPost = existPost
                 performSegueWithIdentifier(Constants.showImageSegueIdentifier, sender: self)
             }
         }
+    }
+    
+}
+
+//MARK: - UINavigationControllerDelegate
+extension InstaPostController: UINavigationControllerDelegate {
+    
+    public func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .Push {
+            return transition
+        }
+        return nil
     }
     
 }
