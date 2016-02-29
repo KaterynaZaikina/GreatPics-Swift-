@@ -51,6 +51,10 @@ final public class InstaListController: UITableViewController {
         }
     }
     
+    override public func didReceiveMemoryWarning() {
+        dataSource.handleMemoryWarning()
+    }
+    
     //MARK: - Public methods
     func refresh() {
         dataSource.refreshTableView()

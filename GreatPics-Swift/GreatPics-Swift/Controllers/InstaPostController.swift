@@ -49,8 +49,10 @@ final public class InstaPostController: UICollectionViewController {
         
         topRefreshControl.addTarget(self, action: "topRefresh", forControlEvents: .ValueChanged)
         collectionView!.addSubview(topRefreshControl)
-        
-        
+    }
+    
+    override public func didReceiveMemoryWarning() {
+        dataSource.handleMemoryWarning()
     }
     
     //MARK: - Public methods

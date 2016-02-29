@@ -53,29 +53,6 @@ final public class InstaPostDataSource: NSObject {
         return []
     }
     
-    func topFetchRequestWithOffset(offset: NSInteger) -> [AnyObject] {
-        let fetchRequest = NSFetchRequest(entityName:DataSourceConstants.DataFetching.entityName)
-        
-        fetchRequest.fetchLimit = DataSourceConstants.DataFetching.fetchLimit
-        fetchRequest.fetchOffset = offset
-        
-        let sortDescriptorKey = "createdTime"
-        let sortDescriptor = NSSortDescriptor(key: sortDescriptorKey, ascending: true)
-        let sortDescriptors = [sortDescriptor]
-        fetchRequest.sortDescriptors = sortDescriptors
-        
-        do {
-            return try managedObjectContext.executeFetchRequest(fetchRequest)
-        } catch {
-            var userInfo = [String: AnyObject]()
-            userInfo[NSLocalizedDescriptionKey] = DataSourceConstants.Errors.userInfo
-            let error = NSError(domain: DataSourceConstants.Errors.errorDomain, code: DataSourceConstants.Errors.errorCode, userInfo: userInfo)
-            print("Unresolved error: \(error.userInfo)")
-        }
-        return []
-    }
-
-    
     func configureCollectionViewCell(cell:CollectionViewCell, indexPath: NSIndexPath) {
         if let post = data[indexPath.item] as? InstaPost, let imageURL = post.imageURL  {
             cell.imageView.loadImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named: DataSourceConstants.DataEditing.placeholder)!)
@@ -115,6 +92,19 @@ final public class InstaPostDataSource: NSObject {
                 })
             }
             })
+    }
+    
+    func handleMemoryWarning() {
+        let dataToDelete = data.prefixUpTo(data.count-10)
+        for post in dataToDelete {
+            if let post = post as? InstaPost {
+        CoreDataManager.sharedManager.managedObjectContext.deleteObject(post)
+                CoreDataManager.sharedManager.saveContext()
+            }
+        }
+        
+        data.removeFirst(data.count - 10)
+        collectionView.reloadData()
     }
 }
 
