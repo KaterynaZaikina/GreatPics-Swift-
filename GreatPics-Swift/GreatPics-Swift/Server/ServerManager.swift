@@ -10,7 +10,7 @@ import Foundation
 
 private struct Constants {
     
-    static let postNumber = "20"
+    static let postNumber = "10"
     static let tag = "cats"
     static let baseURL = "https://api.instagram.com/v1/"
     static let maxTagID = "maxTagID"

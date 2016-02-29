@@ -17,7 +17,7 @@ struct DataSourceConstants {
     }
     struct DataFetching {
         static let entityName = "InstaPost"
-        static let fetchLimit = 20
+        static let fetchLimit = 10
     }
     struct DataEditing {
         static let fontSize: CGFloat = 14.0
@@ -94,6 +94,19 @@ final public class InstaListDataSource: NSObject {
                 })
             }
             })
+    }
+    
+    func handleMemoryWarning() {
+        let dataToDelete = data.prefixUpTo(data.count-10)
+        for post in dataToDelete {
+            if let post = post as? InstaPost {
+                CoreDataManager.sharedManager.managedObjectContext.deleteObject(post)
+                CoreDataManager.sharedManager.saveContext()
+            }
+        }
+        
+        data.removeFirst(data.count - 10)
+        tableView!.reloadData()
     }
     
 }
