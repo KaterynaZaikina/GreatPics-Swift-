@@ -36,10 +36,15 @@ final public class InstaPostController: UICollectionViewController {
 
         dataSource = InstaPostDataSource(collectionView: collectionView!)
         collectionView?.dataSource = dataSource
-        dataSource.refreshCollectionView()
         
         if let layout = collectionView!.collectionViewLayout as? PinterestLayout {
             layout.delegate = dataSource
+        }
+        
+        if Reachability.isConnectedToNetwork() {
+            dataSource.refreshCollectionView()
+        } else {
+            dataSource.data = dataSource.fetchRequestWithOffset(0)
         }
         
         bottomRefreshControl.triggerVerticalOffset = Constants.triggerVerticalOffset

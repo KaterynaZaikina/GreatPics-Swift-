@@ -64,29 +64,36 @@ final public class InstaPostDataSource: NSObject {
     
     func refreshCollectionView() {
         fetchOffset = data.count
-        ServerManager.sharedManager.loadPostsWithTagID(.NextPage, completionBlock:{ [unowned self] in
-            self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
-            
+        if Reachability.isConnectedToNetwork() {
+            ServerManager.sharedManager.loadPostsWithTagID(.NextPage, completionBlock:{ [unowned self] in
+                self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
+                if let collectionView = self.collectionView {
+                    var indexPathArray = [NSIndexPath]()
+                    for item in self.fetchOffset ..< self.data.count {
+                        indexPathArray.append(NSIndexPath.init(forItem: item, inSection: 0))
+                    }
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        collectionView.insertItemsAtIndexPaths(indexPathArray)
+                    })
+                }
+                })
+        } else {
+            data = data + fetchRequestWithOffset(self.fetchOffset)
             if let collectionView = self.collectionView {
                 var indexPathArray = [NSIndexPath]()
                 for item in self.fetchOffset ..< self.data.count {
                     indexPathArray.append(NSIndexPath.init(forItem: item, inSection: 0))
                 }
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    collectionView.insertItemsAtIndexPaths(indexPathArray)
-                })
+                collectionView.insertItemsAtIndexPaths(indexPathArray)
             }
-            })
+        }
     }
     
     func topRefreshCollectionView() {
         fetchOffset = 0
-        
         ServerManager.sharedManager.loadPostsWithTagID(.FirstPage, completionBlock:{ [unowned self] in
             if let collectionView = self.collectionView {
                 self.data = self.fetchRequestWithOffset(self.fetchOffset)
-                
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     collectionView.reloadData()
                 })
@@ -95,14 +102,13 @@ final public class InstaPostDataSource: NSObject {
     }
     
     func handleMemoryWarning() {
-        let dataToDelete = data.prefixUpTo(data.count-10)
+        let dataToDelete = data.prefixUpTo(data.count - 10)
         for post in dataToDelete {
             if let post = post as? InstaPost {
-        CoreDataManager.sharedManager.managedObjectContext.deleteObject(post)
+                CoreDataManager.sharedManager.managedObjectContext.deleteObject(post)
                 CoreDataManager.sharedManager.saveContext()
             }
         }
-        
         data.removeFirst(data.count - 10)
         collectionView.reloadData()
     }
