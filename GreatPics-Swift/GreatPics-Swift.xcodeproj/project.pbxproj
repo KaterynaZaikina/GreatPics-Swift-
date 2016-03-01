@@ -12,6 +12,7 @@
 		803D19C21C7C81BE0070A57C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 803D19C41C7C81BE0070A57C /* Localizable.strings */; };
 		8050A8881C7B425E00425624 /* PushNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8050A8871C7B425E00425624 /* PushNotificationHandler.swift */; };
 		809E8FE71C7D970800676CA8 /* PushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E8FE61C7D970800676CA8 /* PushAnimator.swift */; };
+		80D955661C8491D900B3EF14 /* Reachibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955651C8491D900B3EF14 /* Reachibility.swift */; };
 		80DCFED01C71BD900052DA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80DCFECF1C71BD900052DA6B /* Assets.xcassets */; };
 		80DECDB21C7622E800D68977 /* DetailImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD971C7622E800D68977 /* DetailImageController.swift */; };
 		80DECDB31C7622E800D68977 /* InstaListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DECD981C7622E800D68977 /* InstaListController.swift */; };
@@ -50,6 +51,7 @@
 		803D19C31C7C81BE0070A57C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8050A8871C7B425E00425624 /* PushNotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationHandler.swift; sourceTree = "<group>"; };
 		809E8FE61C7D970800676CA8 /* PushAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnimator.swift; sourceTree = "<group>"; };
+		80D955651C8491D900B3EF14 /* Reachibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachibility.swift; sourceTree = "<group>"; };
 		80DCFECF1C71BD900052DA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80DECD971C7622E800D68977 /* DetailImageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageController.swift; sourceTree = "<group>"; };
 		80DECD981C7622E800D68977 /* InstaListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstaListController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				80DECD9E1C7622E800D68977 /* NetworkingOperation.swift */,
 				80DECD9F1C7622E800D68977 /* NetworkOperationManager.swift */,
 				80DECDA01C7622E800D68977 /* ServerManager.swift */,
+				80D955651C8491D900B3EF14 /* Reachibility.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				80DECDC11C7622E800D68977 /* InstaPostManager.swift in Sources */,
 				80DECDE01C76265900D68977 /* GreatPics_Swift.xcdatamodeld in Sources */,
 				80DECDB81C7622E800D68977 /* NetworkingOperation.swift in Sources */,
+				80D955661C8491D900B3EF14 /* Reachibility.swift in Sources */,
 				80DECDB41C7622E800D68977 /* InstaPostController.swift in Sources */,
 				8032F7A91C0326A300451C46 /* AppDelegate.swift in Sources */,
 				80DECDC21C7622E800D68977 /* NavigationManager.swift in Sources */,

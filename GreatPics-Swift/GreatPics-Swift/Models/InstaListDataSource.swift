@@ -76,7 +76,7 @@ final public class InstaListDataSource: NSObject {
     
     func refreshTableView() {
         fetchOffset = data.count
-        
+        if Reachability.isConnectedToNetwork() {
         ServerManager.sharedManager.loadPostsWithTagID(.NextPage, completionBlock:{ [unowned self] in
             self.data = self.data + self.fetchRequestWithOffset(self.fetchOffset)
             
@@ -88,16 +88,27 @@ final public class InstaListDataSource: NSObject {
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     tableView.beginUpdates()
-                    tableView.insertRowsAtIndexPaths(newIndexPathArray, withRowAnimation:.Fade)
+                    tableView.insertRowsAtIndexPaths(newIndexPathArray, withRowAnimation:.None)
                     tableView.endUpdates()
-                    tableView.reloadRowsAtIndexPaths(newIndexPathArray, withRowAnimation: .None)
                 })
             }
             })
+        } else {
+            data = data + fetchRequestWithOffset(fetchOffset)
+            if let tableView = self.tableView {
+                var newIndexPathArray = [NSIndexPath]()
+                for row in self.fetchOffset ..< self.data.count {
+                    newIndexPathArray.append(NSIndexPath.init(forRow: row, inSection: 0))
+                }
+                tableView.beginUpdates()
+                tableView.insertRowsAtIndexPaths(newIndexPathArray, withRowAnimation:.None)
+                tableView.endUpdates()
+            }
+        }
     }
     
     func handleMemoryWarning() {
-        let dataToDelete = data.prefixUpTo(data.count-10)
+        let dataToDelete = data.prefixUpTo(data.count - 10)
         for post in dataToDelete {
             if let post = post as? InstaPost {
                 CoreDataManager.sharedManager.managedObjectContext.deleteObject(post)

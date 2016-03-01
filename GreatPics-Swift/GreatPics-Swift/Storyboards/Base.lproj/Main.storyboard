@@ -462,7 +462,7 @@
                                         <constraint firstItem="8bd-2k-HIB" firstAttribute="top" secondItem="wFv-IU-218" secondAttribute="top" constant="3" id="Kn7-Q3-25G"/>
                                         <constraint firstItem="CL2-aJ-4ER" firstAttribute="leading" secondItem="wFv-IU-218" secondAttribute="leading" constant="1" id="M6E-I5-5hC"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8bd-2k-HIB" secondAttribute="bottom" constant="3" id="cJl-wC-bfD"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CL2-aJ-4ER" secondAttribute="bottom" constant="1" id="olO-d2-dzI"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CL2-aJ-4ER" secondAttribute="bottom" priority="999" constant="1" id="olO-d2-dzI"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -486,6 +486,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="msJ-ww-WtT"/>
+        <segue reference="QEu-Lr-e3W"/>
     </inferredMetricsTieBreakers>
 </document>
